@@ -1,0 +1,88 @@
+
+/**
+ 
+\mainpage <a href="http://www.desy.de/~gaede/lccd">LCCD</a> (v$(LCCDVERSION))
+
+A conditions data framework for the ILC - based on <a href="http://lcio.desy.de">LCIO</a>.
+
+<p>Upcoming testbeam efforts will need a way to store and retrieve conditions data, e.g. 
+slow control, electronics setup and calibration constants. 
+Typically experiments use a 'conditions database' for this purpose. 
+While a database offers you all the functionality that is required 
+(varying validity time ranges, tags, history, etc.) it also puts some burden on the users
+as they have to set up and maintain a data base system. <br>
+A simpler approach is to store conditions data in LCIO files that are used for the data itself 
+anyhow.<br>
+While being straight forward and easy to implement this approach lacks some of the desired
+features  for conditions data  like tags, versioning and history. 
+<p>
+LCCD is a toolkit that combines the two options in a transparent way.
+It is implemented in C++ and uses an Open Source implementation of a conditions database 
+interface developed for the Atlas experiment: 
+<a href="http://savannah.cern.ch/projects/conddb-mysql/">ConditionsDBMySQL</a>
+<a href="http://conditionsdb.cvs.cern.ch/cgi-bin/conditionsdb.cgi/conddb/CondDBMySQL">
+(cvs)</a> .
+
+<h2>Overview</h2>
+
+LCCD is a conditions data toolkit that is based on LCIO. It allows to handle 
+arbitrary conditions data as long as they are expressed in terms of LCIO classes.
+As long as you don't need the full database functionality you can use LCCD together with 
+LCIO only. The main purpose is to provide an easy to use interface to read conditions data in
+any program that analyzes LCIO data. There are four different uses cases (scenarios) implemented
+in LCCD:
+<ol>
+<li>Read conditions data that is valid for the time specified by the time stamp in the current 
+LCEvent on the fly from a data base. Typically one wants to do this for a given tag that is 
+known to reference data with approved quality (e.g. calibration, channel mapping, etc.). 
+This is the most general case usually needed in a full reconstruction job.</li>
+<li>Read one particular set of conditions data, e.g. calibration constants from an LCIO file in a small
+job. This is the simplest case that can be used to check certain conditions data and distribute it to
+a group of people.</li>
+<li>Read conditions data that occures in the data stream of an LCIO file. 
+This can be used to analyze data that has been created by a DAQ that writes some slow 
+control information into the data stream online. For example there might be a temerature reading every 
+minute during data taking. This sort of conditions data will simply be valid from the event where it was
+stored until the next event with a newer version of this particular data is read.
+</li>
+<li>Read conditions data from an LCIO file that has been created in a special way, so that it holds the 
+data for a given time range with consecutive validity intervalls in consecutive events. lccd::DBInterface
+provides a method to create such a file from a database folder for a given tag. This can be used to 
+distribute conditions data with validity range information to systems where no data base is available. 
+One scenario where this might be usefull is grid computing where you can't necessarily expect to
+have access to a database.
+</li>
+</ol>
+All four use cases are implemented through the common interface lccd::IConditionsHandler. This ensures 
+that user code can be writen without making any assumption on how the conditions data is actually 
+provided at run time.
+
+<p>
+While most users will only be interested in reading the conditions data someone has to actually create
+the data and make it available. The lccd::DBInterface provides easy to use methods 
+to store and tag the data in a conditions database. 
+The only requirement is that the data is available in an LCCollection of LCGenericObject 
+subclasses. The data itself is stored as a BLOB (binary large object) in the database. LCCD provides 
+streamer code for LCGenericObjects that is machine independent (using XDR). By implementing a suitable 
+lccd::VCollectionStreamer users can in principle store any data they like in the data base. But they 
+have to keep in mind that as long as there is no corresponding LCIO class they won't be able to
+use LCIO files transparently.
+
+<h2>Conditions Database</h2>
+For the conditions database LCCD uses
+<a href="http://savannah.cern.ch/projects/conddb-mysql/">ConditionsDBMySQL</a>. This is an open source 
+implementation of the ConditionsDB interface from CERN that has been developed by the Lisbon ATLAS 
+group.<br>
+The main features of the database are:
+<ul>
+<li>data is stored in folders, similar to directories in a unix file system.</li>
+<li>one folder contains one particular type of conditions data for all time intervalls</li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+
+*/
+
+
+
