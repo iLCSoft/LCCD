@@ -8,9 +8,10 @@
 #####################################################
 
 # -- required
-export LCIO=/opt/products/lcio/1.3.1
+#export LCIO=/opt/products/lcio/1.3.1
+export LCIO=~gaede/lcio/devel/v01-04beta
 
-#-- uncomment for production 
+#-- comment out for production 
 export LCCDDEBUG 1
 
 #-- optionally build with CondDBMySQL support
