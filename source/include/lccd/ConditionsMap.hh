@@ -16,7 +16,7 @@ namespace lccd {
    *  Typically this is the case for all LCGenericObject subclasses.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: ConditionsMap.hh,v 1.3 2005-02-14 10:29:49 gaede Exp $
+   *  @version $Id: ConditionsMap.hh,v 1.4 2005-02-24 08:32:41 gaede Exp $
    */
   template <class KEY, class LCCONDOBJECT>
   class ConditionsMap : public lccd::IConditionsChangeListener {
@@ -42,6 +42,19 @@ namespace lccd {
     const std::map< KEY, LCCONDOBJECT> & map() { return _map ; }
     
     
+    /** Returns a reference to the conditions object for key 
+     */
+    LCCONDOBJECT& find( KEY key) {
+
+      MapIter it = _map.find( key ) ;
+
+      if( it == _map.end() )
+	throw Exception("ConditionsMap::find: key not found ") ;
+      else
+	return it->second ;
+    }
+
+
     /** Repopulate the map with new conditions data.
      */ 
     void conditionsChanged( lcio::LCCollection* col ) {
