@@ -24,6 +24,7 @@ namespace lccd{
   std::string DBTAG           = "DBTag" ;
   std::string DBNAME          = "DBName" ;
   std::string DBLAYER         = "DBLayer" ;
+  std::string DBTIMESTAMP     = "DBTimeStamp" ;
 
 
 

@@ -58,6 +58,8 @@ namespace lccd{
   /** String constant: DBLayer */
   extern std::string DBLAYER ;           
 
+  /** String constant: DBTimeStamp */
+  extern std::string DBTIMESTAMP ;
 
   
 
