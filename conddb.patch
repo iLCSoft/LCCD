@@ -1,0 +1,29 @@
+diff -Naur oldsrc/MySqlObjectMgr.cxx src/MySqlObjectMgr.cxx
+--- oldsrc/MySqlObjectMgr.cxx	2005-01-18 14:51:20.000000000 +0100
++++ src/MySqlObjectMgr.cxx	2005-02-16 09:15:48.000000000 +0100
+@@ -380,8 +380,11 @@
+ 	}
+ 	else if ((since_t>=since) && (till_t<=till))
+ 	{
+-	    query << "DELETE FROM " OBJECT_KEY_TBL_HEAD_N << folderId << " WHERE obj_id=" << objId;
+-	    execute(query);
++// 	    query << "DELETE FROM " OBJECT_KEY_TBL_HEAD_N << folderId << " WHERE obj_id=" << objId;
++// fg20050216:  only delete the entry that corresponds to the specified intervall [since_t,till_t]
++	    query << "DELETE FROM " OBJECT_KEY_TBL_HEAD_N << folderId << " WHERE obj_id=" << objId 
++		  << " AND since_t=" << since_t << " AND till_t=" << till_t ;
++	    execute(query); 
+ 	}
+ 	else if ((since_t<till) && (till_t>till) && (since_t>=since))
+ 	{
+@@ -414,7 +417,10 @@
+ 	    }
+ 	    else if ((since_t>=since) && (till_t<=till))
+ 	    {
+-		query << "DELETE FROM " OBJECT_KEY_TBL_HEAD_N << folderId << " WHERE obj_id=" << objId;
++// 		query << "DELETE FROM " OBJECT_KEY_TBL_HEAD_N << folderId << " WHERE obj_id=" << objId;
++// fg20050216:  only delete the entry that corresponds to the specified intervall [since_t,till_t]
++		query << "DELETE FROM " OBJECT_KEY_TBL_HEAD_N << folderId << " WHERE obj_id=" << objId 
++		      << " AND since_t=" << since_t << " AND till_t=" << till_t ;
+ 		execute(query);
+ 	    }
+ 	    else if ((since_t<till) && (till_t>till) && (since_t>=since))

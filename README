@@ -26,14 +26,14 @@ Build instructions:
    export MYSQL_PATH=/opt/products/mysql/3.23.58
 
 
-
+#-----------------------------------------------------
 Apply a patch for CondDBMySQL (bugfix):
 
  cp conddb.patch $CondDBMySQL 
  cd $CondDBMySQL
  patch -p0 < conddb.patch
-
-
+ gmake install
+#-----------------------------------------------------
 
 
  cd source
