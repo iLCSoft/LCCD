@@ -12,6 +12,7 @@ class ICondDBMgr ;
 class ICondDBDataAccess;
 class ICondDBFolderMgr;
 class ICondDBTagMgr;
+class ICondDBObject;
 
 
 // LCIO headers
@@ -23,13 +24,16 @@ class ICondDBTagMgr;
 
 namespace lccd {
   
+  /** Convenience typedef for vector of LCCollection pointers */
+  typedef std::vector< lcio::LCCollection* > ColVec ;
+ 
 
   /** Provides a simple interface to the conditions data base for lccd.
    *  The functionality corresponds to a subset of the ConditionsDB API
    *  for user's ( and lccd developer's) convenience.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: DBInterface.hh,v 1.3 2005-02-14 10:30:37 gaede Exp $
+   *  @version $Id: DBInterface.hh,v 1.4 2005-02-14 18:14:41 gaede Exp $
    */
 
   class DBInterface {
@@ -56,21 +60,22 @@ namespace lccd {
     /** D'tor*/
     virtual ~DBInterface() ;
     
-    /** The db manager object
+    /** The db manager object - use for direct access to the conditions database.
      */
     ICondDBMgr* condDBMgr() { return _condDBmgr ; }
     
-    /** The db access object.
+    /** The db access object - use for direct access to the conditions database..
      */
     ICondDBDataAccess* condDataAccess() {  return _condDataAccess ; }
     
-    /** The folder manager.
+    /** The folder manager - use for direct access to the conditions database..
      */
     ICondDBFolderMgr*  condFolderMgr() { return _condFolderMgr ; }
     
-    /** The tag manager 
+    /** The tag manager  - use for direct access to the conditions database.
      */
     ICondDBTagMgr * condTagMgr() { return _condTagMgr ; }
+
 
     /** The folder used for this DB access.
      */
@@ -94,10 +99,12 @@ namespace lccd {
      *  <li>DBFolder: data base folder </li>
      *  <li>DBTag: the tag used for the query - possibly HEAD at that time. </li>
      *  <li>DBQueryTime: the time the conditions data was extracted from the data base. </li>
+     *  <li>DBInsertionTime: the time the conditions data was inserted into the data base. </li>
      *  <li>DBSince: the start of the vaidity intervall</li>
      *  <li>DBTill: the end of the validity intervall</li>
      *  </ul> 
-     *  DBQueryTime, DBSince and DBTill have two strings: the 64bit time stamp and the date in human readable format.
+     *  DBQueryTime, DBInsertionTime, DBSince and DBTill are string vectors with two elements: 
+     *  the 64bit time stamp and the date in human readable format.
      * 
      *  @param timeStamp: the point in time for which the conditions data is valid
      *  @param since:  return the begin of the validity interval
@@ -115,6 +122,12 @@ namespace lccd {
     lcio::LCCollection* findCollection( LCCDTimeStamp timeStamp, 
 					const std::string& tag="" ) ; 
     
+    /** Creates collections for all conditions data for the given tag and 
+     *  adds them to the colvec. The collections are ordered w.r.t. to their validity 
+     *  time.<br>
+     *  Description parameters are added to the collections as in  findCollection().
+     */
+    void findCollections( ColVec& colVec, const std::string& tag="" ) ; 
 
 
     /** Tag the current HEAD of the database folder as tag.
@@ -122,13 +135,27 @@ namespace lccd {
     void tagFolder( const std::string& tag ,  const std::string& description="" ) ;
 
 
+
+    /** Creates an LCIO file with the all conditions data in the folder for the given tag.
+     *  The collections are sorted w.r.t. their validity time intervall and attached to 
+     *  consecutive events. The run header holds a map of validity time intervalls to events.<br>
+     *  This file can be used by the DBFileHandler.<br>
+     *  FIXME: need to define format of the map. 
+     */
+    void createDBFile( const std::string& tag="" ) ;
+
+
   protected:
-    
+    /** Initializes the database  access */
     void init() ;
+
+    /** Creates an LCColleciton from the data in the ICondDBObject. Adds the db parameters 
+     *  as described in findCollection() to the collection. 
+     */
+    lcio::LCCollection* collectionFromCondDBObject( ICondDBObject* object, const std::string& tag ) ;
     
-    
+
     // data members
- 
     ICondDBMgr* _condDBmgr ;
     ICondDBDataAccess* _condDataAccess ;
     ICondDBFolderMgr* _condFolderMgr ;
