@@ -63,7 +63,9 @@ namespace lccd {
     }
 
 
-    
+    // make sure that the transient flag is not set when collections are stored 
+    flag.unsetBit( LCCollection::BITTransient ) ;
+
     unsigned flagWord = flag.getFlag() ;
 
     Xdr::tostream( s , &flagWord , 1 ) ;
