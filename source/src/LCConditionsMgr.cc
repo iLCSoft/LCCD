@@ -24,8 +24,10 @@ namespace lccd{
 
     if( it != _map.end() ) {
       it->second->registerChangeListener( cl ) ;
-    }
-
+    }      
+    else
+      throw lcio::Exception(" LCConditionsMgr::registerChangeListener: no handler "
+			    " for name: " + name ) ; 
   }
   
   void LCConditionsMgr::removeHandler(const std::string&  name ) {
