@@ -3,7 +3,7 @@
 # GNUmakefile to build the LCCD library test examples
 #
 # @author F. Gaede, DESY
-# @version $Id: GNUmakefile,v 1.2 2005-02-11 11:05:27 gaede Exp $
+# @version $Id: GNUmakefile,v 1.3 2005-02-14 18:16:40 gaede Exp $
 ######################################################
 SIOINSTALL = $(LCCDBASE)/sio
 
@@ -30,7 +30,7 @@ LIBS = -L $(INSTALL) -llccd -L$(LCIO)/lib -llcio -L$(LCIO)/sio/lib -lsio -lz
 BINSRC = readcalfile.cc createcalfile.cc
 
 ifdef CondDBMySQL
-BINSRC += calfiletodb.cc calfilefromdb.cc tagdbfolder.cc
+BINSRC += calfiletodb.cc calfilefromdb.cc tagdbfolder.cc createdbfile.cc
 LIBS += -L $(CondDBMySQL)/lib -lconddb
 endif
 
@@ -74,4 +74,7 @@ $(BINDIR)/calfilefromdb: calfilefromdb.cc $(INSTALL)/liblccd.a $(objects)
 
 $(BINDIR)/tagdbfolder: tagdbfolder.cc $(INSTALL)/liblccd.a $(objects)
 	$(CXX) -o $(BINDIR)/tagdbfolder $(CPPFLAGS) tagdbfolder.cc   $(objects)  $(LIBS) 
+
+$(BINDIR)/createdbfile: createdbfile.cc $(INSTALL)/liblccd.a $(objects)
+	$(CXX) -o $(BINDIR)/createdbfile $(CPPFLAGS) createdbfile.cc   $(objects)  $(LIBS) 
 endif
