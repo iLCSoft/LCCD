@@ -40,7 +40,7 @@ using namespace lcio;
  *  it to an LCIO file
  * 
  * @author F.Gaede, DESY
- * @version $Id: calfilefromdb.cc,v 1.3 2005-02-14 18:16:59 gaede Exp $
+ * @version $Id: calfilefromdb.cc,v 1.4 2005-02-15 16:35:25 gaede Exp $
  */
 
 int main(int argc, char** argv ) {
@@ -96,16 +96,16 @@ int main(int argc, char** argv ) {
 
   // ------ testing: create a calibration map ------------------
   typedef lccd::ConditionsMap<int,CalibrationConstant> CalMap ;
-
+  
   CalMap calMap( &CalibrationConstant::getCellID )   ;
-
+  
   conData->registerChangeListener(  &calMap )  ;
   
   conData->update( timeStamp ) ;
-
-//   conData->update( timeStamp+100 ) ;
-//   conData->update( timeStamp+200 ) ;
-//   conData->update( timeStamp+300 ) ;
+  
+  //   conData->update( timeStamp+100 ) ;
+  //   conData->update( timeStamp+200 ) ;
+  //   conData->update( timeStamp+300 ) ;
 
   calMap.print( std::cout ) ;
 
