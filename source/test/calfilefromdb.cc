@@ -40,7 +40,7 @@ using namespace lcio;
  *  it to an LCIO file
  * 
  * @author F.Gaede, DESY
- * @version $Id: calfilefromdb.cc,v 1.4 2005-02-15 16:35:25 gaede Exp $
+ * @version $Id: calfilefromdb.cc,v 1.5 2005-02-18 14:39:56 gaede Exp $
  */
 
 int main(int argc, char** argv ) {
@@ -68,23 +68,14 @@ int main(int argc, char** argv ) {
     tag = argv[4] ;
   
 
-  // ----- read directly from the db: ----- 
-  //   //     lccd::DBInterface db( folder ) ;
-  //   lccd::DBInterface db("localhost:lccd_test:calvin:hobbes" , folder , true ) ;
-  //   lcio::LCCollection* col = db.findCollection( timeStamp , tag ) ;
-  //   if( col == 0 ){ 
-  //     std::cout << " No collection found for time stamp: " << timeStamp << std::endl ;
-  //     return 1 ;
-  //   }
-  
   // testing: dump all collections in tag :
-  lccd::DBInterface db("localhost:lccd_test:calvin:hobbes" , folder , false ) ;
-
-  lccd::ColVec colVec ;
-  db.findCollections( colVec , tag ) ;
-
-  std::cout << " ---- Collections defined for tag: " << tag ;
-  std::for_each(  colVec.begin() , colVec.end() , LCTOOLS::printLCGenericObjects ) ;
+  //   lccd::DBInterface db("localhost:lccd_test:calvin:hobbes" , folder , false ) ;
+  
+  //   lccd::ColVec colVec ;
+  //   db.findCollections( colVec , tag ) ;
+  
+  //   std::cout << " ---- Collections defined for tag: " << tag ;
+  //   std::for_each(  colVec.begin() , colVec.end() , LCTOOLS::printLCGenericObjects ) ;
   //-----------  end dump all ----------------------------------
 
 
@@ -103,12 +94,7 @@ int main(int argc, char** argv ) {
   
   conData->update( timeStamp ) ;
   
-  //   conData->update( timeStamp+100 ) ;
-  //   conData->update( timeStamp+200 ) ;
-  //   conData->update( timeStamp+300 ) ;
-
   calMap.print( std::cout ) ;
-
   //--------------- end calibration map -----------------------
 
 
@@ -161,6 +147,18 @@ int main(int argc, char** argv ) {
   
   
   delete conData ;
+
+
+  //---------------------------------------------------------------------------
+
+  // while the above demonstrates and tests the use of DBCondHandler and ConditionsMap
+  // we could have created the LCIO file much easier:
+
+  lccd::DBInterface db("localhost:lccd_test:calvin:hobbes" , folder , false )  ;
+  db.createSimpleFile( timeStamp , tag , true ) ;
+
+  //---------------------------------------------------------------------------
+
 
 }
 #endif
