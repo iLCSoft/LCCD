@@ -11,12 +11,12 @@
 
 namespace lccd {
   
-  /** Teplate class for maps of conditions data. The class LCCONDOBJECT
+  /** Template class for maps of conditions data. The class LCCONDOBJECT
    *  has to have a constructor that takes an LCObject* as argument.
    *  Typically this is the case for all LCGenericObject subclasses.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: ConditionsMap.hh,v 1.2 2005-02-11 15:34:13 gaede Exp $
+   *  @version $Id: ConditionsMap.hh,v 1.3 2005-02-14 10:29:49 gaede Exp $
    */
   template <class KEY, class LCCONDOBJECT>
   class ConditionsMap : public lccd::IConditionsChangeListener {
@@ -63,6 +63,10 @@ namespace lccd {
 //       print( std::cout ) ;
     }
 
+    /** Print the conditions map to the specified output stream.<br>
+     *  Debug method - prints the key and the id of the stored objects.
+     */
+    
     void print(  std::ostream& os ) {
       
       os << "ConditionsMap"  
@@ -85,6 +89,11 @@ namespace lccd {
 
   protected:
     
+    /** No default c'tor */
+    ConditionsMap() { }
+ 
+
+
     std::map< KEY, LCCONDOBJECT > _map ;
     PMF _pmf ;
 };

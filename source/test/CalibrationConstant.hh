@@ -8,6 +8,10 @@
 #define NFLOAT 2
 #define NDOUBLE 0
 
+#define ID_INDEX 0
+#define OFFSET_INDEX 0
+#define GAIN_INDEX 1
+
 using namespace lcio ;
 
 class CalibrationConstant ;
@@ -27,9 +31,9 @@ public:
    */
   CalibrationConstant(int cellID, float offset, float gain) {
 
-    obj()->setIntVal( 0 , cellID  ) ;
-    obj()->setFloatVal( 0 ,  offset ) ;  
-    obj()->setFloatVal( 1 ,  gain ) ;  
+    obj()->setIntVal( ID_INDEX , cellID  ) ;
+    obj()->setFloatVal( OFFSET_INDEX ,  offset ) ;  
+    obj()->setFloatVal( GAIN_INDEX ,  gain ) ;  
   }
 
   /** 'Copy constructor' needed to interpret LCCollection read from file/database.
@@ -41,9 +45,9 @@ public:
   
 
   // the class interface:
-  int getCellID()   { return obj()->getIntVal(0) ;  } 
-  float getOffset() { return obj()->getFloatVal( 0 )  ; } 
-  float getGain()   { return obj()->getFloatVal( 1 )  ; } 
+  int getCellID()   { return obj()->getIntVal( ID_INDEX ) ;  } 
+  float getOffset() { return obj()->getFloatVal( OFFSET_INDEX )  ; } 
+  float getGain()   { return obj()->getFloatVal( GAIN_INDEX )  ; } 
   
   void print(  std::ostream& os ) ;
   
