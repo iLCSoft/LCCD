@@ -12,7 +12,7 @@ Build instructions:
 
  -edit env.sh according to your system setup
 
-   # need current version from cvs, at least tag fg20050211 !!
+   # need current version from cvs, at least tag lccdv00-01 !!
    export LCIO=~gaede/lcio/devel/v01-04beta
 
    # your installation of CondDBMySQL
@@ -22,6 +22,7 @@ Build instructions:
     # path to mysql
    export MYSQL_PATH=/opt/products/mysql/3.23.58
 
+ . env.sh
  cd source
  gmake 
  
