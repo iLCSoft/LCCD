@@ -35,10 +35,15 @@ namespace lccd {
    *  If needed access to the relevant manager objects of ConditionsDB
    *  is provided.<br> 
    *  Every DBInterface object is attached to one particular folder
-   *  in a particular data base.
+   *  in a particular database.<br>
+   *  The methods createDBFile() and createSimpleFile() can be used to  
+   *  produce LCIO files with conditions data as input for the corresponding
+   *  conditions handlers in a reconstrcution program.<br>
+   *  They can also provide an easy way to browse the database 
+   *  horizontally (by tag) or vertically (by time stamp).
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: DBInterface.hh,v 1.6 2005-02-17 15:52:34 gaede Exp $
+   *  @version $Id: DBInterface.hh,v 1.7 2005-02-18 14:38:31 gaede Exp $
    */
 
   class DBInterface {
@@ -136,13 +141,20 @@ namespace lccd {
     void findCollections( ColVec& colVec, const std::string& tag="" ) ; 
 
 
+    /** Creates collections for all conditions data for the given timestamp. 
+     *  The collections are ordered w.r.t. to the layer number in the database.<br>
+     *  Description parameters are added to the collections as in  findCollection()
+     *  plus DBLayer.
+     */
+    void findCollections( ColVec& colVec, LCCDTimeStamp timeStamp ) ; 
+
+
     /** Tag the current HEAD of the database folder as tagName. If the argument usingTagName is provided
      *  and refers to an existing tag this tag will be duplicated as tagName.<br>
      *  This can be used to provide a common tag with the same name for several folders of conditions data
      *  that have been tagged before with different names. 
      */
     void tagFolder( const std::string& tagName, const std::string& description="", std::string usingTagName = "");
-
 
 
     /** Creates an LCIO file with the all conditions data in the folder for the given tag.
@@ -154,6 +166,16 @@ namespace lccd {
      *  This file can be used by the DBFileHandler.<br>
      */
     void createDBFile( const std::string& tag="" ) ;
+
+
+    /** Creates an LCIO file with one event that has a collection with the conditions data for the 
+     *  given time stamp and tag  (use "" for the current HEAD).<br>
+     *  If allLayers==true then in addition to the specified collection, all collections
+     *  in the database for this timestamp are added to the event with name COLNAME_layer_LAYERNUM.
+     *  The name of the file will be of the form "conddb_COLNAME_TAG_TIMESTAMP.slcio"
+     *  This file can be used by the SimpleFileHandler.<br>
+     */
+    void createSimpleFile( LCCDTimeStamp timeStamp, const std::string& tag, bool allLayers=false ) ;
 
 
   protected:

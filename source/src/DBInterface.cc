@@ -263,6 +263,38 @@ namespace lccd {
   }
 
 
+
+  void DBInterface::findCollections( ColVec& colVec, LCCDTimeStamp timeStamp ){
+
+    _condDBmgr->startRead(); // dummy method for now 
+
+    ICondDBDataIterator* objIter ;
+
+    condDataAccess()->browseObjectsAtPoint( objIter, _folder, timeStamp ) ;
+
+    ICondDBObject* condObject ; 
+
+    for( condObject = objIter->current() ; condObject != 0  ; condObject = objIter->next() ){
+      
+      // FIXME: need to determine proper tag - so far DBTag=UNKNOWN for all collections ...
+      lcio::LCCollection*  col = collectionFromCondDBObject( condObject, "UNKNOWN" )  ;
+      
+      colVec.push_back( col ) ;
+      
+      CondDBObjFactory::destroyCondDBObject( condObject );
+      
+    }
+    delete objIter ;
+
+    // now we have to sort the array w.r.t. to the since time stamp
+    // FIXME: this shouldn't be necessary according to the ConditionsDB API description ... ?
+    // std::sort(  colVec.begin() , colVec.end() ,   less_wrt_validity()  ) ;
+
+  }
+
+
+
+
   lcio::LCCollection* DBInterface::collectionFromCondDBObject( ICondDBObject* condObject, 
 							       const std::string& tag ) {
     
@@ -380,9 +412,8 @@ namespace lccd {
 	 << std::setw(2) <<  now.sec() 
 	 << ".slcio" ;
 
-    // FIXME: should not overwrite existing files - leave for testing ...
-    wrt->open( file.str()  , lcio::LCIO::WRITE_NEW )  ; 
-//     wrt->open( file.str() ) ;
+//     wrt->open( file.str()  , lcio::LCIO::WRITE_NEW )  ; 
+    wrt->open( file.str() ) ;
     
         
     ColVec colVec ;
@@ -443,6 +474,100 @@ namespace lccd {
     delete rHdr ;
     
   }
+
+
+  void DBInterface::createSimpleFile( LCCDTimeStamp timeStamp, const std::string& tag, bool allLayers ) {
+    
+    lcio::LCWriter* wrt = lcio::LCFactory::getInstance()->createLCWriter() ;
+    
+    
+    // create oputput file name :  conddb_COLNAME_TAG_TIMESTAMP.slcio
+    std::stringstream file ;       
+    
+    std::string dbTag( tag ) ;
+    if( dbTag.size() == 0 )  dbTag = "HEAD" ;
+    
+    std::string colName( _folder, _folder.find_last_of( '/' ) + 1 ,  _folder.size() ) ;
+    
+    file << "condDB_" 
+	 << colName  << "_"
+	 << dbTag<< "_"
+	 << std::setfill('0') 
+	 << std::setw(19) << timeStamp
+	 << ".slcio" ;
+    
+    //     wrt->open( file.str()  , lcio::LCIO::WRITE_NEW )  ; 
+    wrt->open( file.str() ) ;
+    
+    // --- write a run header with some information related to the query
+    lcio::LCRunHeaderImpl* rHdr = new lcio::LCRunHeaderImpl ;
+    
+    rHdr->parameters().setValue( lccd::DBTAG ,  dbTag ) ;
+    rHdr->parameters().setValue( lccd::DBFOLDER ,  _folder ) ;
+    rHdr->parameters().setValue( lccd::DBNAME ,  _dbName ) ;
+    rHdr->parameters().setValue( lccd::DBNAME ,  _dbName ) ;
+    std::stringstream ts ;     
+    ts << timeStamp ;
+    rHdr->parameters().setValue( lccd::DBTIMESTAMP ,  ts.str() ) ;
+
+    lcio::LCTime now ;
+    std::stringstream desc ;
+    desc << " Conditions data extracted from database on " << now.getDateString() << " GMT \n" ;
+
+    lcio::LCTime tsDate( timeStamp ) ;
+    desc << "   for timestamp: " << std::setfill('0') << std::setw(19) << timeStamp   << "\n"
+	 << "              ( " <<  tsDate.getDateString() << ") \n" ;
+    
+    if( allLayers ) {
+      desc << "  Includes all layers for the given time stamp \n" ;
+    }	
+
+    rHdr->setDescription( desc.str() ) ;
+      
+    wrt->writeRunHeader( rHdr ) ;
+    //---------------------------------------------------
+      
+    
+
+    lcio::LCEventImpl* evt = new lcio::LCEventImpl ;
+
+    lcio::LCCollection* col = findCollection( timeStamp, tag ) ; 
+
+    evt->addCollection(  col , colName  ) ;  
+
+
+    if( allLayers ) {
+
+      ColVec colVec ;
+      findCollections( colVec, timeStamp ) ; 
+
+      for( ColVec::iterator it = colVec.begin() ; it != colVec.end() ; it++) {
+	
+	std::stringstream cn ;
+	cn <<  colName <<  "_layer_"  
+	   << std::setfill('0') << std::setw(3) 
+	   << (*it)->parameters().getIntVal( lccd::DBLAYER )  ;
+	
+	evt->addCollection(  *it , cn.str()  ) ;  
+      }
+    }
+
+    //---------------------------------------------------
+
+    wrt->writeEvent( evt ) ;
+
+    wrt->close() ;
+
+    delete evt ; // this deletes the collections as well
+    delete wrt ;
+    delete rHdr ;
+
+
+  }
+
+
+
+
 
   void DBInterface::tagFolder( const std::string& tag,  const std::string& description, std::string usingTagName) {
    
