@@ -8,7 +8,7 @@
 #####################################################
 
 # -- required
-export LCIO=/afs/desy.de/group/it/ilcsoft/lcio/lccdv00-01
+export LCIO=/afs/desy.de/group/it/ilcsoft/lcio/v01-04.pr01
 
 #-- comment out for production 
 export LCCDDEBUG=1
