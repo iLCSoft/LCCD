@@ -16,7 +16,7 @@ namespace lccd {
    *  every data item starts at a 32-bit word boundary.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: Xdr.hh,v 1.1.1.1 2005-02-10 12:17:54 gaede Exp $
+   *  @version $Id: Xdr.hh,v 1.2 2005-02-17 15:45:53 gaede Exp $
    */
 
   class Xdr {
@@ -55,23 +55,23 @@ namespace lccd {
       
     }
 
-    /** Read count objects of (simple) type t to from the string/stream s.<br>
+    /** Read count objects of (simple) type t from the string/stream s at position.<br>
      *  Callers have to keep the current position within the string.
      * 
      *  @return the new position in the stream.
      */ 
     template <class T>
-    static unsigned fromstream( const std::string& s , unsigned index, T* t, unsigned count ) {
+    static unsigned fromstream( const std::string& s , unsigned position, T* t, unsigned count ) {
       
       if( count == 0 )
-	return index ;
+	return position ;
 
       unsigned bytlen, padlen;
       bytlen = count * sizeof( T ) ;
       padlen = (bytlen + 3) & 0xfffffffc ; 
       
 
-      unsigned const char* from = reinterpret_cast< unsigned const char* > (  & s[ index ] ) ;
+      unsigned const char* from = reinterpret_cast< unsigned const char* > (  & s[ position ] ) ;
       unsigned char* dest = reinterpret_cast< unsigned char* > ( t )  ;
       
 
@@ -82,12 +82,12 @@ namespace lccd {
 //       std::cout << " fromstream: " ; 
 //       for( unsigned int i=0; i < count; i++ )
 //  	std::cout	<< std::hex << t[i]  << ", " << std::dec  ;
-//       std::cout	<< "   - [" << index << "] - type:" 
+//       std::cout	<< "   - [" << position << "] - type:" 
 //  		<< typeid( *t ).name()  
 //  		<< std::endl ; 
       
       
-      return index + padlen ;
+      return position + padlen ;
     }
            
   };

@@ -33,7 +33,7 @@ namespace lccd {
    *  for user's ( and lccd developer's) convenience.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: DBInterface.hh,v 1.4 2005-02-14 18:14:41 gaede Exp $
+   *  @version $Id: DBInterface.hh,v 1.5 2005-02-17 15:45:53 gaede Exp $
    */
 
   class DBInterface {
@@ -102,6 +102,7 @@ namespace lccd {
      *  <li>DBInsertionTime: the time the conditions data was inserted into the data base. </li>
      *  <li>DBSince: the start of the vaidity intervall</li>
      *  <li>DBTill: the end of the validity intervall</li>
+     *  <li>DBLayer: the layer number of this data set</li>
      *  </ul> 
      *  DBQueryTime, DBInsertionTime, DBSince and DBTill are string vectors with two elements: 
      *  the 64bit time stamp and the date in human readable format.
@@ -130,17 +131,22 @@ namespace lccd {
     void findCollections( ColVec& colVec, const std::string& tag="" ) ; 
 
 
-    /** Tag the current HEAD of the database folder as tag.
+    /** Tag the current HEAD of the database folder as tagName. If the argument usingTagName is provided
+     *  and refers to an existing tag this tag will be duplicated as tagName.<br>
+     *  This can be used to provide a common tag with the same name for several folders of conditions data
+     *  that have been tagged before with different names. 
      */
-    void tagFolder( const std::string& tag ,  const std::string& description="" ) ;
+    void tagFolder( const std::string& tagName, const std::string& description="", std::string usingTagName = "");
 
 
 
     /** Creates an LCIO file with the all conditions data in the folder for the given tag.
      *  The collections are sorted w.r.t. their validity time intervall and attached to 
-     *  consecutive events. The run header holds a map of validity time intervalls to events.<br>
+     *  consecutive events. The run header holds a map of validity time intervalls to events.
+     *  in the parameters DBSince and DBTill.<br>
+     *  The name of the file will be of the form "conddb_COLNAME_TAG_YYYYMMDD_HHMMSS.slcio"
+     *  where the specified time is the creation time.
      *  This file can be used by the DBFileHandler.<br>
-     *  FIXME: need to define format of the map. 
      */
     void createDBFile( const std::string& tag="" ) ;
 

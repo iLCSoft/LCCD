@@ -39,8 +39,8 @@ namespace lccd {
   /** Helper class to sort collections of conditions data w.r.t. to their validity time intervall */
   struct less_wrt_validity : public binary_function<lcio::LCCollection*,lcio::LCCollection*,bool>{
     bool operator() (lcio::LCCollection*  c0, lcio::LCCollection* c1) const {
-      return ( std::atoll( c0->parameters().getStringVal("DBSince").c_str() ) <
-	       std::atoll( c1->parameters().getStringVal("DBSince").c_str() ) ) ;
+      return ( std::atoll( c0->parameters().getStringVal(lccd::DBSINCE).c_str() ) <
+	       std::atoll( c1->parameters().getStringVal(lccd::DBSINCE).c_str() ) ) ;
     }
   } ;
 
@@ -300,14 +300,14 @@ namespace lccd {
     sinceStr << since ;
     strVec.push_back(  sinceStr.str() ) ;
     strVec.push_back( lcio::LCTime( since ).getDateString() ) ;
-    col->parameters().setValues( "DBSince" ,  strVec ) ;
+    col->parameters().setValues( lccd::DBSINCE ,  strVec ) ;
     strVec.clear() ;
 
     std::stringstream tillStr ;
     tillStr << till ;
     strVec.push_back(  tillStr.str() ) ;
     strVec.push_back( lcio::LCTime( till ).getDateString() ) ;
-    col->parameters().setValues( "DBTill" ,  strVec ) ;
+    col->parameters().setValues( lccd::DBTILL ,  strVec ) ;
     strVec.clear() ;
 
     
@@ -316,7 +316,7 @@ namespace lccd {
     nowStr << now.timeStamp() ;
     strVec.push_back(  nowStr.str() ) ;
     strVec.push_back( now.getDateString() ) ;
-    col->parameters().setValues( "DBQueryTime" ,  strVec ) ;
+    col->parameters().setValues( lccd::DBQUERYTIME ,  strVec ) ;
     strVec.clear() ;
     
     
@@ -328,7 +328,7 @@ namespace lccd {
     insertStr << insert.timeStamp() ;
     strVec.push_back(  insertStr.str() ) ;
     strVec.push_back( insert.getDateString() ) ;
-    col->parameters().setValues( "DBInsertionTime" ,  strVec ) ;
+    col->parameters().setValues( lccd::DBINSERTIONTIME ,  strVec ) ;
     strVec.clear() ;
     
     
@@ -336,12 +336,14 @@ namespace lccd {
     std::string dbTag( tag ) ;
     if( dbTag.size() == 0 ) 
       dbTag = "HEAD" ;
-    col->parameters().setValue( "DBTag" ,  dbTag ) ;
+    col->parameters().setValue( lccd::DBTAG ,  dbTag ) ;
     
     
-    col->parameters().setValue( "DBFolder" ,  _folder ) ;
+    col->parameters().setValue( lccd::DBFOLDER ,  _folder ) ;
     
-    col->parameters().setValue( "DBName" ,  _dbName ) ;
+    col->parameters().setValue( lccd::DBNAME ,  _dbName ) ;
+
+    col->parameters().setValue( lccd::DBLAYER,   (int) condObject->layer() ) ;
     
     
     //---------------------------------------------------
@@ -356,8 +358,8 @@ namespace lccd {
     lcio::LCWriter* wrt = lcio::LCFactory::getInstance()->createLCWriter() ;
     
 
-    // create oputput file name :  condDB_$COLLNAME_$TAG_yyyymmdd_hhmmss.slcio
-    std::stringstream file ;
+    // create oputput file name :  conddb_COLNAME_TAG_YYYYMMDD_HHMMSS.slcio
+    std::stringstream file ;       
     
     std::string dbTag( tag ) ;
     if( dbTag.size() == 0 )  dbTag = "HEAD" ;
@@ -396,17 +398,17 @@ namespace lccd {
     // add map with validity time intervalls and events - needed by DBFileHandler
     for( ColVec::iterator it = colVec.begin() ; it != colVec.end() ; it++) {
       
-      sinceVec.push_back ( (*it)->parameters().getStringVal( "DBSince" ) ) ;
-      tillVec.push_back ( (*it)->parameters().getStringVal( "DBTill" ) ) ;
+      sinceVec.push_back ( (*it)->parameters().getStringVal( lccd::DBSINCE ) ) ;
+      tillVec.push_back ( (*it)->parameters().getStringVal( lccd::DBTILL ) ) ;
     }
     
-    rHdr->parameters().setValues(  "DBSince" , sinceVec ) ;
-    rHdr->parameters().setValues(  "DBTill" , tillVec ) ;
+    rHdr->parameters().setValues(  lccd::DBSINCE , sinceVec ) ;
+    rHdr->parameters().setValues(  lccd::DBTILL , tillVec ) ;
     
     // write some additional information to the run header
-    rHdr->parameters().setValue( "DBTag" ,  dbTag ) ;
-    rHdr->parameters().setValue( "DBFolder" ,  _folder ) ;
-    rHdr->parameters().setValue( "DBName" ,  _dbName ) ;
+    rHdr->parameters().setValue( lccd::DBTAG ,  dbTag ) ;
+    rHdr->parameters().setValue( lccd::DBFOLDER ,  _folder ) ;
+    rHdr->parameters().setValue( lccd::DBNAME ,  _dbName ) ;
     
     
     std::stringstream desc ;
@@ -442,13 +444,13 @@ namespace lccd {
     
   }
 
-  void DBInterface::tagFolder( const std::string& tag,  const std::string& description) {
-    
+  void DBInterface::tagFolder( const std::string& tag,  const std::string& description, std::string usingTagName) {
+   
     if( ! _update ) 
       throw lcio::Exception(" DBInterface::tagFolder: not in update mode !" ) ;
 
     condTagMgr()->createCondDBTag( tag, description ) ;
-    condTagMgr()->tag( _folder , tag ) ;
+    condTagMgr()->tag( _folder , tag , usingTagName ) ;
 
   }
 

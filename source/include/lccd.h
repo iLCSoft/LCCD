@@ -9,7 +9,6 @@ class SimpleTime ;
 #endif
 
 
-
 // Provides common definitions and typedefs for LCCD.
 /** The only namespace in the project.<br>
  */
@@ -32,6 +31,35 @@ namespace lccd{
   /** If this doesn't compile than LCCDTimeStamp doesn't have 64bit.
    */
   void ensure_LCCDTimeStamp_is_64bit() ;
+
+
+
+  /** String constant: DBSince */
+  extern std::string DBSINCE ;
+
+  /** String constant: DBTill */
+  extern std::string DBTILL ;
+
+  /** String constant: DBQueryTime */
+  extern std::string DBQUERYTIME ;
+
+  /** String constant: DBInsertionTime */
+  extern std::string DBINSERTIONTIME ;
+
+  /** String constant: DBTag */
+  extern std::string DBTAG ;
+
+  /** String constant: DBFolder */
+  extern std::string DBFOLDER ;
+
+  /** String constant: DBName */
+  extern std::string DBNAME ;
+
+  /** String constant: DBLayer */
+  extern std::string DBLAYER ;           
+
+
+  
 
 
 #ifdef USE_CONDDB
