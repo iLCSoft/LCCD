@@ -3,7 +3,7 @@
 # GNUmakefile to build the LCCD library
 #
 # @author Frank Gaede, DESY
-# @version $Id: GNUmakefile,v 1.1.1.1 2005-02-10 12:17:54 gaede Exp $
+# @version $Id: GNUmakefile,v 1.2 2005-02-11 11:05:27 gaede Exp $
 ######################################################
 
 
@@ -36,6 +36,7 @@ include $(dependence)
 objects := $(patsubst %.cc,%.o,$(wildcard *.cc))
 
 $(INSTALL)/liblccd.a: $(objects)
+	mkdir -p $(INSTALL)
 	$(AR) cr $(INSTALL)/liblccd.a  $?
 
 #lib: $(objects)

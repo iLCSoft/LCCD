@@ -6,10 +6,13 @@
 // 
 #include "lccd.h"
 
-// -- CondDB headers
-#include "ConditionsDB/ICondDBMgr.h"
-#include "ConditionsDB/CondDBMySQLMgrFactory.h"
-#include "ConditionsDB/CondDBObjFactory.h"
+
+// forward declarations
+class ICondDBMgr ;
+class ICondDBDataAccess;
+class ICondDBFolderMgr;
+class ICondDBTagMgr;
+
 
 // LCIO headers
 #include "lcio.h"
@@ -26,7 +29,7 @@ namespace lccd {
    *  for user's ( and lccd developer's) convenience.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: DBInterface.hh,v 1.1.1.1 2005-02-10 12:17:54 gaede Exp $
+   *  @version $Id: DBInterface.hh,v 1.2 2005-02-11 15:35:30 gaede Exp $
    */
 
   class DBInterface {

@@ -1,10 +1,14 @@
 #include <iostream>
 
+// LCIO headers
 #include "lcio.h"
+#include "UTIL/LCTOOLS.h"
+#include "UTIL/LCTime.h"
+
+// LCCD headers
 #include "lccd.h"
 #include "lccd/SimpleFileHandler.hh"
 
-#include "UTIL/LCTOOLS.h"
 
 #include "CalibrationConstant.hh"
 
@@ -16,7 +20,7 @@ using namespace lcio;
 /** Test program that reads some calibration from a file. 
  * 
  * @author F.Gaede, DESY
- * @version $Id: readcalfile.cc,v 1.1.1.1 2005-02-10 12:17:54 gaede Exp $
+ * @version $Id: readcalfile.cc,v 1.2 2005-02-11 11:03:14 gaede Exp $
  */
 
 int main(int argc, char** argv ) {
@@ -66,12 +70,18 @@ int main(int argc, char** argv ) {
   }
 
 
+  lcio::LCTime t0 ( conData->validSince()  ) ;
+  lcio::LCTime t1 ( conData->validTill()  ) ;
+
   cout << endl 
-       << " vailid since " <<  conData->validSince() 
-       << "  till " <<  conData->validTill() 
+       << " valid since: " <<  t0.getDateString()  
+       << " [" <<  conData->validSince()  << "] " 
+       << endl
+       << "        till: " <<  t1.getDateString()  
+       << " [" <<  conData->validTill()  << "] "
        << endl 
        << endl ;
-
+  
   // clean up
   delete conData ;
 

@@ -1,10 +1,6 @@
 #ifdef USE_CONDDB
 
-// -- CondDB headers
-#include "ConditionsDB/ICondDBMgr.h"
-#include "ConditionsDB/CondDBMySQLMgrFactory.h"
-#include "ConditionsDB/CondDBObjFactory.h"
-//#include "exampleObject.h"
+// -- no CondDB headers needed !
 
 // -- LCIO headers
 #include "lcio.h"
@@ -33,7 +29,7 @@ using namespace lcio;
  *  and writes it to the database.
  * 
  * @author F.Gaede, DESY
- * @version $Id: calfiletodb.cc,v 1.1.1.1 2005-02-10 12:17:54 gaede Exp $
+ * @version $Id: calfiletodb.cc,v 1.2 2005-02-11 15:36:25 gaede Exp $
  */
 
 int main(int argc, char** argv ) {
@@ -90,8 +86,6 @@ int main(int argc, char** argv ) {
   //lccd::DBInterface db( folder , true ) ;
   lccd::DBInterface db("localhost:lccd_test:calvin:hobbes" , folder , true ) ;
   
-  //  lccd::LCCDTimeStamp since = lccd::LCCDMinusInf ;
-  //  lccd::LCCDTimeStamp till  = lccd::LCCDPlusInf
   lccd::LCCDTimeStamp since = std::atoll( sinceStr.c_str()  )  ;
   lccd::LCCDTimeStamp till  = std::atoll( tillStr.c_str()  )  ;
   

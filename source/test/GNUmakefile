@@ -3,7 +3,7 @@
 # GNUmakefile to build the LCCD library test examples
 #
 # @author F. Gaede, DESY
-# @version $Id: GNUmakefile,v 1.1.1.1 2005-02-10 12:17:54 gaede Exp $
+# @version $Id: GNUmakefile,v 1.2 2005-02-11 11:05:27 gaede Exp $
 ######################################################
 SIOINSTALL = $(LCCDBASE)/sio
 
@@ -57,6 +57,7 @@ clean:
 
 
 $(BINDIR)/readcalfile: readcalfile.cc $(INSTALL)/liblccd.a $(objects)
+	mkdir -p $(BINDIR)
 	$(CXX) -o $(BINDIR)/readcalfile $(CPPFLAGS) readcalfile.cc  $(objects) $(LIBS) 
 
 

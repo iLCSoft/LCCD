@@ -8,3 +8,53 @@
 ######################################################
 
 
+Build instructions:
+
+ -edit env.sh according to your system setup
+
+   # need current version from cvs, at least tag fg20050211 !!
+   export LCIO=~gaede/lcio/devel/v01-04beta
+
+   # your installation of CondDBMySQL
+   # requires a runnig mysql server initialized for CondDBMySQL
+   export CondDBMySQL=/data/gaede/CondDBMySQL
+
+    # path to mysql
+   export MYSQL_PATH=/opt/products/mysql/3.23.58
+
+
+ cd source
+ gmake 
+
+
+Run examples:  ( see code in source/test ) , e.g.
+
+ ./test/createcalfile hcal.slcio hcal
+
+ ./test/readcalfile hcal.slcio hcal
+
+
+ ./test/calfiletodb hcal.slcio hcal myhcal 100 200
+ ./test/calfiletodb hcal.slcio hcal myhcal 200 300
+ ./test/calfiletodb hcal.slcio hcal myhcal 300 400
+ ./test/calfiletodb hcal.slcio hcal myhcal 400 500
+
+ ./test/tagdbfolder /lccd/myhcal mytag01 "just a test tag"
+
+ 
+  ./test/calfiletodb hcal.slcio hcal myhcal 0 500
+
+
+  ./test/calfilefromdb myhcal 20 fromdb.slcio mytag01
+
+
+  ./test/calfilefromdb myhcal 20 fromdb.slcio 
+
+
+
+
+
+
+
+
+
