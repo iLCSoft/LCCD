@@ -12,12 +12,12 @@ namespace lccd {
    *  that is stored in a data LCIO file. The condition collection is kept 
    *  until an event is presented that has a new version of the particular collection.
    *  The time stamps are ignored and the validity of the conditions data is determined 
-   *  by the sequence with which it apperas in the data stream.<br>
+   *  by the sequence with which they appear in the data stream.<br>
    *  This can for example be used in cases where the DAQ system writes slow control data
    *  into the same data stream as the raw data.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: DataFileHandler.hh,v 1.1 2005-02-16 11:02:46 gaede Exp $
+   *  @version $Id: DataFileHandler.hh,v 1.2 2005-02-17 12:21:17 gaede Exp $
    */
   
   class DataFileHandler : public ConditionsHandlerBase {

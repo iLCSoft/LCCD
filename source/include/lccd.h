@@ -8,12 +8,6 @@
 class SimpleTime ;
 #endif
 
-/**
- * \mainpage <a href="http://www.desy.de/~gaede/lccd">LCCD</a> (v00-00)
- * A conditions data framework for the ILC - based on LCIO.
- * <p>UNDER DEVELOPMENT !!!!!
- *
- */
 
 
 // Provides common definitions and typedefs for LCCD.

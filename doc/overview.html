@@ -27,7 +27,7 @@ interface developed for the Atlas experiment:
 
 LCCD is a conditions data toolkit that is based on LCIO. It allows to handle 
 arbitrary conditions data as long as they are expressed in terms of LCIO classes.
-As long as you don't need the full database functionality you can use LCCD together with 
+If you don't need the full database functionality you can use LCCD with plain
 LCIO only. The main purpose is to provide an easy to use interface to read conditions data in
 any program that analyzes LCIO data. There are four different uses cases (scenarios) implemented
 in LCCD:
@@ -77,12 +77,40 @@ The main features of the database are:
 <ul>
 <li>data is stored in folders, similar to directories in a unix file system.</li>
 <li>one folder contains one particular type of conditions data for all time intervalls</li>
-<li></li>
-<li></li>
-<li></li>
+<li>data can be tagged similar to the tagging mechanism in cvs:
+  <ul>
+  <li>there is always a HEAD version that holds the latest data</li>
+  <li>if a tag is applied all data in the current HEAD become part of that tag</li>
+  </ul>
+</li>
+<li>every new collection of conditions data stored in the folder superseeds all existing data for the
+given validity time intervall</li>
+<li>there is no (easy) way to find out what the HEAD was at a given point in the past, thus one should 
+use tags frequently to mark certain points in time</li>
+<li>for a given point in time you can always get all versions of collections that have been stored in 
+the database valid at this point (vertical browsing)</li>
 </ul>
 
+ConditionsDB provides a rich <a href="http://www.desy.de/~gaede/ConditionsDB/html/index.html">API</a>
+for storing and retrieving data in/from a database. <br>
+However for most users the subset of functionality provided in lccd::DBInterface should suffice.
+
+<h3>Time Stamps</h3>
+LCCD and LCIO use 64bit time stamps to synchronize data and condtions data. The definition is
+<ul><li><STRONG>ns since 1.1.1970 00:00:00 UTC </STRONG></li></ul>
+<EM>Note: this is different from the convention used in SimpleTime of ConditionsDB.<br> 
+LCCD provides a conversion method lccd::fromSimpleTime() in case this is needed.</EM>
+
+
+<h2>Example Code</h2>
+
+LCCD comes with a number of test programs that can be used as examples for your own applications in<br>
+
+<CODE>source/test</CODE>
+
+All examples are simple and self explanatory - if not please let now. <br>
+
+<a href="mailto:Frank Gaede &lt;frank.gaede@desy.de&gt;">frank.gaede@desy.de</a>
+
+
 */
-
-
-

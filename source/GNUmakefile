@@ -3,9 +3,10 @@
 # GNUmakefile to build the LCCD library
 #
 # @author F. Gaede, DESY
-# @version $Id: GNUmakefile,v 1.1.1.1 2005-02-10 12:17:54 gaede Exp $
+# @version $Id: GNUmakefile,v 1.2 2005-02-17 12:21:17 gaede Exp $
 ######################################################
 
+version = 0.1
 
 LCCDBASE := $(PWD)/..
 export LCCDBASE 
@@ -53,6 +54,7 @@ clean:
 	rm -rf $(LCCDBASE)/lib/liblccd.a
 
 doc:
+	export LCCDVERSION=$(version) ; \
 	cd $(LCCDBASE)/doc ; doxygen
 
 
