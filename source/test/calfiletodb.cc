@@ -29,7 +29,7 @@ using namespace lcio;
  *  and writes it to the database.
  * 
  * @author F.Gaede, DESY
- * @version $Id: calfiletodb.cc,v 1.3 2005-02-18 16:51:55 gaede Exp $
+ * @version $Id: calfiletodb.cc,v 1.4 2005-02-21 13:01:06 gaede Exp $
  */
 
 int main(int argc, char** argv ) {
@@ -68,7 +68,7 @@ int main(int argc, char** argv ) {
   LCCollection* col = conData->currentCollection() ;
   
   
-  //    LCTOOLS::printLCGenericObjects( col ) ;
+  LCTOOLS::printLCGenericObjects( col ) ;
   //   // or use the class CalibrationConstant to print, i.e. access the data
   //   for(int i=0 ; i< col->getNumberOfElements() ; i++) {
   //     CalibrationConstant cc( col->getElementAt(i) ) ;

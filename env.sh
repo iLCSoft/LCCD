@@ -12,12 +12,12 @@
 export LCIO=~gaede/lcio/devel/v01-04beta
 
 #-- comment out for production 
-export LCCDDEBUG 1
+export LCCDDEBUG=1
 
 #-- optionally build with CondDBMySQL support
-export CondDBMySQL=/data/gaede/CondDBMySQL
-
+#export CondDBMySQL=/data/gaede/CondDBMySQL
+export CondDBMySQL=/afs/desy.de/group/it/ilcsoft/CondDBMySQL
 export MYSQL_PATH=/opt/products/mysql/3.23.58
-
+export LD_LIBRARY_PATH=$CondDBMySQL/lib
 
 

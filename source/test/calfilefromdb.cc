@@ -44,7 +44,7 @@ using namespace lcio;
  *  see commented out code at the end.
  * 
  * @author F.Gaede, DESY
- * @version $Id: calfilefromdb.cc,v 1.6 2005-02-18 16:51:18 gaede Exp $
+ * @version $Id: calfilefromdb.cc,v 1.7 2005-02-21 13:01:06 gaede Exp $
  */
 
 int main(int argc, char** argv ) {
@@ -157,8 +157,8 @@ int main(int argc, char** argv ) {
   // while the above demonstrates and tests the use of DBCondHandler and ConditionsMap
   // we could have created the LCIO file much easier :)
 
-  //   lccd::DBInterface db(  folder )  ;
-  //   db.createSimpleFile( timeStamp , tag , true ) ;
+  lccd::DBInterface db(  folder )  ;
+  db.createSimpleFile( timeStamp , tag , true ) ;
 
   //---------------------------------------------------------------------------
 

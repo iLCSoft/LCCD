@@ -16,6 +16,7 @@
 #include "IMPL/LCRunHeaderImpl.h"
 #include "IMPL/LCEventImpl.h"
 #include "UTIL/LCTime.h"
+#include "UTIL/LCTOOLS.h"
 
 // -- CondDB headers
 #include "ConditionsDB/ICondDBMgr.h"
@@ -455,6 +456,8 @@ namespace lccd {
       
       evt->addCollection(  *it , colName  ) ;  
       
+      lcio::LCTOOLS::dumpEventDetailed( evt  ) ;
+
       wrt->writeEvent( evt ) ;
 
       delete evt ; // this deletes the collection as well
