@@ -30,10 +30,15 @@ namespace lccd {
 
   /** Provides a simple interface to the conditions data base for lccd.
    *  The functionality corresponds to a subset of the ConditionsDB API
-   *  for user's ( and lccd developer's) convenience.
+   *  for user's ( and lccd developer's) convenience. Most of the usual 
+   *  tasks can be handled through this interface.<br>
+   *  If needed access to the relevant manager objects of ConditionsDB
+   *  is provided.<br> 
+   *  Every DBInterface object is attached to one particular folder
+   *  in a particular data base.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: DBInterface.hh,v 1.5 2005-02-17 15:45:53 gaede Exp $
+   *  @version $Id: DBInterface.hh,v 1.6 2005-02-17 15:52:34 gaede Exp $
    */
 
   class DBInterface {
