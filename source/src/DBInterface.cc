@@ -29,6 +29,7 @@
 #include <algorithm>
 #include <functional>
 #include <stdlib.h>
+#include <iomanip>
 
 #include <iostream>
 #include <sstream>
@@ -355,35 +356,72 @@ namespace lccd {
     lcio::LCWriter* wrt = lcio::LCFactory::getInstance()->createLCWriter() ;
     
 
-    std::string fileName( "to_do_proper_filename.slcio" ) ;   // FIXME
+    // create oputput file name :  condDB_$COLLNAME_$TAG_yyyymmdd_hhmmss.slcio
+    std::stringstream file ;
     
-    wrt->open( fileName , lcio::LCIO::WRITE_NEW )  ;
+    std::string dbTag( tag ) ;
+    if( dbTag.size() == 0 )  dbTag = "HEAD" ;
     
+    std::string colName( _folder, _folder.find_last_of( '/' ) + 1 ,  _folder.size() ) ;
     
+    lcio::LCTime now ;
     
+    file << "condDB_" 
+	 << colName  << "_"
+	 << dbTag<< "_"
+	 << std::setfill('0') 
+	 << std::setw(4) <<  now.year() 
+	 << std::setw(2) <<  now.month() 
+	 << std::setw(2) <<  now.day() << "_"
+	 << std::setw(2) <<  now.hour() //<< "-"
+	 << std::setw(2) <<  now.min() //<< "-"
+	 << std::setw(2) <<  now.sec() 
+	 << ".slcio" ;
+
+    // FIXME: should not overwrite existing files - leave for testing ...
+    wrt->open( file.str()  , lcio::LCIO::WRITE_NEW )  ; 
+//     wrt->open( file.str() ) ;
+    
+        
     ColVec colVec ;
     findCollections( colVec, tag ) ; 
 
 
-    lcio::LCRunHeader* rHdr = new lcio::LCRunHeaderImpl ;
+    // --- write a run header with some information related to the query
+    lcio::LCRunHeaderImpl* rHdr = new lcio::LCRunHeaderImpl ;
 
-
-    int evtNum(0) ;
-    // add map with vailidity time intervalls and events
+    lcio::StringVec sinceVec ;
+    lcio::StringVec tillVec ;
+    
+    // add map with validity time intervalls and events - needed by DBFileHandler
     for( ColVec::iterator it = colVec.begin() ; it != colVec.end() ; it++) {
-      // evtNum++
-
-      // FIXME: to be done
+      
+      sinceVec.push_back ( (*it)->parameters().getStringVal( "DBSince" ) ) ;
+      tillVec.push_back ( (*it)->parameters().getStringVal( "DBTill" ) ) ;
     }
+    
+    rHdr->parameters().setValues(  "DBSince" , sinceVec ) ;
+    rHdr->parameters().setValues(  "DBTill" , tillVec ) ;
+    
+    // write some additional information to the run header
+    rHdr->parameters().setValue( "DBTag" ,  dbTag ) ;
+    rHdr->parameters().setValue( "DBFolder" ,  _folder ) ;
+    rHdr->parameters().setValue( "DBName" ,  _dbName ) ;
+    
+    
+    std::stringstream desc ;
+    desc << " Conditions data extracted from database on " << now.getDateString() << " GMT \n" ;
+    rHdr->setDescription( desc.str() ) ;
+    
+    //---------------------------------------------------
+    
     wrt->writeRunHeader( rHdr ) ;
-
-
-
+    
 
     // loop over collections....
-    std::string colName("ConditionsData") ; // FIXME
+//     std::string colName("ConditionsData") ; // FIXME
 
-    evtNum = 0 ;
+    int evtNum(0) ;
     for( ColVec::iterator it = colVec.begin() ; it != colVec.end() ; it++) {
       
       lcio::LCEventImpl* evt = new lcio::LCEventImpl ;
