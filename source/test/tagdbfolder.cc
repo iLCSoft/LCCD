@@ -24,7 +24,7 @@ using namespace lcio;
 /** Test program that tags an existing folder in the database.
  * 
  * @author F.Gaede, DESY
- * @version $Id: tagdbfolder.cc,v 1.1.1.1 2005-02-10 12:17:54 gaede Exp $
+ * @version $Id: tagdbfolder.cc,v 1.2 2005-02-18 16:51:55 gaede Exp $
  */
 
 int main(int argc, char** argv ) {
@@ -48,7 +48,7 @@ int main(int argc, char** argv ) {
   if( argc > 4 ) 
     dbInit = argv[4] ;
   else
-    dbInit = "localhost:lccd_test:calvin:hobbes"  ;
+    dbInit = lccd::getDBInitString() ; // "localhost:lccd_test:calvin:hobbes"  ;
   
   lccd::DBInterface db( dbInit, folder , true ) ;
   

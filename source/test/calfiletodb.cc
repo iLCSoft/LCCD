@@ -29,7 +29,7 @@ using namespace lcio;
  *  and writes it to the database.
  * 
  * @author F.Gaede, DESY
- * @version $Id: calfiletodb.cc,v 1.2 2005-02-11 15:36:25 gaede Exp $
+ * @version $Id: calfiletodb.cc,v 1.3 2005-02-18 16:51:55 gaede Exp $
  */
 
 int main(int argc, char** argv ) {
@@ -83,8 +83,9 @@ int main(int argc, char** argv ) {
   
   //------------------ write constants to database -----------------------
   
-  //lccd::DBInterface db( folder , true ) ;
-  lccd::DBInterface db("localhost:lccd_test:calvin:hobbes" , folder , true ) ;
+  lccd::DBInterface db( folder , true ) ;
+//   lccd::DBInterface db( lccd::getDBInitString() , folder , true ) ;
+// lccd::DBInterface db("localhost:lccd_test:calvin:hobbes" , folder , true ) ;
   
   lccd::LCCDTimeStamp since = std::atoll( sinceStr.c_str()  )  ;
   lccd::LCCDTimeStamp till  = std::atoll( tillStr.c_str()  )  ;

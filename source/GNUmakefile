@@ -3,7 +3,7 @@
 # GNUmakefile to build the LCCD library
 #
 # @author F. Gaede, DESY
-# @version $Id: GNUmakefile,v 1.2 2005-02-17 12:21:17 gaede Exp $
+# @version $Id: GNUmakefile,v 1.3 2005-02-18 16:51:55 gaede Exp $
 ######################################################
 
 version = 0.1
@@ -30,6 +30,13 @@ ifdef CondDBMySQL
  LCCDCPPFLAGS += -D USE_CONDDB -I $(CondDBMySQL)/include
 endif
 
+# to set the same default as in ConditionsDBMySQL, do
+# strings lib/libconddb.so | grep -E ".+:.+:.+:.+"
+ifdef LCCD_DB_INIT
+  LCCDCPPFLAGS += -D LCCD_DB_INIT_DEFAULT=\"$(LCCD_DB_INIT)\"
+else
+  LCCDCPPFLAGS += -D LCCD_DB_INIT_DEFAULT=\"localhost:lccd_test:calvin:hobbes\"
+endif
 
 export LCCDCPPFLAGS
 

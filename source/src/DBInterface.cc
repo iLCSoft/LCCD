@@ -45,10 +45,7 @@ namespace lccd {
   } ;
 
   DBInterface::DBInterface( const std::string& folder, bool update ) : 
-    // uses init string as defined in the library: 
-    // strings lib/libconddb.so | grep -E ".+:.+:.+:.+"
-    // or as in $COND_DB_INIT
-    _dbInit( "" ) , 
+    _dbInit( lccd::getDBInitString() ) , // as defined in $LCCD_DB_INIT 
     _folder( folder ) ,
     _update( update ) ,
     _dbName("") {
@@ -285,10 +282,6 @@ namespace lccd {
       
     }
     delete objIter ;
-
-    // now we have to sort the array w.r.t. to the since time stamp
-    // FIXME: this shouldn't be necessary according to the ConditionsDB API description ... ?
-    // std::sort(  colVec.begin() , colVec.end() ,   less_wrt_validity()  ) ;
 
   }
 
@@ -564,9 +557,6 @@ namespace lccd {
 
 
   }
-
-
-
 
 
   void DBInterface::tagFolder( const std::string& tag,  const std::string& description, std::string usingTagName) {

@@ -1,8 +1,11 @@
 #ifndef lccd_h
 #define lccd_h 1
 
-#include <bitset>
 #include "lcio.h"
+
+#include <bitset>
+#include <string>
+
 
 #ifdef USE_CONDDB
 class SimpleTime ;
@@ -62,8 +65,14 @@ namespace lccd{
   extern std::string DBTIMESTAMP ;
 
   
-
-
+  /** Returns a database initialization string of the form "DB_HOST:DB_NAME:DB_USER:PASSWD" 
+   *  from the environment variable $LCCD_DB_INIT. The default value is determined at compile 
+   *  time from the same variable. If it isn't set at compile time "localhost:lccd_test:calvin:hobbes" 
+   *  is used as default-default.
+   */
+  std::string getDBInitString() ;
+  
+  
 #ifdef USE_CONDDB
   /** Converts the 64bit time stamp in SimpleTime objects (based on 1.1.1900) to the LCIO definition
    *  of time stamps: ns since 1.1.1970 UTC.

@@ -16,7 +16,7 @@ using namespace lcio;
  *  for a given tag.
  * 
  * @author F.Gaede, DESY
- * @version $Id: createdbfile.cc,v 1.1 2005-02-14 18:16:40 gaede Exp $
+ * @version $Id: createdbfile.cc,v 1.2 2005-02-18 16:51:55 gaede Exp $
  */
 
 int main(int argc, char** argv ) {
@@ -38,7 +38,7 @@ int main(int argc, char** argv ) {
     tag = argv[2] ;
   
 
-  lccd::DBInterface db("localhost:lccd_test:calvin:hobbes" , folder , false ) ;
+  lccd::DBInterface db( folder , false ) ;
 
   db.createDBFile( tag ) ; 
 

@@ -39,20 +39,21 @@ namespace lccd {
    *  The methods createDBFile() and createSimpleFile() can be used to  
    *  produce LCIO files with conditions data as input for the corresponding
    *  conditions handlers in a reconstrcution program.<br>
-   *  They can also provide an easy way to browse the database 
+   *  They also provide an easy way to browse the database 
    *  horizontally (by tag) or vertically (by time stamp).
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: DBInterface.hh,v 1.7 2005-02-18 14:38:31 gaede Exp $
+   *  @version $Id: DBInterface.hh,v 1.8 2005-02-18 16:51:55 gaede Exp $
    */
 
   class DBInterface {
     
   public:
     
-    /** Default c'tor, uses the default database as defined in ConitionsDB, i.e. 
-     *  as defined at compile time if not superseeded by $COND_DB_INIT.
-     *  In update mode the folder is created if it doesn't exist.
+    /** Default c'tor, uses lccd::getDBInitString() to determine the db initialization, i.e. 
+     *  as defined by the environment variable $LCCD_DB_INIT.
+     *  In update mode the folder is created if it doesn't exist - provided the 
+     *  database user has the proper privileges.
      *
      *  @param folder: the folder used for this db access
      *  @param update: open db in update mode, default: false
@@ -60,7 +61,8 @@ namespace lccd {
     DBInterface( const std::string& folder, bool update=false ) ;
     
     /** Open the database specified in dbInit.
-     *  In update mode the folder is created if it doesn't exist.
+     *  In update mode the folder is created if it doesn't exist - provided the 
+     *  database user has the proper privileges.
      *
      *  @param folder: the folder used for this db access
      *  @param update: open db in update mode, default: false

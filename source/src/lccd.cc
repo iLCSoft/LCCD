@@ -5,6 +5,7 @@
 #endif
 
 #include <bitset>
+#include <stdlib.h>
 
 /** Provides global constants
  */
@@ -28,12 +29,22 @@ namespace lccd{
 
 
 
-  /** If this doesn't compile than LCCDTimeStamp doesn't have 64bit.
-   */
-  void ensure_LCCDTimeStamp_is_64bit(){ 
-    std::bitset<64> a(0xcafebabedeadbeafLL)  ; 
-    std::bitset< 8*sizeof(LCCDTimeStamp)  > b = a ;
-  } 
+
+  std::string getDBInitString() {
+    
+    const char* lccd_db_init = std::getenv("LCCD_DB_INIT");
+    
+    if (lccd_db_init)
+      
+      return lccd_db_init ;
+    
+    else 
+
+      return LCCD_DB_INIT_DEFAULT ;
+
+  }
+  
+
 
 #ifdef USE_CONDDB
 
@@ -44,5 +55,14 @@ namespace lccd{
 
 #endif
 
+
+
+
+  /** If this doesn't compile than LCCDTimeStamp doesn't have 64bit.
+   */
+  void ensure_LCCDTimeStamp_is_64bit(){ 
+    std::bitset<64> a(0xcafebabedeadbeafLL)  ; 
+    std::bitset< 8*sizeof(LCCDTimeStamp)  > b = a ;
+  } 
 
 };
