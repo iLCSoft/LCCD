@@ -17,7 +17,7 @@ namespace lccd {
    *  Subclasses need to implement IConditionsHandler::update( LCCDTimeStamp timestamp ).
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: ConditionsHandlerBase.hh,v 1.1.1.1 2005-02-10 12:17:54 gaede Exp $
+   *  @version $Id: ConditionsHandlerBase.hh,v 1.2 2005-02-22 18:55:22 gaede Exp $
    */
   
   class ConditionsHandlerBase : public IConditionsHandler {
@@ -39,7 +39,7 @@ namespace lccd {
      * and adds a collection to event with its name.
      * Notifies all registered listeners
      */
-    virtual void update( lcio::LCEvent* evt ) ;
+    virtual void updateEvent( lcio::LCEvent* evt ) ;
    
 
     /** Retrieves the new conditions data if required by timestamp.

@@ -47,7 +47,7 @@ public:
  *   
  * 
  * @author F.Gaede, DESY
- * @version $Id: testdbfile.cc,v 1.1 2005-02-15 16:34:27 gaede Exp $
+ * @version $Id: testdbfile.cc,v 1.2 2005-02-22 18:55:22 gaede Exp $
  */
 
 int main(int argc, char** argv ) {
@@ -89,7 +89,7 @@ int main(int argc, char** argv ) {
 
     evt->setTimeStamp( i ) ;
 
-    conData->update(  evt  )  ;
+    conData->updateEvent(  evt  )  ;
 
     delete evt ;
   }

@@ -20,7 +20,7 @@ namespace lccd {
    *  update and allways hold the same data set.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: IConditionsHandler.hh,v 1.1.1.1 2005-02-10 12:17:54 gaede Exp $
+   *  @version $Id: IConditionsHandler.hh,v 1.2 2005-02-22 18:55:22 gaede Exp $
    */
 
   class IConditionsHandler {
@@ -34,7 +34,7 @@ namespace lccd {
      * and adds a collection to event with its name.
      * Notifies all registered listeners
      */
-    virtual void update( lcio::LCEvent* evt ) = 0;
+    virtual void updateEvent( lcio::LCEvent* evt ) = 0;
     
     /** Retrieves the new conditions data if required by timestamp.
      *  Notifies all registered listeners<br>

@@ -8,7 +8,7 @@ using namespace lcio ;
 namespace lccd {
 
 
-  void ConditionsHandlerBase::update( LCEvent* evt ) {
+  void ConditionsHandlerBase::updateEvent( LCEvent* evt ) {
     
     update( LCCDTimeStamp( evt->getTimeStamp() ) ) ;
     

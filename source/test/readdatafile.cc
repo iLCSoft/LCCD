@@ -22,7 +22,7 @@ using namespace lcio;
  *  exists in the event.
  * 
  * @author F.Gaede, DESY
- * @version $Id: readdatafile.cc,v 1.1 2005-02-16 11:02:24 gaede Exp $
+ * @version $Id: readdatafile.cc,v 1.2 2005-02-22 18:55:22 gaede Exp $
  */
 
 int main(int argc, char** argv ) {
@@ -53,7 +53,7 @@ int main(int argc, char** argv ) {
   //----------- the event loop -----------
   while( (evt = lcReader->readNextEvent()) != 0 ) {
     
-    conData->update( evt ) ;
+    conData->updateEvent( evt ) ;
     
     LCTOOLS::dumpEvent( evt ) ;
 
