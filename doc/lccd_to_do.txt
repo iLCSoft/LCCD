@@ -1,0 +1,14 @@
+############################################################
+#
+#  TO DO list  for LCCD
+#
+#  F.Gaede
+############################################################
+
+
+ from v00-01:
+ ------------
+
+ * calfilefromdb crashes when timestamp on boundary between validity intervall
+   -> probably a bug in ConditionsDBMySQL: validity intervalls are
+      since <= timestamp < till !??
