@@ -17,8 +17,8 @@ namespace lccd {
 
   LCGenericObjectStreamer::LCGenericObjectStreamer() {
 
-    std::cout << " LCGenericObjectStreamer::LCGenericObjectStreamer() : " 
-	      << this << std::endl ; 
+//     std::cout << " LCGenericObjectStreamer::LCGenericObjectStreamer() : " 
+// 	      << this << std::endl ; 
  
 
   }
@@ -26,10 +26,10 @@ namespace lccd {
   void LCGenericObjectStreamer::storeToDB(std::string &s) const {
     
     
-    std::cout << " LCGenericObjectStreamer::storeToDB() : " 
-	      << this 
-	      << " _col : " << _col 
-	      << std::endl ; 
+//     std::cout << " LCGenericObjectStreamer::storeToDB() : " 
+// 	      << this 
+// 	      << " _col : " << _col 
+// 	      << std::endl ; 
 
     bool isFixedSize = true ;
 
@@ -131,12 +131,12 @@ namespace lccd {
     pos = Xdr::fromstream( s , pos , &nObj , 1 ) ;
     
 
-    std::cout << " LCGenericObjectStreamer::retrieveFromDB() : " 
-	      << this 
-	      << " _col : " << _col 
-      	      << " flag : 0x" << std::hex << flagWord << std::dec 
-	      << " nObj : " << nObj 
-	      << std::endl ; 
+//     std::cout << " LCGenericObjectStreamer::retrieveFromDB() : " 
+// 	      << this 
+// 	      << " _col : " << _col 
+//       	      << " flag : 0x" << std::hex << flagWord << std::dec 
+// 	      << " nObj : " << nObj 
+// 	      << std::endl ; 
     
 
     for( unsigned int i=0 ; i< nObj ; i++ ){

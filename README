@@ -8,6 +8,9 @@
 ######################################################
 
 
+
+
+
 Build instructions:
 
  -edit env.sh according to your system setup
@@ -21,6 +24,16 @@ Build instructions:
 
     # path to mysql
    export MYSQL_PATH=/opt/products/mysql/3.23.58
+
+
+
+Apply a patch for CondDBMySQL (bugfix):
+
+ cp conddb.patch $CondDBMySQL 
+ cd $CondDBMySQL
+ patch -p0 < conddb.patch
+
+
 
 
  cd source
