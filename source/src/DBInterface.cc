@@ -9,6 +9,8 @@
 // LCIO headers
 #include "lcio.h"
 #include "EVENT/LCCollection.h"
+#include "EVENT/LCParameters.h"
+#include "UTIL/LCTime.h"
 
 // -- CondDB headers
 #include "ConditionsDB/ICondDBMgr.h"
@@ -21,6 +23,7 @@
 #include <memory>
 
 #include <iostream>
+#include <sstream>
 
 namespace lccd {
 
@@ -32,7 +35,8 @@ namespace lccd {
     // or as in $COND_DB_INIT
     _dbInit( "" ) , 
     _folder( folder ) ,
-    _update( update ) {
+    _update( update ) ,
+    _dbName("") {
     
     init() ;
   }
@@ -40,7 +44,8 @@ namespace lccd {
   DBInterface::DBInterface(const std::string& dbInit, const std::string& folder, bool update ) : 
     _dbInit( dbInit ) ,
     _folder( folder ),
-    _update( update ) {
+    _update( update ) ,
+    _dbName("") {
     
     init() ;
   }
@@ -75,8 +80,15 @@ namespace lccd {
     _condFolderMgr  = _condDBmgr->getCondDBFolderMgr() ; 
     _condTagMgr     = _condDBmgr->getCondDBTagMgr() ;
     
+
+    // we can't get the database name through the abstract interface as this is 
+    // a feature typical for MySQL, i.e. CondDBInterface* is used
+    CondDBInterface* interface = dynamic_cast<CondDBInterface*>(_condDBmgr) ;
+    if( interface != 0 )
+      _dbName = interface->getGeneralDBname() ;
+    
     std::cout << "DBInterface::init: connected to database " 
- 	      << dynamic_cast<CondDBInterface*>(_condDBmgr)->getGeneralDBname() 
+ 	      << _dbName 
 	      << " using folder: " << _folder
  	      << std::endl;
     
@@ -190,19 +202,62 @@ namespace lccd {
       throw lcio::Exception( " DBInterface::findCollection: no streamer found for collection of type " 
  			     + colType ) ;
     }
-
+    
     // create auto pointer to prevent memory leaks if exceptions are thrown
     std::auto_ptr<lccd::VCollectionStreamer> colStreamer( colStr ) ;
-    
+
     condObject->data( *colStreamer ) ;
     
     since = condObject->validSince() ;
     till = condObject->validTill() ;
-
-    CondDBObjFactory::destroyCondDBObject(condObject);
-
-    return colStreamer->getCollection() ;
     
+    CondDBObjFactory::destroyCondDBObject(condObject);
+    
+    //---- add some parameters to the collection --------
+    lcio::LCCollection* col =  colStreamer->getCollection() ;
+
+
+    std::stringstream str ;
+    lcio::StringVec strVec ;
+
+    str << since << std::ends ;
+    strVec.push_back(  str.str() ) ;
+    strVec.push_back( lcio::LCTime( since ).getDateString() ) ;
+    col->parameters().setValues( "DBSince" ,  strVec ) ;
+    str.clear() ;
+    strVec.clear() ;
+
+    str << till << std::ends ;
+    strVec.push_back(  str.str() ) ;
+    strVec.push_back( lcio::LCTime( till ).getDateString() ) ;
+    col->parameters().setValues( "DBTill" ,  strVec ) ;
+    str.clear() ;
+    strVec.clear() ;
+
+    
+    lcio::LCTime now ;
+    str << now.timeStamp()  << std::ends ;
+    strVec.push_back(  str.str() ) ;
+    strVec.push_back( now.getDateString() ) ;
+    col->parameters().setValues( "DBQueryTime" ,  strVec ) ;
+    str.clear() ;
+    strVec.clear() ;
+    
+    
+    std::string dbTag( tag ) ;
+    if( dbTag.size() == 0 ) 
+      dbTag = "HEAD" ;
+    col->parameters().setValue( "DBTag" ,  dbTag ) ;
+    
+    
+    col->parameters().setValue( "DBFolder" ,  _folder ) ;
+
+    col->parameters().setValue( "DBName" ,  _dbName ) ;
+
+
+  //---------------------------------------------------
+
+    return col ;
   }
 
 
