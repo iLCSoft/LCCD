@@ -37,10 +37,14 @@ using namespace lcio;
 
 
 /** Test program that reads some calibration from a data base and writes 
- *  it to an LCIO file
+ *  it to an LCIO file. Demonstrates the usage of lccd::DBCondHandler and
+ *  lccd::ConditionsMap. <br>
+ *  To simply create a file with conditions data
+ *  for a certain point in time use lccd::DBInterface::createSimpleFile() 
+ *  see commented out code at the end.
  * 
  * @author F.Gaede, DESY
- * @version $Id: calfilefromdb.cc,v 1.5 2005-02-18 14:39:56 gaede Exp $
+ * @version $Id: calfilefromdb.cc,v 1.6 2005-02-18 16:51:18 gaede Exp $
  */
 
 int main(int argc, char** argv ) {
@@ -82,7 +86,8 @@ int main(int argc, char** argv ) {
   // ---- use the DBCondHandler -----------
 
   lccd::IConditionsHandler* conData = 
-    new lccd::DBCondHandler( "localhost:lccd_test:calvin:hobbes", folder, colName, tag ) ;
+    new lccd::DBCondHandler( lccd::getDBInitString() , folder, colName, tag ) ;
+//     new lccd::DBCondHandler( "localhost:lccd_test:calvin:hobbes", folder, colName, tag ) ;
   
 
   // ------ testing: create a calibration map ------------------
@@ -130,32 +135,30 @@ int main(int argc, char** argv ) {
   LCEvent* evt = new LCEventImpl ;
   evt->addCollection(  col , colName  ) ;  
 
-
-  evt->takeCollection(  colName  ) ;  // this is needed because the event should not own the collection... 
-
-  
   LCTOOLS::dumpEventDetailed( evt ) ; 
   wrt->writeEvent( evt ) ;
   
+  // this is needed because the event should not own the collection when beeing deleted 
+  // FIXME: not very nice, is it ?
+  evt->takeCollection(  colName  ) ;  
+
   wrt->close() ;
   //----------------------------------------------------------------
 
   // clean up
-  delete evt ; // this deletes the collection as well
+  delete evt ; 
   delete wrt ;
   delete rHdr ;
-  
-  
   delete conData ;
 
 
   //---------------------------------------------------------------------------
 
   // while the above demonstrates and tests the use of DBCondHandler and ConditionsMap
-  // we could have created the LCIO file much easier:
+  // we could have created the LCIO file much easier :)
 
-  lccd::DBInterface db("localhost:lccd_test:calvin:hobbes" , folder , false )  ;
-  db.createSimpleFile( timeStamp , tag , true ) ;
+  //   lccd::DBInterface db(  folder )  ;
+  //   db.createSimpleFile( timeStamp , tag , true ) ;
 
   //---------------------------------------------------------------------------
 
