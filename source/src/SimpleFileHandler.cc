@@ -35,9 +35,13 @@ namespace lccd {
   
   void SimpleFileHandler::update( LCCDTimeStamp timestamp ) {
     
-    if( timestamp >= _validTill ) { // true for first call only ! 
+//     if( timestamp >= _validTill ) { // true for first call only ! 
+    static bool firstCall = true ;
+    if( firstCall ) {
+
+      firstCall = false ;
       
-      
+
 //       std::cout << "SimpleFileHandler::update: reading constants from file for time stamp : " 
 // 		<< timestamp << std::endl ;
       
