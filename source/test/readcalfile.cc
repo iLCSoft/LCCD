@@ -17,10 +17,10 @@ using namespace std ;
 using namespace lcio;
 //using namespace lccd ;
 
-/** Test program that reads some calibration from a file. 
+/** Test program that reads conditions data from an LCIO file using the SimpleFileHandler. 
  * 
  * @author F.Gaede, DESY
- * @version $Id: readcalfile.cc,v 1.2 2005-02-11 11:03:14 gaede Exp $
+ * @version $Id: readcalfile.cc,v 1.3 2005-02-16 11:01:32 gaede Exp $
  */
 
 int main(int argc, char** argv ) {

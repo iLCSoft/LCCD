@@ -23,12 +23,12 @@ namespace lccd {
    *      for every event in the file</li>
    *  <li>the collections in the events have to have a common name</li>
    *  <li>consecutive events hold condition collections for consecutive validity time intervalls</li>
-   *  </lu>
+   *  </lu> <br>
    *  This can be used for example to run a calibration job with a well defined tag of calibration
    *  constants from a database without actually having access to the database, e.g. in a grid environment.
    *   
    *  @author F.Gaede, DESY
-   *  @version $Id: DBFileHandler.hh,v 1.1 2005-02-15 16:35:06 gaede Exp $
+   *  @version $Id: DBFileHandler.hh,v 1.2 2005-02-16 11:01:32 gaede Exp $
    */
   
   class DBFileHandler : public ConditionsHandlerBase {
