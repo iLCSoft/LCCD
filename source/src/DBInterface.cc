@@ -10,6 +10,10 @@
 #include "lcio.h"
 #include "EVENT/LCCollection.h"
 
+// -- CondDB headers
+#include "ConditionsDB/ICondDBMgr.h"
+#include "ConditionsDB/CondDBMySQLMgrFactory.h"
+#include "ConditionsDB/CondDBObjFactory.h"
 #include "CondDBInterface.h"
 
 
@@ -194,6 +198,8 @@ namespace lccd {
     
     since = condObject->validSince() ;
     till = condObject->validTill() ;
+
+    CondDBObjFactory::destroyCondDBObject(condObject);
 
     return colStreamer->getCollection() ;
     
