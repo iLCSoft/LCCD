@@ -4,6 +4,10 @@
 #include <bitset>
 #include "lcio.h"
 
+#ifdef USE_CONDDB
+class SimpleTime ;
+#endif
+
 /**
  * \mainpage <a href="http://www.desy.de/~gaede/lccd">LCCD</a> (v00-00)
  * A conditions data framework for the ILC - based on LCIO.
@@ -31,12 +35,17 @@ namespace lccd{
    */
   extern LCCDTimeStamp LCCDPlusInf ;
    
-
-
   /** If this doesn't compile than LCCDTimeStamp doesn't have 64bit.
    */
   void ensure_LCCDTimeStamp_is_64bit() ;
 
+
+#ifdef USE_CONDDB
+  /** Converts the 64bit time stamp in SimpleTime objects (based on 1.1.1900) to the LCIO definition
+   *  of time stamps: ns since 1.1.1970 UTC.
+   */
+  LCCDTimeStamp fromSimpleTime( SimpleTime st ) ;
+#endif
 
 };
 
