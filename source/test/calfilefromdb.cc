@@ -29,7 +29,7 @@
 
 // -- C++ headers 
 #include <iostream>
-
+#include <algorithm>
 
 using namespace std ;
 using namespace lcio;
@@ -40,7 +40,7 @@ using namespace lcio;
  *  it to an LCIO file
  * 
  * @author F.Gaede, DESY
- * @version $Id: calfilefromdb.cc,v 1.2 2005-02-11 15:36:00 gaede Exp $
+ * @version $Id: calfilefromdb.cc,v 1.3 2005-02-14 18:16:59 gaede Exp $
  */
 
 int main(int argc, char** argv ) {
@@ -77,30 +77,41 @@ int main(int argc, char** argv ) {
   //     return 1 ;
   //   }
   
+  // testing: dump all collections in tag :
+  lccd::DBInterface db("localhost:lccd_test:calvin:hobbes" , folder , false ) ;
+
+  lccd::ColVec colVec ;
+  db.findCollections( colVec , tag ) ;
+
+  std::cout << " ---- Collections defined for tag: " << tag ;
+  std::for_each(  colVec.begin() , colVec.end() , LCTOOLS::printLCGenericObjects ) ;
+  //-----------  end dump all ----------------------------------
+
 
   // ---- use the DBCondHandler -----------
 
   lccd::IConditionsHandler* conData = 
     new lccd::DBCondHandler( "localhost:lccd_test:calvin:hobbes", folder, colName, tag ) ;
   
-  // create a calibration map
 
+  // ------ testing: create a calibration map ------------------
   typedef lccd::ConditionsMap<int,CalibrationConstant> CalMap ;
+
   CalMap calMap( &CalibrationConstant::getCellID )   ;
-
-//   typedef lccd::ConditionsMap<float,CalibrationConstant> CalMap ;
-//   CalMap calMap( &CalibrationConstant::getGain )   ;
-
 
   conData->registerChangeListener(  &calMap )  ;
   
   conData->update( timeStamp ) ;
+
 //   conData->update( timeStamp+100 ) ;
 //   conData->update( timeStamp+200 ) ;
 //   conData->update( timeStamp+300 ) ;
 
-
   calMap.print( std::cout ) ;
+
+  //--------------- end calibration map -----------------------
+
+
 
   lcio::LCTime t0 ( conData->validSince()  ) ;
   lcio::LCTime t1 ( conData->validTill()  ) ;
