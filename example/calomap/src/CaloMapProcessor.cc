@@ -5,13 +5,6 @@
 
 #include <iostream>
 
-#ifdef MARLIN_USE_AIDA
-#include <marlin/AIDAProcessor.h>
-#include <AIDA/IHistogramFactory.h>
-#include <AIDA/ICloud1D.h>
-//#include <AIDA/IHistogram1D.h>
-#endif
-
 #include "EVENT/LCCollection.h"
 #include "EVENT/RawCalorimeterHit.h"
 
@@ -47,10 +40,8 @@ void CaloMapProcessor::init() {
   // create a conditions map with channel to cell id mapping 
   _chMap = new ChMap( &ChannelToCellID::getChannelID ) ;
 
+  // register it for automatic update
   ConditionsProcessor::registerChangeListener( _chMap , _colName ) ;
-
-//   lccd::LCConditionsMgr::instance()->registerChangeListener( _chMap , _colName ) ;
-  
 
 
   _nRun = 0 ;
@@ -80,11 +71,12 @@ void CaloMapProcessor::processEvent( LCEvent * evt ) {
 
     int cellID = 0xffffffff ;
 
-    try{  
+    try{    // here we get the proper cellID from the map
+
       cellID = _chMap->find( channelID ).getCellID() ;  
+
     }
     catch(Exception& e ){
-//       _chMap->print( std::cout ) ;
       std::cout << " Exception: " << e.what() << std::endl ;
     }
     
