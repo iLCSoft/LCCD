@@ -24,7 +24,7 @@ namespace lccd {
   
 
   
-  void DataFileHandler::update( LCEvent* evt ) {
+  void DataFileHandler::updateEvent( LCEvent* evt ) {
     
     
     try{

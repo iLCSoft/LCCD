@@ -17,7 +17,7 @@ namespace lccd {
    *  into the same data stream as the raw data.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: DataFileHandler.hh,v 1.2 2005-02-17 12:21:17 gaede Exp $
+   *  @version $Id: DataFileHandler.hh,v 1.3 2005-02-25 17:28:54 gaede Exp $
    */
   
   class DataFileHandler : public ConditionsHandlerBase {
@@ -37,7 +37,7 @@ namespace lccd {
      *  The events time stamp is ignored.<br>
      *  Notifies all registered listeners.
      */
-    virtual void update( lcio::LCEvent* evt ) ;
+    virtual void updateEvent( lcio::LCEvent* evt ) ;
     
 
     /* The timestamp is ignored, use update(LCEvent *evt) instead. 
