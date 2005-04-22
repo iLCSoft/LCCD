@@ -44,7 +44,7 @@ using namespace lcio;
  *  see commented out code at the end.
  * 
  * @author F.Gaede, DESY
- * @version $Id: calfilefromdb.cc,v 1.7 2005-02-21 13:01:06 gaede Exp $
+ * @version $Id: calfilefromdb.cc,v 1.8 2005-04-22 14:26:51 gaede Exp $
  */
 
 int main(int argc, char** argv ) {
@@ -62,7 +62,7 @@ int main(int argc, char** argv ) {
   string timeStr( argv[2] ) ;
   string fileName( argv[3] ) ;
 
-  lccd::LCCDTimeStamp  timeStamp ( atoi( timeStr.c_str() ) )   ;  
+  lccd::LCCDTimeStamp  timeStamp ( atol( timeStr.c_str() ) )   ;  
   
   string folder( "/lccd/" + colName ) ;
 
