@@ -16,7 +16,8 @@ namespace lccd {
 				       const std::string& inputCollection ) : 
     ConditionsHandlerBase(name) ,
     _fileName( fileName ) ,
-    _inputCollection( inputCollection ) {
+    _inputCollection( inputCollection ),
+    _firstCall( true )  {
     
     // use the same name for the input collection
     // and the data set name 
@@ -36,10 +37,9 @@ namespace lccd {
   void SimpleFileHandler::update( LCCDTimeStamp timestamp ) {
     
 //     if( timestamp >= _validTill ) { // true for first call only ! 
-    static bool firstCall = true ;
-    if( firstCall ) {
+    if( _firstCall ) {
 
-      firstCall = false ;
+      _firstCall = false ;
       
 
 //       std::cout << "SimpleFileHandler::update: reading constants from file for time stamp : " 

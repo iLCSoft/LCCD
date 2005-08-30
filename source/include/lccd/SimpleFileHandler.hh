@@ -16,7 +16,7 @@ namespace lccd {
    *  Note: The data isn't read from the file until update() is called.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: SimpleFileHandler.hh,v 1.1.1.1 2005-02-10 12:17:54 gaede Exp $
+   *  @version $Id: SimpleFileHandler.hh,v 1.2 2005-08-30 13:36:20 gaede Exp $
    */
   
   class SimpleFileHandler : public ConditionsHandlerBase {
@@ -56,6 +56,9 @@ namespace lccd {
 
     /** Name of LCCollection in first event */
     std::string _inputCollection ;
+
+
+    bool  _firstCall ;
 
   };
 } ; //end namespace
