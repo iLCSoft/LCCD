@@ -52,14 +52,21 @@ namespace lccd {
     }
     LCFlagImpl flag( _col->getFlag() ) ;
     
-    if(  _col->parameters().getStringVal( "TypeName" ).size() ==  0 )
-      _col->parameters().setValue( "TypeName", objects[0]->getTypeName() ) ;
-
+    if(  _col->parameters().getStringVal( "TypeName" ).size() ==  0 ){
+      if (nObj>0) 
+	_col->parameters().setValue( "TypeName", objects[0]->getTypeName() ) ;
+      else
+	_col->parameters().setValue( "TypeName", "LCGenericObject" ) ;
+    }
     if( isFixedSize ) {
       flag.setBit( LCIO::GOBIT_FIXED ) ;
 
-      if(  _col->parameters().getStringVal( "DataDescription" ).size() ==  0 )
-	_col->parameters().setValue( "DataDescription", objects[0]->getDataDescription() ) ;
+      if(  _col->parameters().getStringVal( "DataDescription" ).size() ==  0 ){
+	if (nObj>0) 
+	  _col->parameters().setValue( "DataDescription", objects[0]->getDataDescription() ) ;
+	else
+	  _col->parameters().setValue( "DataDescription", "UNKNOWN" ) ;
+      }
     }
 
 
