@@ -1,0 +1,357 @@
+2005-09-09 10:09  gaede
+
+	* source/: include/lccd/Xdr.hh, src/Xdr.cc: fixed seg fault with
+	  -O3: template specialization moved to class declaration
+
+2005-08-30 15:36  gaede
+
+	* source/: include/lccd/SimpleFileHandler.hh,
+	  src/SimpleFileHandler.cc (utags: v00-02-01): fixed bug with
+	  static bool firstCall (made member variable)
+
+2005-08-30 15:35  gaede
+
+	* example/calomap/src/GNUmakefile (tags: v00-02-01): modfied for
+	  usage with Marlin v00-09 (or higher)
+
+2005-04-22 16:26  gaede
+
+	* source/test/calfilefromdb.cc: changed atoi to atol
+
+2005-03-11 14:56  gaede
+
+	* doc/overview.html (tags: v00-02-01, v00-02): fixed new homepage
+
+2005-03-11 14:54  gaede
+
+	* doc/overview.html, source/GNUmakefile (tags: v00-02-01, v00-02):
+	  fixed automatic version in API doc
+
+2005-03-11 12:39  gaede
+
+	* env.sh, example/calomap/env.sh (utags: v00-02, v00-02-01):
+	  updated pathes
+
+2005-03-08 17:35  gaede
+
+	* example/calomap/: README (tags: v00-02-01, v00-02), env.sh,
+	  src/CaloMapProcessor.cc (tags: v00-02-01, v00-02): improved
+	  documentation
+
+2005-03-08 10:51  gaede
+
+	* env.sh, doc/lccd_to_do.txt (tags: v00-02-01, v00-02),
+	  example/calomap/env.sh, example/calomap/my.steer (tags:
+	  v00-02-01, v00-02), example/calomap/include/CaloMapProcessor.h
+	  (tags: v00-02-01, v00-02),
+	  example/calomap/include/ChannelToCellID.h (tags: v00-02-01,
+	  v00-02), example/calomap/src/CaloMapProcessor.cc,
+	  example/calomap/src/GNUmakefile (tags: v00-02),
+	  example/calomap/src/createmaps.cc (tags: v00-02-01, v00-02):
+	  added extended example
+
+2005-02-25 18:30  gaede
+
+	* source/src/LCConditionsMgr.cc (tags: v00-02-01, v00-02): throw
+	  exception in registerChangeListener
+
+2005-02-25 18:29  gaede
+
+	* source/include/lccd/ConditionsMap.hh (tags: v00-02-01, v00-02):
+	  nicer erroe message if key not found
+
+2005-02-25 18:28  gaede
+
+	* source/: include/lccd/DataFileHandler.hh, src/DataFileHandler.cc
+	  (utags: v00-02, v00-02-01): bug fix: update -> updateEvent
+
+2005-02-24 18:23  gaede
+
+	* doc/lccd_to_do.txt: initial version
+
+2005-02-24 09:34  gaede
+
+	* README (tags: v00-02-01, v00-02), env.sh (utags: v00-01): doc
+	  updated
+
+2005-02-24 09:32  gaede
+
+	* source/include/lccd/ConditionsMap.hh (tags: v00-01): added find
+	  method
+
+2005-02-23 16:13  gaede
+
+	* README: added gmake doc
+
+2005-02-22 19:55  gaede
+
+	* source/: include/lccd/ConditionsHandlerBase.hh,
+	  include/lccd/IConditionsHandler.hh, src/ConditionsHandlerBase.cc,
+	  test/readdatafile.cc, test/testdbfile.cc (utags: v00-01, v00-02,
+	  v00-02-01): renamed update to updateEvent
+
+2005-02-22 19:55  gaede
+
+	* source/src/SimpleFileHandler.cc (tags: v00-02, v00-01): bug fix:
+	  enforce update on first call only
+
+2005-02-22 19:54  gaede
+
+	* source/: include/lccd/LCConditionsMgr.hh (tags: v00-02-01,
+	  v00-02), src/LCConditionsMgr.cc (utags: v00-01): initial version
+
+2005-02-22 12:27  gaede
+
+	* source/src/LCGenericObjectStreamer.cc (tags: v00-02-01, v00-02,
+	  v00-01): make sure stored collections are not transient (flagbit)
+
+2005-02-21 14:01  gaede
+
+	* env.sh, source/src/DBInterface.cc (tags: v00-02-01, v00-02,
+	  v00-01), source/test/calfilefromdb.cc (tags: v00-02-01, v00-02,
+	  v00-01), source/test/calfiletodb.cc (tags: v00-02-01, v00-02,
+	  v00-01): added debug code
+
+2005-02-18 17:51  gaede
+
+	* source/: GNUmakefile (tags: v00-01), include/lccd.h (tags:
+	  v00-02-01, v00-02, v00-01), include/lccd/DBInterface.hh (tags:
+	  v00-02-01, v00-02, v00-01), src/DBInterface.cc, src/lccd.cc
+	  (tags: v00-02-01, v00-02, v00-01), test/calfiletodb.cc,
+	  test/createdbfile.cc (tags: v00-02-01, v00-02, v00-01),
+	  test/tagdbfolder.cc (tags: v00-02-01, v00-02, v00-01): added
+	  lccd::getDBInitString to evaluate $LCCD_DB_INIT
+
+2005-02-18 17:51  gaede
+
+	* source/test/calfilefromdb.cc: bug fix: evt->takeCollection at the
+	  wrong position
+
+2005-02-18 15:39  gaede
+
+	* source/test/calfilefromdb.cc: added test for createSimpleFile()
+
+2005-02-18 15:39  gaede
+
+	* doc/overview.html (tags: v00-01): updated documentation
+
+2005-02-18 15:38  gaede
+
+	* source/: include/lccd/DBInterface.hh, src/DBInterface.cc: added
+	  findCollections() and createSimpleFile() for vertical browsing
+
+2005-02-18 15:37  gaede
+
+	* source/: include/lccd.h, src/lccd.cc: added DBTIMESTAMP
+
+2005-02-17 16:52  gaede
+
+	* source/include/lccd/DBInterface.hh: documentation update
+
+2005-02-17 16:45  gaede
+
+	* source/: include/lccd.h, include/lccd/DBInterface.hh,
+	  include/lccd/Xdr.hh (tags: v00-02-01, v00-02, v00-01),
+	  src/DBInterface.cc, src/lccd.cc: cosmetics (string constants,
+	  documentation)
+
+2005-02-17 13:21  gaede
+
+	* README, conddb.patch, doc/overview.html, source/GNUmakefile,
+	  source/include/lccd.h, source/include/lccd/DataFileHandler.hh
+	  (tags: v00-01): updated documentation
+
+2005-02-17 12:49  gaede
+
+	* doc/: Doxyfile (tags: v00-02-01, v00-02, v00-01), overview.html,
+	  manual/manual.tex (tags: v00-02-01, v00-02, v00-01): Added
+	  documentation
+
+2005-02-16 12:02  gaede
+
+	* source/: include/lccd/DataFileHandler.hh, src/DataFileHandler.cc
+	  (tags: v00-01): initial version
+
+2005-02-16 12:02  gaede
+
+	* source/test/: GNUmakefile (tags: v00-02-01, v00-02, v00-01),
+	  readdatafile.cc: test program for DataFileHandler
+
+2005-02-16 12:01  gaede
+
+	* source/: include/lccd/DBFileHandler.hh, test/readcalfile.cc
+	  (utags: v00-01, v00-02, v00-02-01): cosmetics
+
+2005-02-16 10:31  gaede
+
+	* README, conddb.patch: patch for CondDBMysQL
+
+2005-02-16 10:27  gaede
+
+	* README, source/src/LCGenericObjectStreamer.cc: removed debug
+	  printout
+
+2005-02-15 17:35  gaede
+
+	* source/test/calfilefromdb.cc: cosmetics
+
+2005-02-15 17:35  gaede
+
+	* source/: include/lccd/DBFileHandler.hh, src/DBFileHandler.cc
+	  (tags: v00-02-01, v00-02, v00-01): initial version
+
+2005-02-15 17:34  gaede
+
+	* source/test/: GNUmakefile, testdbfile.cc: added test for
+	  DBFileHandler
+
+2005-02-15 17:33  gaede
+
+	* source/src/DBInterface.cc: finished createDBFile( tag )
+
+2005-02-14 19:16  gaede
+
+	* source/test/calfilefromdb.cc: comsetics - added test for
+	  findCollections
+
+2005-02-14 19:16  gaede
+
+	* source/test/: GNUmakefile, createdbfile.cc: added createdbfile
+
+2005-02-14 19:15  gaede
+
+	* source/src/lccd.cc: added fromSimpleTime
+
+2005-02-14 19:14  gaede
+
+	* source/: include/lccd/DBInterface.hh, src/DBInterface.cc: added
+	  methods for vertically browsing a folder and creating an
+	  LCIO-dbfile
+
+2005-02-14 19:11  gaede
+
+	* source/include/lccd.h: function to convert SImpleTime to
+	  LCCDTimestamp
+
+2005-02-14 11:30  gaede
+
+	* source/: include/lccd/DBInterface.hh, src/DBInterface.cc: Added
+	  collection parameters that describe the data at the time of the
+	  query
+
+2005-02-14 11:29  gaede
+
+	* source/: include/lccd/ConditionsMap.hh,
+	  test/CalibrationConstant.hh (tags: v00-02-01, v00-02, v00-01):
+	  cosmetics
+
+2005-02-11 16:51  gaede
+
+	* README, env.sh (utags: fg20050211): initial version of readme
+
+2005-02-11 16:36  gaede
+
+	* source/test/calfiletodb.cc (tags: fg20050211): removed COndDB
+	  headers
+
+2005-02-11 16:36  gaede
+
+	* source/test/calfilefromdb.cc (tags: fg20050211): included example
+	  for ConditionsMap
+
+2005-02-11 16:35  gaede
+
+	* source/: include/lccd/DBInterface.hh, src/DBInterface.cc (utags:
+	  fg20050211): moved CondDB headers from .hh to .cc
+
+2005-02-11 16:34  gaede
+
+	* source/include/lccd/ConditionsMap.hh (tags: fg20050211): added
+	  member function pointer for function returning key
+
+2005-02-11 13:31  gaede
+
+	* source/include/lccd/ConditionsMap.hh: initial version -
+	  experimental !
+
+2005-02-11 12:05  gaede
+
+	* source/: src/GNUmakefile (tags: v00-02-01, v00-02, v00-01),
+	  test/GNUmakefile (utags: fg20050211): create bin(test)  and
+	  libdir
+
+2005-02-11 12:04  gaede
+
+	* source/test/CalibrationConstant.cc (tags: v00-02-01, v00-02,
+	  v00-01, fg20050211): removed static _typeName and
+	  _dataDescription (new LCGenericObject API)
+
+2005-02-11 12:03  gaede
+
+	* source/test/readcalfile.cc (tags: fg20050211): added nice time
+	  printout with LCTime
+
+2005-02-11 12:02  gaede
+
+	* source/test/CalibrationConstant.hh (tags: fg20050211): modified
+	  to use LCFixedObject template
+
+2005-02-10 13:17  gaede
+
+	* README, env.sh, doc/Doxyfile, source/GNUmakefile,
+	  source/include/lccd.h,
+	  source/include/lccd/ConditionsHandlerBase.hh,
+	  source/include/lccd/DBCondHandler.hh,
+	  source/include/lccd/DBInterface.hh,
+	  source/include/lccd/IConditionsChangeListener.hh,
+	  source/include/lccd/IConditionsHandler.hh,
+	  source/include/lccd/LCGenericObjectStreamer.hh,
+	  source/include/lccd/SimpleFileHandler.hh,
+	  source/include/lccd/StreamerMgr.hh,
+	  source/include/lccd/VCollectionStreamer.hh,
+	  source/include/lccd/Xdr.hh, source/src/ConditionsHandlerBase.cc,
+	  source/src/DBCondHandler.cc, source/src/DBInterface.cc,
+	  source/src/GNUmakefile, source/src/LCGenericObjectStreamer.cc,
+	  source/src/SimpleFileHandler.cc, source/src/StreamerMgr.cc,
+	  source/src/VCollectionStreamer.cc, source/src/Xdr.cc,
+	  source/src/lccd.cc, source/test/CalibrationConstant.cc,
+	  source/test/CalibrationConstant.hh, source/test/GNUmakefile,
+	  source/test/calfilefromdb.cc, source/test/calfiletodb.cc,
+	  source/test/createcalfile.cc, source/test/readcalfile.cc,
+	  source/test/tagdbfolder.cc: Initial revision
+
+2005-02-10 13:17  gaede
+
+	* README, env.sh, doc/Doxyfile (tags: fg20050211),
+	  source/GNUmakefile (tags: fg20050211), source/include/lccd.h
+	  (tags: fg20050211), source/include/lccd/ConditionsHandlerBase.hh
+	  (tags: fg20050211), source/include/lccd/DBCondHandler.hh (tags:
+	  v00-02-01, v00-02, v00-01, fg20050211),
+	  source/include/lccd/DBInterface.hh,
+	  source/include/lccd/IConditionsChangeListener.hh (tags:
+	  v00-02-01, v00-02, v00-01, fg20050211),
+	  source/include/lccd/IConditionsHandler.hh (tags: fg20050211),
+	  source/include/lccd/LCGenericObjectStreamer.hh (tags: v00-02-01,
+	  v00-02, v00-01, fg20050211),
+	  source/include/lccd/SimpleFileHandler.hh (tags: v00-02, v00-01,
+	  fg20050211), source/include/lccd/StreamerMgr.hh (tags: v00-02-01,
+	  v00-02, v00-01, fg20050211),
+	  source/include/lccd/VCollectionStreamer.hh (tags: v00-02-01,
+	  v00-02, v00-01, fg20050211), source/include/lccd/Xdr.hh (tags:
+	  fg20050211), source/src/ConditionsHandlerBase.cc (tags:
+	  fg20050211), source/src/DBCondHandler.cc (tags: v00-02-01,
+	  v00-02, v00-01, fg20050211), source/src/DBInterface.cc,
+	  source/src/GNUmakefile, source/src/LCGenericObjectStreamer.cc
+	  (tags: fg20050211), source/src/SimpleFileHandler.cc (tags:
+	  fg20050211), source/src/StreamerMgr.cc (tags: v00-02-01, v00-02,
+	  v00-01, fg20050211), source/src/VCollectionStreamer.cc (tags:
+	  v00-02-01, v00-02, v00-01, fg20050211), source/src/Xdr.cc (tags:
+	  v00-02-01, v00-02, v00-01, fg20050211), source/src/lccd.cc (tags:
+	  fg20050211), source/test/CalibrationConstant.cc,
+	  source/test/CalibrationConstant.hh, source/test/GNUmakefile,
+	  source/test/calfilefromdb.cc, source/test/calfiletodb.cc,
+	  source/test/createcalfile.cc (tags: v00-02-01, v00-02, v00-01,
+	  fg20050211), source/test/readcalfile.cc,
+	  source/test/tagdbfolder.cc (tags: fg20050211) (utags: start):
+	  initial version
+
