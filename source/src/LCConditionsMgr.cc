@@ -1,7 +1,7 @@
 #include "lccd/LCConditionsMgr.hh"
 
 #include "lcio.h"
-
+#include <iostream>
 
 namespace lccd{
 
@@ -44,16 +44,25 @@ namespace lccd{
     
     for( HandlerMap::iterator it =  _map.begin() ; it != _map.end() ; it++ ){
       
-      it->second->updateEvent( evt ) ;
+      try {
+	it->second->updateEvent( evt ) ;
+      }
+      catch(lcio::Exception e ){
+	std::cout << " LCConditionsMgr::updateEvent: an exception occured: " << e.what() << std::endl ;
+      }
     }
-    
   }
   
   void LCConditionsMgr::update( LCCDTimeStamp timestamp ) {
 
     for( HandlerMap::iterator it =  _map.begin() ; it != _map.end() ; it++ ){
       
+      try {
       it->second->update( timestamp ) ;
+      }
+      catch(lcio::Exception e ){
+	std::cout << " LCConditionsMgr::update: an exception occured: " << e.what() << std::endl ;
+      }
     }
 
   }
