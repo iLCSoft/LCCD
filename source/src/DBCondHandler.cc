@@ -52,8 +52,8 @@ namespace lccd {
       if( _col == 0 ) {
 	
 	std::stringstream mess ;
-	mess << "DBCondHandler::update: No collection found for time stamp: " 
-	     << timeStamp << std::ends ;
+	mess << "DBCondHandler::update: no collection found for time stamp: " 
+	     << timeStamp << " and name " << name () << std::ends ;
 	throw lcio::Exception( mess.str() ) ;
 	
       }
