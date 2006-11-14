@@ -1,3 +1,24 @@
+2006-11-14 18:42  gaede
+
+	* source/src/DBFileHandler.cc: patch for error printout (S.Schmidt)
+
+2006-11-14 18:34  gaede
+
+	* source/: include/lccd/ConditionsMap.hh,
+	  include/lccd/DBConnectionMgr.hh, include/lccd/DBInterface.hh,
+	  src/DBConnectionMgr.cc, src/DBInterface.cc, test/GNUmakefile,
+	  test/multiblefolders.cc: added reference counting for db
+	  connections (DBConnectionMgr)
+
+2006-06-16 16:33  gaede
+
+	* source/src/DBCondHandler.cc: print collection name in Exception
+	  for 'no timestamp'
+
+2006-05-03 14:52  gaede
+
+	* ChangeLog, env.sh: uopdated to v00-03-01
+
 2006-05-03 12:52  gaede
 
 	* source/src/LCConditionsMgr.cc: allow to update handlers w/o
