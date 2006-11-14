@@ -5,6 +5,7 @@
 #include "IO/LCReader.h"
 #include "EVENT/LCRunHeader.h"
 #include "EVENT/LCParameters.h"
+#include "UTIL/LCTime.h"
 
 #include <iostream>
 #include <sstream>
@@ -140,9 +141,12 @@ namespace lccd {
     }
     if( evtNum < 0 ) {
 
+      UTIL::LCTime ts(timestamp);
+
       std::stringstream err ;
       err << "DBFileHandler::findEventNumber: no conditions data in file for time stamp: " 
-	  << timestamp ;
+	  << ts.getDateString() << " (" << timestamp << ") in file " << _fileName;
+
       throw Exception( err.str() ) ;
     }
 
