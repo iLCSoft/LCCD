@@ -1,3 +1,7 @@
+2006-11-14 18:47  gaede
+
+	* ChangeLog:  ----- tag  v00-03-03
+
 2006-11-14 18:42  gaede
 
 	* source/src/DBFileHandler.cc: patch for error printout (S.Schmidt)
