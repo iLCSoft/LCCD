@@ -5,6 +5,7 @@
 // lccd headers
 #include "lccd.h"
 #include "lccd/StreamerMgr.hh"
+#include "lccd/DBConnectionMgr.hh"
 
 // LCIO headers
 #include "lcio.h"
@@ -64,30 +65,34 @@ namespace lccd {
   }
   
   DBInterface::~DBInterface() {
-    
-    CondDBMySQLMgrFactory::destroyCondDBMgr( _condDBmgr );
+
+    DBConnectionMgr::instance()->releaseConnection(  _dbInit , this ) ;   
+//     CondDBMySQLMgrFactory::destroyCondDBMgr( _condDBmgr );
  } 
   
   void DBInterface::init() {
     
     //  Database initialization
-    _condDBmgr = CondDBMySQLMgrFactory::createCondDBMgr();
-    _condDBmgr->init( _dbInit );
+//     _condDBmgr = CondDBMySQLMgrFactory::createCondDBMgr();
+//     _condDBmgr->init( _dbInit );
     
-    if( ! _condDBmgr->isCondDBcreated() )
+//     if( ! _condDBmgr->isCondDBcreated() )
       
-      _condDBmgr->createCondDB();
+//       _condDBmgr->createCondDB();
 	
-    // FIXME: the following calls are useless as ConDBMySQL doesn't use transactions so far...
-    // is this a problem ?
-    // void CondDBInterface::startUpdate() throw(CondDBException) {}
-    // void CondDBInterface::startRead() throw(CondDBException) {}
-    // void CondDBInterface::abort() throw(CondDBException) {}
-    // void CondDBInterface::commit() throw(CondDBException) {}
+//     // FIXME: the following calls are useless as ConDBMySQL doesn't use transactions so far...
+//     // is this a problem ?
+//     // void CondDBInterface::startUpdate() throw(CondDBException) {}
+//     // void CondDBInterface::startRead() throw(CondDBException) {}
+//     // void CondDBInterface::abort() throw(CondDBException) {}
+//     // void CondDBInterface::commit() throw(CondDBException) {}
     
-    _condDBmgr->startRead();
-    _condDBmgr->openDatabase();
-    _condDBmgr->commit();
+//     _condDBmgr->startRead();
+//     _condDBmgr->openDatabase();
+//     _condDBmgr->commit();
+
+    //fg: use the DBConnectionMgr to limit the database connections for this job
+     _condDBmgr = DBConnectionMgr::instance()->getDBConnection(  _dbInit , this ) ;   
     
     _condDataAccess = _condDBmgr->getCondDBDataAccess() ;
     _condFolderMgr  = _condDBmgr->getCondDBFolderMgr() ; 

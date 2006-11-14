@@ -3,7 +3,7 @@
 # GNUmakefile to build the LCCD library test examples
 #
 # @author F. Gaede, DESY
-# @version $Id: GNUmakefile,v 1.5 2005-02-16 11:02:24 gaede Exp $
+# @version $Id: GNUmakefile,v 1.6 2006-11-14 17:34:27 gaede Exp $
 ######################################################
 SIOINSTALL = $(LCCDBASE)/sio
 
@@ -27,7 +27,7 @@ CPPFLAGS += -I $(LCIO)/src/cpp/include
 LIBS = -L $(INSTALL) -llccd -L$(LCIO)/lib -llcio -L$(LCIO)/sio/lib -lsio -lz
 
 
-BINSRC = readcalfile.cc createcalfile.cc testdbfile.cc readdatafile.cc
+BINSRC = readcalfile.cc createcalfile.cc testdbfile.cc readdatafile.cc multiblefolders.cc
 
 ifdef CondDBMySQL
 BINSRC += calfiletodb.cc calfilefromdb.cc tagdbfolder.cc createdbfile.cc
@@ -75,6 +75,9 @@ $(BINDIR)/readdatafile: readdatafile.cc $(INSTALL)/liblccd.a $(objects)
 ifdef CondDBMySQL
 $(BINDIR)/calfiletodb: calfiletodb.cc $(INSTALL)/liblccd.a $(objects)
 	$(CXX) -o $(BINDIR)/calfiletodb $(CPPFLAGS) calfiletodb.cc   $(objects)  $(LIBS) 
+
+$(BINDIR)/multiblefolders: multiblefolders.cc $(INSTALL)/liblccd.a $(objects)
+	$(CXX) -o $(BINDIR)/multiblefolders $(CPPFLAGS) multiblefolders.cc   $(objects)  $(LIBS) 
 
 $(BINDIR)/calfilefromdb: calfilefromdb.cc $(INSTALL)/liblccd.a $(objects)
 	$(CXX) -o $(BINDIR)/calfilefromdb $(CPPFLAGS) calfilefromdb.cc   $(objects)  $(LIBS) 

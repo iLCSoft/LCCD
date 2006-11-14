@@ -43,7 +43,7 @@ namespace lccd {
    *  horizontally (by tag) or vertically (by time stamp).
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: DBInterface.hh,v 1.8 2005-02-18 16:51:55 gaede Exp $
+   *  @version $Id: DBInterface.hh,v 1.9 2006-11-14 17:34:27 gaede Exp $
    */
 
   class DBInterface {
@@ -178,7 +178,6 @@ namespace lccd {
      *  This file can be used by the SimpleFileHandler.<br>
      */
     void createSimpleFile( LCCDTimeStamp timeStamp, const std::string& tag, bool allLayers=false ) ;
-
 
   protected:
     /** Initializes the database  access */
