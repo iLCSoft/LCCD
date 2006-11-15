@@ -50,7 +50,7 @@ checks whether the proper random mapping is inverted.
 By modifying the user can run the _same_ application to perform the check with all
 possible forms of input for the conditions data.
 
-Note: you have to modify the actual timestamps in my.steer after every run of
+Note: you have to modify the actual timestamps in steer.xml (my.steer) after every run of
 
    createmaps
 

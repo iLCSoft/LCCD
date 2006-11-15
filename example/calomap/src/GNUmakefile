@@ -3,7 +3,7 @@
 # Example GNUmakefile to build an Application with Marlin
 #
 # @author Frank Gaede
-# @version $Id: GNUmakefile,v 1.2 2005-08-30 13:35:02 gaede Exp $
+# @version $Id: GNUmakefile,v 1.3 2006-11-15 16:31:08 gaede Exp $
 #
 ###########################################################
 
@@ -17,7 +17,7 @@
 
 
 # name of the program/library
-PROGNAME = calomaptest
+PROGNAME = calomap
 
 
 #----  additional user include/libraries
