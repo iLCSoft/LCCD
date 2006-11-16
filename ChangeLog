@@ -1,3 +1,7 @@
+2006-11-16 16:04  gaede
+
+	* ChangeLog, env.sh:  ----- tag  v00-03-04
+
 2006-11-16 16:01  gaede
 
 	* source/include/lccd/ConditionsMap.hh: include Exception (gcc 4.x
