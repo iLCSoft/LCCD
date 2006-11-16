@@ -1,3 +1,21 @@
+2006-11-16 16:01  gaede
+
+	* source/include/lccd/ConditionsMap.hh: include Exception (gcc 4.x
+	  ?)
+
+2006-11-16 16:01  gaede
+
+	* env.sh: updated version
+
+2006-11-15 17:31  gaede
+
+	* example/calomap/: README, steer.xml, src/GNUmakefile: added xml
+	  steering file and updated makefile
+
+2006-11-14 18:48  gaede
+
+	* ChangeLog: [no log message]
+
 2006-11-14 18:47  gaede
 
 	* ChangeLog:  ----- tag  v00-03-03
