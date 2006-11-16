@@ -3,6 +3,7 @@
 
 #include "lcio.h"
 #include "EVENT/LCCollection.h"
+#include "Exceptions.h"
 
 #include "lccd/IConditionsChangeListener.hh"
 
@@ -17,7 +18,7 @@ namespace lccd {
    *  Typically this is the case for all LCGenericObject subclasses.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: ConditionsMap.hh,v 1.6 2006-11-14 17:34:27 gaede Exp $
+   *  @version $Id: ConditionsMap.hh,v 1.7 2006-11-16 15:01:42 gaede Exp $
    */
   template <class KEY, class LCCONDOBJECT>
   class ConditionsMap : public lccd::IConditionsChangeListener {

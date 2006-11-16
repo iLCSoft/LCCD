@@ -20,4 +20,4 @@ export LD_LIBRARY_PATH=$CondDBMySQL/lib
 
 
 #----- for documetation only
-export LCCDVERSION=v00-03-01
+export LCCDVERSION=v00-03-03
