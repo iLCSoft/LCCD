@@ -115,8 +115,6 @@ ENDIF()
 ### DEPENDENCIES
 ####################################################################################################
 
-SET( ${PROJECT_NAME}_DEPENDS "CondDBMySQL;LCIO" CACHE STRING "${PROJECT_NAME} Dependencies" FORCE )
-
 # load macro
 IF( DEFINED ${PROJECT_NAME}_DEPENDS OR DEFINED BUILD_WITH OR DEFINED LINK_WITH )
 	MESSAGE( STATUS "-------------------------------------------------------------------------------" )
