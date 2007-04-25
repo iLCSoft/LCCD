@@ -14,6 +14,10 @@ SET( CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS TRUE )
 # project name
 PROJECT( LCCD )
 
+# project options
+OPTION( BUILD_LCCD_TESTS "Set to ON to build LCCD tests" OFF )
+OPTION( BUILD_CONDDB_TESTS "Set to ON to build CondDB tests" OFF )
+
 # project dependencies
 SET( ${PROJECT_NAME}_DEPENDS "CondDBMySQL;LCIO" )
 

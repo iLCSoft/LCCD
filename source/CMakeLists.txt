@@ -77,8 +77,6 @@ SET( conddb_tests
 	createdbfile
 	tagdbfolder
 )
-OPTION( BUILD_LCCD_TESTS "Set to on to build LCCD tests" OFF )
-OPTION( BUILD_CONDDB_TESTS "Set to on to build CondDB tests" OFF )
 
 IF( BUILD_LCCD_TESTS )
 	LIST( APPEND test_bins ${lccd_tests} )
