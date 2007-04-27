@@ -26,7 +26,7 @@ namespace lccd {
    *  Singleton.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: StreamerMgr.hh,v 1.1.1.1 2005-02-10 12:17:54 gaede Exp $
+   *  @version $Id: StreamerMgr.hh,v 1.2 2007-04-27 13:21:31 gaede Exp $
    */
 
   class StreamerMgr {
@@ -65,7 +65,7 @@ namespace lccd {
 
   };
 
-} ; //end namespace
+}  //end namespace
 
 #endif // USE_CONDDB
 #endif // StreamerMgr_h

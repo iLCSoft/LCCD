@@ -23,7 +23,7 @@ namespace lccd {
   /** Singleton that manages data base connection on the basis of access strings.
    *
    *  @author F.Gaede, DESY
-   *  @version $Id: DBConnectionMgr.hh,v 1.1 2006-11-14 17:34:27 gaede Exp $
+   *  @version $Id: DBConnectionMgr.hh,v 1.2 2007-04-27 13:21:31 gaede Exp $
    */
 
   class DBConnectionMgr {
@@ -61,7 +61,7 @@ namespace lccd {
 
   };
 
-} ; //end namespace
+}  //end namespace
 
 #endif // USE_CONDDB
 #endif // DBConnectionMgr_h

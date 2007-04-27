@@ -28,7 +28,7 @@ namespace lccd {
    *  constants from a database without actually having access to the database, e.g. in a grid environment.
    *   
    *  @author F.Gaede, DESY
-   *  @version $Id: DBFileHandler.hh,v 1.2 2005-02-16 11:01:32 gaede Exp $
+   *  @version $Id: DBFileHandler.hh,v 1.3 2007-04-27 13:21:31 gaede Exp $
    */
   
   class DBFileHandler : public ConditionsHandlerBase {
@@ -86,6 +86,6 @@ namespace lccd {
     LCReader* _lcReader ;
 
   };
-} ; //end namespace
+}  //end namespace
 
 #endif // DBFileHandler_h

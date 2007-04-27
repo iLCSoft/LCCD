@@ -8,7 +8,7 @@
 #####################################################
 
 # -- required
-export LCIO=/afs/desy.de/group/it/ilcsoft/lcio/v01-07
+export LCIO=/afs/desy.de/group/it/ilcsoft/lcio/v01-08-02
 
 #-- comment out for production 
 export LCCDDEBUG=1
@@ -20,4 +20,4 @@ export LD_LIBRARY_PATH=$CondDBMySQL/lib
 
 
 #----- for documetation only
-export LCCDVERSION=v00-03-04
+export LCCDVERSION=v00-03-05

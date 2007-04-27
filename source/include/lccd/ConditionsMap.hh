@@ -18,7 +18,7 @@ namespace lccd {
    *  Typically this is the case for all LCGenericObject subclasses.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: ConditionsMap.hh,v 1.7 2006-11-16 15:01:42 gaede Exp $
+   *  @version $Id: ConditionsMap.hh,v 1.8 2007-04-27 13:21:31 gaede Exp $
    */
   template <class KEY, class LCCONDOBJECT>
   class ConditionsMap : public lccd::IConditionsChangeListener {
@@ -116,6 +116,6 @@ namespace lccd {
     PMF _pmf ;
 };
 
-} ; //end namespace
+}  //end namespace
 
 #endif // ConditionsMap_h

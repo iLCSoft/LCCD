@@ -16,7 +16,7 @@ namespace lccd {
    *  Note: The data isn't read from the file until update() is called.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: SimpleFileHandler.hh,v 1.2 2005-08-30 13:36:20 gaede Exp $
+   *  @version $Id: SimpleFileHandler.hh,v 1.3 2007-04-27 13:21:31 gaede Exp $
    */
   
   class SimpleFileHandler : public ConditionsHandlerBase {
@@ -61,6 +61,6 @@ namespace lccd {
     bool  _firstCall ;
 
   };
-} ; //end namespace
+}  //end namespace
 
 #endif // SimpleFileHandler_h

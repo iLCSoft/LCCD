@@ -17,7 +17,7 @@ namespace lccd {
    *  Subclasses need to implement IConditionsHandler::update( LCCDTimeStamp timestamp ).
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: ConditionsHandlerBase.hh,v 1.2 2005-02-22 18:55:22 gaede Exp $
+   *  @version $Id: ConditionsHandlerBase.hh,v 1.3 2007-04-27 13:21:31 gaede Exp $
    */
   
   class ConditionsHandlerBase : public IConditionsHandler {
@@ -107,6 +107,6 @@ namespace lccd {
     
 
   };
-} ; //end namespace
+}  //end namespace
 
 #endif // ConditionsHandlerBase_h

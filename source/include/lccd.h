@@ -80,6 +80,6 @@ namespace lccd{
   LCCDTimeStamp fromSimpleTime( SimpleTime st ) ;
 #endif
 
-};
+}
 
 #endif

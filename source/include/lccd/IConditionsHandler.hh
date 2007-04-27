@@ -20,7 +20,7 @@ namespace lccd {
    *  update and allways hold the same data set.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: IConditionsHandler.hh,v 1.2 2005-02-22 18:55:22 gaede Exp $
+   *  @version $Id: IConditionsHandler.hh,v 1.3 2007-04-27 13:21:31 gaede Exp $
    */
 
   class IConditionsHandler {
@@ -75,6 +75,6 @@ namespace lccd {
     
   };
 
-} ; //end namespace
+} //end namespace
 
 #endif // IConditionsHandler_h

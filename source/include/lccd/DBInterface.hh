@@ -43,7 +43,7 @@ namespace lccd {
    *  horizontally (by tag) or vertically (by time stamp).
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: DBInterface.hh,v 1.9 2006-11-14 17:34:27 gaede Exp $
+   *  @version $Id: DBInterface.hh,v 1.10 2007-04-27 13:21:31 gaede Exp $
    */
 
   class DBInterface {
@@ -204,7 +204,7 @@ namespace lccd {
     std::string _dbName ;
   };
 
-} ; //end namespace
+}  //end namespace
 
 #endif // USE_CONDDB
 #endif // DBInterface_h

@@ -21,7 +21,7 @@ namespace lccd {
   /** Base class for LCCollection streamer classes.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: VCollectionStreamer.hh,v 1.1.1.1 2005-02-10 12:17:54 gaede Exp $
+   *  @version $Id: VCollectionStreamer.hh,v 1.2 2007-04-27 13:21:31 gaede Exp $
    */
 
   class VCollectionStreamer : public ICondDBStreamable {
@@ -61,7 +61,7 @@ namespace lccd {
     lcio::LCCollection*  _col ;
   };
 
-} ; //end namespace
+} //end namespace
 
 #endif // USE_CONDDB
 #endif // VCollectionStreamer_h

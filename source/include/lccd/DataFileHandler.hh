@@ -17,7 +17,7 @@ namespace lccd {
    *  into the same data stream as the raw data.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: DataFileHandler.hh,v 1.3 2005-02-25 17:28:54 gaede Exp $
+   *  @version $Id: DataFileHandler.hh,v 1.4 2007-04-27 13:21:31 gaede Exp $
    */
   
   class DataFileHandler : public ConditionsHandlerBase {
@@ -50,6 +50,6 @@ namespace lccd {
     DataFileHandler() {} 
 
   };
-} ; //end namespace
+}  //end namespace
 
 #endif // DataFileHandler_h

@@ -17,7 +17,7 @@ namespace lccd {
   /** Base class for LCCollection streamer classes.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: LCGenericObjectStreamer.hh,v 1.1.1.1 2005-02-10 12:17:54 gaede Exp $
+   *  @version $Id: LCGenericObjectStreamer.hh,v 1.2 2007-04-27 13:21:31 gaede Exp $
    */
 
   class LCGenericObjectStreamer : public VCollectionStreamer {
@@ -48,7 +48,7 @@ namespace lccd {
 
   };
 
-} ; //end namespace
+} //end namespace
 
 #endif // USE_CONDDB
 #endif // LCGenericObjectStreamer_h
