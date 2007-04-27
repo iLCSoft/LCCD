@@ -1,0 +1,12 @@
+====================
+ LCCD release notes
+====================
+
+
+ ----------
+| v00-03-05 |
+ ----------
+
+ bug fix release
+  - removed ';'s at end of namespace for gcc 3.4 and higher
+  - added support for cmake (experimental)
