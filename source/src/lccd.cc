@@ -65,4 +65,4 @@ namespace lccd{
     std::bitset< 8*sizeof(LCCDTimeStamp)  > b = a ;
   } 
 
-};
+}

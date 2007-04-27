@@ -50,6 +50,6 @@ namespace lccd{
   }
   
   
-} ;
+}
 #endif // USE_CONDDB
 

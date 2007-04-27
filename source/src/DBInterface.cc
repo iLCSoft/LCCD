@@ -577,5 +577,5 @@ namespace lccd {
 
   }
 
-} ;
+}
 #endif
