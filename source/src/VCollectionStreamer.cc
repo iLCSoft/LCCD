@@ -1,3 +1,4 @@
+#ifdef USE_CONDDB
 #include "lccd/VCollectionStreamer.hh"
 
 #include "lccd/Xdr.hh"
@@ -145,3 +146,4 @@ namespace lccd {
 
 
 } 
+#endif

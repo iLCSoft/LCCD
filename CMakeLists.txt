@@ -20,7 +20,8 @@ OPTION( BUILD_LCCD_TESTS "Set to ON to build LCCD tests" OFF )
 OPTION( BUILD_CONDDB_TESTS "Set to ON to build CondDB tests" OFF )
 
 # project dependencies
-SET( ${PROJECT_NAME}_DEPENDS "CondDBMySQL;LCIO" )
+#SET( ${PROJECT_NAME}_DEPENDS "CondDBMySQL;LCIO" )
+SET( ${PROJECT_NAME}_DEPENDS "LCIO" )
 
 # project version
 SET( ${PROJECT_NAME}_MAJOR_VERSION 0 )
