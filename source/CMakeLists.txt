@@ -112,10 +112,7 @@ IF( test_bins )
 	# loop through list of binaries
 	FOREACH( bin ${test_bins} )
 		# create target for binary
-		ADD_EXECUTABLE( bin_${bin} EXCLUDE_FROM_ALL
-			test/${bin}.cc
-			test/CalibrationConstant.cc
-		)
+		ADD_EXECUTABLE( bin_${bin} test/${bin}.cc test/CalibrationConstant.cc )
 		# tell bin target to call this bin_XXX target
 		ADD_DEPENDENCIES( bin bin_${bin} )
 		# avoid conflicts between library and binary target names
