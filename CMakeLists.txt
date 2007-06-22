@@ -124,13 +124,12 @@ ENDIF()
 ADD_SUBDIRECTORY( source )
 
 # create uninstall configuration file 
-CONFIGURE_FILE( "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
-                "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
+CONFIGURE_FILE( "${CMAKE_SOURCE_DIR}/cmake_uninstall.cmake.in"
+                "${CMAKE_BINARY_DIR}/cmake_uninstall.cmake"
                 IMMEDIATE @ONLY )
 
 # create uninstall target
-ADD_CUSTOM_TARGET( uninstall
-  "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake" )
+ADD_CUSTOM_TARGET( uninstall "${CMAKE_COMMAND}" -P "${CMAKE_BINARY_DIR}/cmake_uninstall.cmake" )
 
 # create configuration file from .in file
 CONFIGURE_FILE( "${${PROJECT_NAME}_SOURCE_DIR}/${PROJECT_NAME}Config.cmake.in"
