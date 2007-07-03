@@ -23,34 +23,41 @@ SET( ILC_HOME "/afs/desy.de/group/it/ilcsoft/v01-01_beta"
 SET( LCIO_HOME "${ILC_HOME}/lcio/HEAD"
     CACHE PATH "Path to LCIO" FORCE )
 
-# Path to CondDBMySQL
-SET( CondDBMySQL_HOME "${ILC_HOME}/CondDBMySQL/CondDBMySQL_ILC-0-5-10"
-    CACHE PATH "Path to CondDBMySQL" FORCE )
-
 # CMake Modules Path
 SET( CMAKE_MODULE_PATH "${ILC_HOME}/CMakeModules/v01-00"
     CACHE PATH "Path to CMake Modules" FORCE )
 
-###############################################
-# Project options
-###############################################
+#############################################################################
+# CondDBMySQL
+#############################################################################
 
-# Enable this if you also want to enable BUILD_CONDDB_TESTS option
+# Enable this if you want to build LCCD with CondDBMySQL
 #SET( BUILD_WITH "CondDBMySQL" CACHE STRING "Build LCCD with these optional packages" FORCE )
+
+# Path to CondDBMySQL
+SET( CondDBMySQL_HOME "${ILC_HOME}/CondDBMySQL/CondDBMySQL_ILC-0-5-10"
+    CACHE PATH "Path to CondDBMySQL" FORCE )
+
+# Enable this if you want to build the CondDB tests
+#SET( BUILD_CONDDB_TESTS ON CACHE BOOL "Set to ON to build CondDB tests" FORCE )
+
+#############################################################################
+# Project options
+#############################################################################
 
 #SET( BUILD_SHARED_LIBS OFF CACHE BOOL "Set to OFF to build static libraries" FORCE )
 #SET( INSTALL_DOC OFF CACHE BOOL "Set to OFF to skip build/install Documentation" FORCE )
+
 #SET( BUILD_LCCD_TESTS ON CACHE BOOL "Set to ON to build LCCD tests" FORCE )
-#SET( BUILD_CONDDB_TESTS ON CACHE BOOL "Set to ON to build CondDB tests" FORCE )
 #SET( LCCD_DB_INIT "localhost:lccd_test:calvin:hobbes" CACHE STRING "DB initialization" FORCE )
 
 # set cmake build type, default value is: RelWithDebInfo
 # possible options are: None Debug Release RelWithDebInfo MinSizeRel
 #SET( CMAKE_BUILD_TYPE "Debug" CACHE STRING "Choose the type of build" FORCE )
 
-###############################################
+#############################################################################
 # Advanced options
-###############################################
+#############################################################################
 
 # installation path for LCCD
 #SET( CMAKE_INSTALL_PREFIX "/foo/bar" CACHE STRING "Where to install LCCD" FORCE )
