@@ -27,8 +27,8 @@
  http://www.cmake.org
 
 
- Build instructions: -> Deprecated, please use cmake!
- -------------------------------------------------------------
+ Build instructions (old makefiles): -> Deprecated, please use cmake!
+ --------------------------------------------------------------------
  
  edit env.sh according to your system setup
 
@@ -50,7 +50,7 @@
  # create API documentation in ./doc/html/index.html
  gmake doc 
 
- -------------------------------------------------------------
+ --------------------------------------------------------------------
 
 
 Make sure you have a version of CondDBMySQL with tag CondDBMySQLLisbon-0-5-6
