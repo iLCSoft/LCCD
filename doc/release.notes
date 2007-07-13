@@ -2,6 +2,12 @@
  LCCD release notes
 ====================
 
+ ----------
+| v00-03-06 |
+ ----------
+    - cmake now default build tool - see README for details
+    - bug fix:
+	  CondDBMySQL is now optional but not required for building LCCD
 
  ----------
 | v00-03-05 |

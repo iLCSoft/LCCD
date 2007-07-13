@@ -1,3 +1,88 @@
+2007-07-13 16:15  engels
+
+	* README: updated
+
+2007-07-12 15:04  engels
+
+	* README: updated
+
+2007-07-10 11:46  engels
+
+	* BuildSetup.cmake: updated
+
+2007-07-06 15:25  engels
+
+	* README: updated
+
+2007-07-05 17:24  engels
+
+	* README: added cmake build instructions
+
+2007-07-04 16:02  engels
+
+	* CMakeLists.txt: added rpath for apple
+
+2007-07-03 14:50  engels
+
+	* BuildSetup.cmake: more user friendly
+
+2007-07-02 14:49  engels
+
+	* BuildSetup.cmake, CMakeLists.txt: added BuildSetup.cmake
+
+2007-06-27 15:37  engels
+
+	* CMakeLists.txt: replaced SEND_ERROR with STATUS
+
+2007-06-22 14:29  engels
+
+	* CMakeLists.txt: small bug fix
+
+2007-06-22 14:18  engels
+
+	* CMakeLists.txt: small bug fix
+
+2007-06-22 14:03  engels
+
+	* CMakeLists.txt, source/CMakeLists.txt: retabed files
+
+2007-06-19 15:12  engels
+
+	* CMakeLists.txt: added documentation target
+
+2007-05-29 18:27  engels
+
+	* CMakeLists.txt: updated version
+
+2007-05-16 15:23  engels
+
+	* source/CMakeLists.txt: removed EXCLUDE_FROM_ALL from bin targets
+
+2007-05-16 15:13  engels
+
+	* CMakeLists.txt: bug fix: variable was being written to cache in
+	  wrong place
+
+2007-05-16 14:54  engels
+
+	* source/CMakeLists.txt: moved dependencies code to a macro
+
+2007-05-11 10:08  engels
+
+	* CMakeLists.txt, source/CMakeLists.txt: removed cmake backwards
+	  compatibility 2.2
+
+2007-05-07 13:44  engels
+
+	* CMakeLists.txt, source/src/DBConnectionMgr.cc,
+	  source/src/LCGenericObjectStreamer.cc,
+	  source/src/VCollectionStreamer.cc, source/src/Xdr.cc: bug fix:
+	  CondDBMySQL is now optional but not required for building LCCD
+
+2007-04-27 17:52  gaede
+
+	* ChangeLog, doc/release.notes: tag v00-03-05
+
 2007-04-27 15:30  gaede
 
 	* CMakeLists.txt: changed version to 0.3.5
