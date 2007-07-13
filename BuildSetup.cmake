@@ -16,11 +16,11 @@
 #############################################################################
 
 # ILC_HOME
-SET( ILC_HOME "/afs/desy.de/group/it/ilcsoft/v01-01_beta"
+SET( ILC_HOME "/afs/desy.de/group/it/ilcsoft"
     CACHE PATH "Path to ILC Software" FORCE )
 
 # Path to LCIO
-SET( LCIO_HOME "${ILC_HOME}/lcio/HEAD"
+SET( LCIO_HOME "${ILC_HOME}/lcio/v01-08-02"
     CACHE PATH "Path to LCIO" FORCE )
 
 # CMake Modules Path
