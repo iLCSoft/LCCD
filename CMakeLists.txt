@@ -45,31 +45,65 @@ IF( NOT LCCD_DB_INIT )
     SET( LCCD_DB_INIT "localhost:lccd_test:calvin:hobbes" )
 ENDIF()
 
+# library *nix style versioning
+SET( ${PROJECT_NAME}_SOVERSION
+    "${${PROJECT_NAME}_MAJOR_VERSION}.${${PROJECT_NAME}_MINOR_VERSION}" )
+SET( ${PROJECT_NAME}_VERSION
+    "${${PROJECT_NAME}_SOVERSION}.${${PROJECT_NAME}_PATCH_LEVEL}" )
+
 # DOCUMENTATION
-FIND_PACKAGE( Doxygen )
-FIND_PACKAGE( LATEX )
-IF( DOXYGEN_FOUND AND LATEX_COMPILER AND MAKEINDEX_COMPILER )
-    
-    ADD_CUSTOM_COMMAND(
-        OUTPUT  "${${PROJECT_NAME}_SOURCE_DIR}/doc/html"
-        COMMAND "${DOXYGEN_EXECUTABLE}"
-        WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/doc"
-        COMMENT "Building API Documentation..."
-        VERBATIM )
-    
-    ADD_CUSTOM_TARGET( doc DEPENDS
-        "${${PROJECT_NAME}_SOURCE_DIR}/doc/html" )
-    
-ELSE()
-    IF( NOT DOXYGEN_FOUND )
-        MESSAGE( STATUS "Doxygen not found in your system!!" )
-    ENDIF()
-    IF( NOT LATEX_COMPILER OR NOT MAKEINDEX_COMPILER )
-        MESSAGE( STATUS "Latex not found in your system!!" )
-    ENDIF()
-    IF( INSTALL_DOC )
-        MESSAGE( STATUS "INSTALL_DOC forced to OFF" )
-        SET( INSTALL_DOC OFF )
+# code for *nix only!
+IF( UNIX )
+    # find shell
+    FIND_PROGRAM( SH
+      sh
+      ${CYGWIN_INSTALL_PATH}/bin
+      /bin
+      /usr/bin
+      /usr/local/bin
+      /sbin
+      # FIXME add path to MacOS here
+    )
+    MARK_AS_ADVANCED( SH )
+
+    IF( SH )
+        # generate shell script for setting environment before running a command
+        MESSAGE( STATUS "Generating shell environment script..." )
+        FILE( WRITE "${CMAKE_BINARY_DIR}/script.sh"
+                    "export LCCDVERSION=${${PROJECT_NAME}_VERSION}\n"
+                    "$1 $2" )
+
+        FIND_PACKAGE( Doxygen )
+        FIND_PACKAGE( LATEX )
+        IF( DOXYGEN_FOUND AND LATEX_COMPILER AND MAKEINDEX_COMPILER )
+            
+            ADD_CUSTOM_COMMAND(
+                OUTPUT  "${${PROJECT_NAME}_SOURCE_DIR}/doc/html"
+                COMMAND ${SH} "${CMAKE_BINARY_DIR}/script.sh" "${DOXYGEN_EXECUTABLE}"
+                WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/doc"
+                COMMENT "Building API Documentation..."
+                VERBATIM )
+            
+            ADD_CUSTOM_TARGET( doc DEPENDS
+                "${${PROJECT_NAME}_SOURCE_DIR}/doc/html" )
+            
+        ELSE()
+            IF( NOT DOXYGEN_FOUND )
+                MESSAGE( STATUS "Doxygen not found in your system!!" )
+            ENDIF()
+            IF( NOT LATEX_COMPILER OR NOT MAKEINDEX_COMPILER )
+                MESSAGE( STATUS "Latex not found in your system!!" )
+            ENDIF()
+            IF( INSTALL_DOC )
+                MESSAGE( STATUS "INSTALL_DOC forced to OFF" )
+                SET( INSTALL_DOC OFF )
+            ENDIF()
+        ENDIF()
+    ELSE()
+        IF( INSTALL_DOC )
+            MESSAGE( STATUS "Unix Shell not found - INSTALL_DOC forced to OFF and doc target disabled!" )
+            SET( INSTALL_DOC OFF )
+        ENDIF()
     ENDIF()
 ENDIF()
 
@@ -84,12 +118,6 @@ IF( INSTALL_DOC )
 ENDIF()
 
 ##########################################################################################
-
-# library *nix style versioning
-SET( ${PROJECT_NAME}_SOVERSION
-    "${${PROJECT_NAME}_MAJOR_VERSION}.${${PROJECT_NAME}_MINOR_VERSION}" )
-SET( ${PROJECT_NAME}_VERSION
-    "${${PROJECT_NAME}_SOVERSION}.${${PROJECT_NAME}_PATCH_LEVEL}" )
 
 # add install path to the rpath list
 SET( CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib" )
