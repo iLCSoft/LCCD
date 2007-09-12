@@ -69,7 +69,7 @@ IF( UNIX )
     IF( SH )
         # generate shell script for setting environment before running a command
         MESSAGE( STATUS "Generating shell environment script..." )
-        FILE( WRITE "${CMAKE_BINARY_DIR}/script.sh"
+        FILE( WRITE "${PROJECT_BINARY_DIR}/script.sh"
                     "export LCCDVERSION=${${PROJECT_NAME}_VERSION}\n"
                     "$1 $2" )
 
@@ -79,8 +79,8 @@ IF( UNIX )
             
             ADD_CUSTOM_COMMAND(
                 OUTPUT  "${${PROJECT_NAME}_SOURCE_DIR}/doc/html"
-                COMMAND ${SH} "${CMAKE_BINARY_DIR}/script.sh" "${DOXYGEN_EXECUTABLE}"
-                WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/doc"
+                COMMAND ${SH} "${PROJECT_BINARY_DIR}/script.sh" "${DOXYGEN_EXECUTABLE}"
+                WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}/doc"
                 COMMENT "Building API Documentation..."
                 VERBATIM )
             
@@ -158,12 +158,12 @@ ENDIF()
 ADD_SUBDIRECTORY( source )
 
 # create uninstall configuration file 
-CONFIGURE_FILE( "${CMAKE_SOURCE_DIR}/cmake_uninstall.cmake.in"
-                "${CMAKE_BINARY_DIR}/cmake_uninstall.cmake"
+CONFIGURE_FILE( "${PROJECT_SOURCE_DIR}/cmake_uninstall.cmake.in"
+                "${PROJECT_BINARY_DIR}/cmake_uninstall.cmake"
                 IMMEDIATE @ONLY )
 
 # create uninstall target
-ADD_CUSTOM_TARGET( uninstall "${CMAKE_COMMAND}" -P "${CMAKE_BINARY_DIR}/cmake_uninstall.cmake" )
+ADD_CUSTOM_TARGET( uninstall "${CMAKE_COMMAND}" -P "${PROJECT_BINARY_DIR}/cmake_uninstall.cmake" )
 
 # create configuration file from .in file
 CONFIGURE_FILE( "${${PROJECT_NAME}_SOURCE_DIR}/${PROJECT_NAME}Config.cmake.in"
