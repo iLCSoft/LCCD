@@ -45,6 +45,14 @@ IF( NOT LCCD_DB_INIT )
     SET( LCCD_DB_INIT "localhost:lccd_test:calvin:hobbes" )
 ENDIF()
 
+#----- need long long for int64 for now ------
+#FIXME: should establish wether we are on a 32bit or 64 bit machine ....
+ADD_DEFINITIONS( "-Wno-long-long" )
+LIST( APPEND ${PROJECT_NAME}_DEFINITIONS "-Wno-long-long" )
+                                                                                                                                                           
+ADD_DEFINITIONS( "-DLCCD_DB_INIT_DEFAULT=\\\"${LCCD_DB_INIT}\\\"" )
+LIST( APPEND ${PROJECT_NAME}_DEFINITIONS "-DLCCD_DB_INIT_DEFAULT=\\\"${LCCD_DB_INIT}\\\"" )
+
 # library *nix style versioning
 SET( ${PROJECT_NAME}_SOVERSION
     "${${PROJECT_NAME}_MAJOR_VERSION}.${${PROJECT_NAME}_MINOR_VERSION}" )
