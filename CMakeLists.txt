@@ -51,7 +51,6 @@ ADD_DEFINITIONS( "-Wno-long-long" )
 LIST( APPEND ${PROJECT_NAME}_DEFINITIONS "-Wno-long-long" )
                                                                                                                                                            
 ADD_DEFINITIONS( "-DLCCD_DB_INIT_DEFAULT=\\\"${LCCD_DB_INIT}\\\"" )
-LIST( APPEND ${PROJECT_NAME}_DEFINITIONS "-DLCCD_DB_INIT_DEFAULT=\\\"${LCCD_DB_INIT}\\\"" )
 
 # library *nix style versioning
 SET( ${PROJECT_NAME}_SOVERSION
