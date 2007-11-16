@@ -16,15 +16,15 @@
 #############################################################################
 
 # ILC_HOME
-SET( ILC_HOME "/afs/desy.de/group/it/ilcsoft"
+SET( ILC_HOME "/afs/desy.de/group/it/ilcsoft/v01-03"
     CACHE PATH "Path to ILC Software" FORCE )
 
 # Path to LCIO
-SET( LCIO_HOME "${ILC_HOME}/lcio/v01-08-02"
+SET( LCIO_HOME "${ILC_HOME}/lcio/v01-09"
     CACHE PATH "Path to LCIO" FORCE )
 
 # CMake Modules Path
-SET( CMAKE_MODULE_PATH "${ILC_HOME}/CMakeModules/v01-00"
+SET( CMAKE_MODULE_PATH "${ILC_HOME}/CMakeModules/v01-04"
     CACHE PATH "Path to CMake Modules" FORCE )
 
 #############################################################################
@@ -32,7 +32,7 @@ SET( CMAKE_MODULE_PATH "${ILC_HOME}/CMakeModules/v01-00"
 #############################################################################
 
 # Enable this if you want to build LCCD with CondDBMySQL
-#SET( BUILD_WITH "CondDBMySQL" CACHE STRING "Build LCCD with these optional packages" FORCE )
+SET( BUILD_WITH "CondDBMySQL" CACHE STRING "Build LCCD with these optional packages" FORCE )
 
 # Path to CondDBMySQL
 SET( CondDBMySQL_HOME "${ILC_HOME}/CondDBMySQL/CondDBMySQL_ILC-0-5-10"
