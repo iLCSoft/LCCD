@@ -5,7 +5,7 @@
 #endif
 
 #include <bitset>
-#include <stdlib.h>
+#include <cstdlib>
 
 /** Provides global constants
  */
