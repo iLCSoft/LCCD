@@ -208,7 +208,7 @@ SET( BUILD_CONDDB_TESTS "${BUILD_CONDDB_TESTS}" CACHE BOOL
     "Set to ON to build CONDDB tests" FORCE )
 SET( LCCD_DB_INIT "${LCCD_DB_INIT}" CACHE STRING
     "DB initialization" FORCE )
-SET( INSTALL_DOC "${BUILD_DOC}" CACHE BOOL
+SET( INSTALL_DOC "${INSTALL_DOC}" CACHE BOOL
     "Set to OFF to skip build/install Documentation" FORCE )
 
 # export build settings
