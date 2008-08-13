@@ -30,7 +30,7 @@ namespace lccd {
 	
 	CondDBMySQLMgrFactory::destroyCondDBMgr( refs.Mgr );
 
-	std::cout << " DBConnectionMgr::~DBConnectionMgr closing leftover db connection " 
+	// std::cout << " DBConnectionMgr::~DBConnectionMgr closing leftover db connection " 
 		  << std::endl ;
 	
       }
@@ -66,7 +66,7 @@ namespace lccd {
       
       refs.Mgr = condDBmgr ;
 
-      std::cout << " DBConnectionMgr::getDBConnection( " << dbInit << ")" << std::endl ;
+      // std::cout << " DBConnectionMgr::getDBConnection( " << dbInit << ")" << std::endl ;
     }
 
     refs.Set.insert( dbInterface ) ; // keep track of users ...
@@ -87,7 +87,7 @@ namespace lccd {
 
       refs.Mgr = 0 ;
 
-      std::cout << " DBConnectionMgr::releaseConnection( " << dbInit << ")" << std::endl ;
+      // std::cout << " DBConnectionMgr::releaseConnection( " << dbInit << ")" << std::endl ;
 
 
     }

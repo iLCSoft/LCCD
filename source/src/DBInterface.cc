@@ -104,12 +104,13 @@ namespace lccd {
     CondDBInterface* interface = dynamic_cast<CondDBInterface*>(_condDBmgr) ;
     if( interface != 0 )
       _dbName = interface->getGeneralDBname() ;
-    
-    std::cout << "DBInterface::init: connected to database " 
- 	      << _dbName 
-	      << " using folder: " << _folder
- 	      << std::endl;
-    
+
+    /*    
+     * std::cout << "DBInterface::init: connected to database " 
+     *	      << _dbName 
+     *	      << " using folder: " << _folder
+     *        << std::endl;
+     */
 
     if( _update ) {
        _condDBmgr->startUpdate();
@@ -200,7 +201,7 @@ namespace lccd {
     
     if( condObject == 0 ){
       
-      std::cout << "DBInterface::findCollection: No object found in database for timestamp : " 
+      std::cout << "DBInterface::findCollection: No object found in database folder " << _folder << " for timestamp : " 
 		<< point
 		<< std::endl ;
       return 0 ;
