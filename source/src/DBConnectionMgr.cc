@@ -31,7 +31,7 @@ namespace lccd {
 	CondDBMySQLMgrFactory::destroyCondDBMgr( refs.Mgr );
 
 	// std::cout << " DBConnectionMgr::~DBConnectionMgr closing leftover db connection " 
-		  << std::endl ;
+	//	  << std::endl ;
 	
       }
     }
