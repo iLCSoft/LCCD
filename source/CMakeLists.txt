@@ -20,12 +20,13 @@ INSTALL( DIRECTORY "${${PROJECT_NAME}_SOURCE_DIR}/source/include" DESTINATION .
 ### SOURCES
 ####################################################################################################
 
-# require proper c++
-ADD_DEFINITIONS( "-Wall -ansi -pedantic" )
-
 # get list of all source files
 AUX_SOURCE_DIRECTORY( src lib_srcs )
 
+SET_SOURCE_FILES_PROPERTIES(
+  ${lib_srcs} PROPERTIES
+  COMPILE_FLAGS "-Wall -ansi -pedantic"
+)
 
 ####################################################################################################
 ### LIBRARY
@@ -89,6 +90,10 @@ IF( test_bins )
 
     # loop through list of binaries
     FOREACH( bin ${test_bins} )
+        SET_SOURCE_FILES_PROPERTIES( test/${bin}.cc PROPERTIES
+            # FIXME -pedantic crashes with gcc 3.4.6
+          COMPILE_FLAGS "-Wall -ansi"
+        )
         # create target for binary
         ADD_EXECUTABLE( bin_${bin} test/${bin}.cc test/CalibrationConstant.cc )
         # tell bin target to call this bin_XXX target
