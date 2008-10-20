@@ -56,8 +56,14 @@ Note: you have to modify the actual timestamps in steer.xml (my.steer) after eve
 
 
 
+CMake Build Instructions
+------------------------
 
+mkdir build
+cd build
+cmake -C /afs/desy.de/group/it/ilcsoft/v01-04/ILCSoft.cmake ..
+# or
+cmake -DLCIO_HOME=/path/to/lcio -DMarlin_HOME=/path/to/Marlin ..
 
-
-
+make install
 
