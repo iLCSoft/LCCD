@@ -8,10 +8,10 @@
 ####################################################################################################
 
 # include directories
-INCLUDE_DIRECTORIES( "${${PROJECT_NAME}_SOURCE_DIR}/source/include" )
+INCLUDE_DIRECTORIES( "${PROJECT_SOURCE_DIR}/source/include" )
 
 # install include files
-INSTALL( DIRECTORY "${${PROJECT_NAME}_SOURCE_DIR}/source/include" DESTINATION .
+INSTALL( DIRECTORY "${PROJECT_SOURCE_DIR}/source/include" DESTINATION .
         PATTERN "*~" EXCLUDE
         PATTERN "*CVS*" EXCLUDE )
 
