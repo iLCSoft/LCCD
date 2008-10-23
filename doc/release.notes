@@ -1,7 +1,15 @@
 ====================
  LCCD release notes
 ====================
-
+ ----------
+| v00-04   |
+ ----------
+    - made gcc4.3 compliant
+    - made cmake 2.6 compliant
+    - added LCCD_LIBRARY_DIRS
+    - added 32 bit compatibility build option
+    - added CMakeLists.txt for calomap example
+ 
  ----------
 | v00-03-06 |
  ----------

@@ -18,8 +18,8 @@ PROJECT( LCCD )
 
 # project version
 SET( LCCD_MAJOR_VERSION 0 )
-SET( LCCD_MINOR_VERSION 3 )
-SET( LCCD_PATCH_LEVEL 6 )
+SET( LCCD_MINOR_VERSION 4 )
+SET( LCCD_PATCH_LEVEL 0 )
 
 # project options
 OPTION( BUILD_SHARED_LIBS "Set to OFF to build static libraries" ON )
