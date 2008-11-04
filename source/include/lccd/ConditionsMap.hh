@@ -11,6 +11,8 @@
 #include <typeinfo>
 #include <sstream>
 
+#include <iostream>
+
 namespace lccd {
   
   /** Template class for maps of conditions data. The class LCCONDOBJECT
@@ -18,7 +20,7 @@ namespace lccd {
    *  Typically this is the case for all LCGenericObject subclasses.
    * 
    *  @author F.Gaede, DESY
-   *  @version $Id: ConditionsMap.hh,v 1.8 2007-04-27 13:21:31 gaede Exp $
+   *  @version $Id: ConditionsMap.hh,v 1.9 2008-11-04 10:32:20 meyern Exp $
    */
   template <class KEY, class LCCONDOBJECT>
   class ConditionsMap : public lccd::IConditionsChangeListener {
@@ -30,10 +32,17 @@ namespace lccd {
     // PMF: pointer to member function that returns the key
     typedef KEY (LCCONDOBJECT::*PMF)() ;  
 
+    // PMF: pointer to member function that returns the key if it is
+    // declared const
+    typedef KEY (LCCONDOBJECT::*PMFC)() const ;  
 
-    /** Only constructor: provide the pointer to the member fuction that returns the key*/
-    ConditionsMap( PMF pmf ) : _pmf(pmf) {
-    }
+    /** Constructor: provide the pointer to the member fuction that
+        returns the key */
+    ConditionsMap( PMF pmf ) : _pmf(pmf) { _isPMFconst = false; }
+
+    /** Constructor: provide the pointer to the member fuction that
+        returns the key if it is declared const */
+    ConditionsMap( PMFC pmfc ) : _pmfc(pmfc) { _isPMFconst = true; }
 
 
     /** The d'tor.*/
@@ -73,7 +82,16 @@ namespace lccd {
 	LCCONDOBJECT obj( col->getElementAt( i ) ) ;
 	
 	
-	_map.insert( std::make_pair( (obj.*_pmf)() , obj)  ) ;
+        if(_isPMFconst == false) {
+
+          _map.insert( std::make_pair( (obj.*_pmf)() , obj)  ) ;
+          
+        } else if(_isPMFconst == true) {
+
+          _map.insert( std::make_pair( (obj.*_pmfc)() , obj)  ) ;
+
+        }
+
 	// call member function for key  ^^^^^^^  ,e.g.
 	// _map.insert( std::make_pair( obj.getCellID() , obj)  ) ;
       }
@@ -110,10 +128,11 @@ namespace lccd {
     /** No default c'tor */
     ConditionsMap() { }
  
-
-
     std::map< KEY, LCCONDOBJECT > _map ;
     PMF _pmf ;
+    PMFC _pmfc ;
+
+    bool _isPMFconst;
 };
 
 }  //end namespace
