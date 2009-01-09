@@ -1,3 +1,107 @@
+2008-11-04 11:32  meyern
+
+	* source/include/lccd/ConditionsMap.hh: ConditionsMap: allow also
+	  constant publ;ic member functions
+
+2008-10-23 17:21  engels
+
+	* CMakeLists.txt, doc/release.notes: ---------- v00-04 ----------
+
+2008-10-20 16:28  engels
+
+	* example/calomap/README: added cmake build instructions
+
+2008-10-20 16:17  engels
+
+	* example/calomap/CMakeLists.txt: added CMakeLists.txt for calomap
+	  example
+
+2008-10-20 15:49  engels
+
+	* source/CMakeLists.txt: replaced ${${PROJECT_NAME}_SOURCE_DIR}
+	  with equivalent ${PROJECT_SOURCE_DIR}
+
+2008-10-14 15:48  engels
+
+	* CMakeLists.txt, LCCDConfig.cmake.in, source/CMakeLists.txt: added
+	  32 bit compatibility option; made cmake 2.6 compatible
+
+2008-08-18 11:10  engels
+
+	* source/src/DBConnectionMgr.cc: bug fixed
+
+2008-08-13 21:55  meyern
+
+	* source/src/: DBConnectionMgr.cc, DBInterface.cc: DBConnectionMgr
+	  and DBInterface: Comment out some debug messages
+
+2008-05-29 10:47  engels
+
+	* CMakeLists.txt: bug fix: INSTALL_DOC wasn't being correctly
+	  written to cache
+
+2008-05-28 12:02  engels
+
+	* source/src/lccd.cc: patched to make gcc4.3 compliant
+
+2008-02-15 14:14  engels
+
+	* LCCDConfig.cmake.in: bug fix: -DUSE_LCCD definition was missing
+
+2008-01-22 09:54  engels
+
+	* LCCDConfig.cmake.in: set both variables INCLUDE_DIR and
+	  INCLUDE_DIRS for compatibility
+
+2008-01-07 15:05  engels
+
+	* CMakeLists.txt: bug fix: using CMAKE_MODULE_PATH with multiple
+	  paths wouldn't work
+
+2007-11-26 16:50  engels
+
+	* BuildSetup.cmake: updated versions for ilcsoft release v01-03
+
+2007-11-23 16:13  engels
+
+	* BuildSetup.cmake: updated for ilcsoft release v01-03
+
+2007-11-16 11:27  engels
+
+	* BuildSetup.cmake: updated for release v01-03
+
+2007-11-06 17:14  engels
+
+	* CMakeLists.txt: removed LCCD_DB_INIT_DEFAULT from the exported
+	  list of definitions in LCCDConfig.cmake
+
+2007-11-05 18:37  engels
+
+	* CMakeLists.txt, LCCDConfig.cmake.in, source/CMakeLists.txt: added
+	  changes for exporting build definitions to LCCDConfig.cmake
+
+2007-10-30 16:23  engels
+
+	* LCCDConfig.cmake.in: bug fixed (as reported by J. Samson)
+
+2007-09-12 09:53  engels
+
+	* CMakeLists.txt: replaced CMAKE_XXX_DIR with PROJECT_XXX_DIR
+
+2007-07-16 17:00  engels
+
+	* CMakeLists.txt: bug fix: LCCD version wasn't being set correctly
+	  in the documentation
+
+2007-07-13 18:22  gaede
+
+	* ChangeLog, doc/release.notes: ----- release v00-03-06
+	  -----------------
+
+2007-07-13 18:19  gaede
+
+	* BuildSetup.cmake: updated pathes
+
 2007-07-13 16:15  engels
 
 	* README: updated

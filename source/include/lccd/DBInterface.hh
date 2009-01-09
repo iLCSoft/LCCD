@@ -42,8 +42,14 @@ namespace lccd {
    *  They also provide an easy way to browse the database 
    *  horizontally (by tag) or vertically (by time stamp).
    * 
+   *  @history 20090109, B.Lutz DESY: added functions: 
+   *  void findCollections(ColVec &colVec, LCCDTimeStamp since, LCCDTimeStamp till, 
+   *                       const std::string &tag="") ;
+   *  void dump2File( ) ;
+   *  void findAllCollections( ColVec& colVec ) ;
+   * 
    *  @author F.Gaede, DESY
-   *  @version $Id: DBInterface.hh,v 1.10 2007-04-27 13:21:31 gaede Exp $
+   *  @version $Id: DBInterface.hh,v 1.11 2009-01-09 10:20:58 gaede Exp $
    */
 
   class DBInterface {
@@ -142,6 +148,12 @@ namespace lccd {
      */
     void findCollections( ColVec& colVec, const std::string& tag="" ) ; 
 
+    /** Creates collections for all conditions data for the given time range and tag. 
+     *  The result is added to the colvec. The collections are ordered w.r.t. to their 
+     *  validity time.<br>
+     *  Description parameters are added to the collections as in  findCollection().
+     */
+    void findCollections(ColVec &colVec, LCCDTimeStamp since, LCCDTimeStamp till, const std::string &tag="") ; 
 
     /** Creates collections for all conditions data for the given timestamp. 
      *  The collections are ordered w.r.t. to the layer number in the database.<br>
@@ -150,6 +162,14 @@ namespace lccd {
      */
     void findCollections( ColVec& colVec, LCCDTimeStamp timeStamp ) ; 
 
+    /** @brief Creates collections for all conditions data in current folder.<br>
+     *  @brief <b> This does not respect tags! </b>
+     *
+     *  Description parameters are added to the collections as in  findCollection()
+     *  plus DBLayer.
+     *  @warning This does not respect tags!
+     */
+    void findAllCollections( ColVec& colVec ) ; 
 
     /** Tag the current HEAD of the database folder as tagName. If the argument usingTagName is provided
      *  and refers to an existing tag this tag will be duplicated as tagName.<br>
@@ -178,6 +198,19 @@ namespace lccd {
      *  This file can be used by the SimpleFileHandler.<br>
      */
     void createSimpleFile( LCCDTimeStamp timeStamp, const std::string& tag, bool allLayers=false ) ;
+
+    /** @brief Creates an LCIO file with the all conditions data in the folder.<br>
+     *  @brief <b> This file does not respect tags! It is not meant ot be used with the DBFileHandler. </b>
+     *
+     *  The collections are sorted w.r.t. their validity time intervall and attached to 
+     *  consecutive events. The run header holds a map of validity time intervalls to events.
+     *  in the parameters DBSince and DBTill.<br>
+     *  The name of the file will be of the form "conddb_COLNAME_YYYYMMDD_HHMMSS.slcio"
+     *  where the specified time is the creation time.
+     *  @warning This file does not respect tags! It is not meant ot be used with the DBFileHandler.
+     */
+    void dump2File( ) ;
+
 
   protected:
     /** Initializes the database  access */

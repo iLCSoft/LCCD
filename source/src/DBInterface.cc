@@ -292,6 +292,87 @@ namespace lccd {
 
   }
 
+  void 	DBInterface::findCollections (ColVec &colVec, LCCDTimeStamp since, LCCDTimeStamp till, const std::string &tag) {
+    
+    _condDBmgr->startRead(); // dummy method for now 
+    
+    ICondDBDataIterator* objIter = 0;
+    
+    condDataAccess()->browseHistory(objIter, _folder, since, till, tag ) ;
+    
+    if (!objIter)  return; // return if no elements found
+    
+    ICondDBObject* condObject ; 
+    
+    
+    // Note: due to a bug/feature in ConditionsDBMysQL implementation
+    // the following runs into an endless loop:
+    //  while( (condObject = objIter->current() ) != 0 ) {  
+    //    ...
+    //     objIter->next() ;
+    //  } 
+    
+    // This way of looping through the iterator produces a memory leak,
+    // as current() and next() instantiate condObjects ...
+    //     do {
+    //       condObject = objIter->current() ;
+    //       ...
+    //     } while ( objIter->next() );
+    
+    
+    // this seems to be the only proper way of looping through the iterator:
+    for( condObject = objIter->current() ; condObject != 0  ; condObject = objIter->next() ){
+      
+      //       cout << " ---- adding collection:  [" <<  condObject->validSince() 
+      // 	   << "," << condObject->validTill() << "]" << endl ;
+      
+      lcio::LCCollection*  col = collectionFromCondDBObject( condObject, tag )  ;
+      
+      colVec.push_back( col ) ;
+      
+      CondDBObjFactory::destroyCondDBObject( condObject );
+      
+    }
+    
+    delete objIter ;
+    
+    // now we have to sort the array w.r.t. to the since time stamp
+    // FIXME: this shouldn't be necessary according to the ConditionsDB API description ... ?
+    std::sort(  colVec.begin() , colVec.end() ,   less_wrt_validity()  ) ;
+    
+  }
+
+  void DBInterface::findAllCollections( ColVec& colVec ){ 
+      
+    _condDBmgr->startRead(); // dummy method for now 
+    
+    ICondDBDataIterator* objIter ;
+    
+    condDataAccess()->browseAllObjects( objIter, _folder) ;
+    
+    ICondDBObject* condObject ; 
+    
+    // this seems to be the only proper way of looping through the iterator:
+    for( condObject = objIter->current() ; condObject != 0  ; condObject = objIter->next() ){
+      
+      //       cout << " ---- adding collection:  [" <<  condObject->validSince() 
+      // 	   << "," << condObject->validTill() << "]" << endl ;
+      
+      lcio::LCCollection*  col = collectionFromCondDBObject( condObject ,"UNKNWON")  ;
+      
+      colVec.push_back( col ) ;
+      
+      CondDBObjFactory::destroyCondDBObject( condObject );
+      
+    }
+    
+    delete objIter ;
+      
+    // now we have to sort the array w.r.t. to the since time stamp
+    // FIXME: this shouldn't be necessary according to the ConditionsDB API description ... ?
+    std::sort(  colVec.begin() , colVec.end() ,   less_wrt_validity()  ) ;
+    
+  }
 
 
 
@@ -476,6 +557,97 @@ namespace lccd {
     delete rHdr ;
     
   }
+
+  void DBInterface::dump2File( ) {
+
+
+    lcio::LCWriter* wrt = lcio::LCFactory::getInstance()->createLCWriter() ;
+    
+    
+    // create oputput file name :  conddb_COLNAME_YYYYMMDD_HHMMSS.slcio
+    std::stringstream file ;       
+      
+      
+    std::string colName( _folder, _folder.find_last_of( '/' ) + 1 ,  _folder.size() ) ;
+      
+    lcio::LCTime now ;
+    
+    file << "condDB_" 
+	 << colName  << "_"
+	 << std::setfill('0') 
+	 << std::setw(4) <<  now.year() 
+	 << std::setw(2) <<  now.month() 
+	 << std::setw(2) <<  now.day() << "_"
+	 << std::setw(2) <<  now.hour() //<< "-"
+	 << std::setw(2) <<  now.min() //<< "-"
+	 << std::setw(2) <<  now.sec() 
+	 << ".slcio" ;
+    
+    //     wrt->open( file.str()  , lcio::LCIO::WRITE_NEW )  ; 
+    wrt->open( file.str() ) ;
+    
+    
+    ColVec colVec ;
+    findAllCollections( colVec ) ; 
+      
+
+    // --- write a run header with some information related to the query
+    lcio::LCRunHeaderImpl* rHdr = new lcio::LCRunHeaderImpl ;
+    
+    lcio::StringVec sinceVec ;
+    lcio::StringVec tillVec ;
+    
+    // add map with validity time intervalls and events - needed by DBFileHandler
+    for( ColVec::iterator it = colVec.begin() ; it != colVec.end() ; it++) {
+      
+      sinceVec.push_back ( (*it)->parameters().getStringVal( lccd::DBSINCE ) ) ;
+      tillVec.push_back ( (*it)->parameters().getStringVal( lccd::DBTILL ) ) ;
+    }
+    
+    rHdr->parameters().setValues(  lccd::DBSINCE , sinceVec ) ;
+    rHdr->parameters().setValues(  lccd::DBTILL , tillVec ) ;
+    
+    // write some additional information to the run header
+    //      rHdr->parameters().setValue( lccd::DBTAG ,  dbTag ) ;
+    rHdr->parameters().setValue( lccd::DBFOLDER ,  _folder ) ;
+    rHdr->parameters().setValue( lccd::DBNAME ,  _dbName ) ;
+    
+    
+    std::stringstream desc ;
+    desc << " Conditions data extracted from database on " << now.getDateString() << " GMT \n" ;
+    rHdr->setDescription( desc.str() ) ;
+    
+    //---------------------------------------------------
+    
+    wrt->writeRunHeader( rHdr ) ;
+    
+      
+    // loop over collections....
+    //     std::string colName("ConditionsData") ; // FIXME
+    
+    int evtNum(0) ;
+    for( ColVec::iterator it = colVec.begin() ; it != colVec.end() ; it++) {
+      
+      lcio::LCEventImpl* evt = new lcio::LCEventImpl ;
+      evt->setEventNumber( evtNum++ ) ;
+      
+      evt->addCollection(  *it , colName  ) ;  
+      
+      lcio::LCTOOLS::dumpEventDetailed( evt  ) ;
+      
+      wrt->writeEvent( evt ) ;
+      
+      delete evt ; // this deletes the collection as well
+  
+    }
+
+    wrt->close() ;
+    // clean up
+    delete wrt ;
+    delete rHdr ;
+      
+  }
+
 
 
   void DBInterface::createSimpleFile( LCCDTimeStamp timeStamp, const std::string& tag, bool allLayers ) {
