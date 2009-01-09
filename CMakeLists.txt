@@ -18,7 +18,7 @@ PROJECT( LCCD )
 
 # project version
 SET( LCCD_MAJOR_VERSION 0 )
-SET( LCCD_MINOR_VERSION 4 )
+SET( LCCD_MINOR_VERSION 5 )
 SET( LCCD_PATCH_LEVEL 0 )
 
 # project options

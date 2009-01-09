@@ -1,6 +1,16 @@
 ====================
  LCCD release notes
 ====================
+ --------
+| v00-05 |
+ --------
+      DBinterface extended:  B.Lutz DESY
+       - added functions: 
+	 void findCollections(ColVec &colVec, LCCDTimeStamp since, LCCDTimeStamp till, 
+                              const std::string &tag="") ;
+         void dump2File( ) ;
+         void findAllCollections( ColVec& colVec ) ;
+
  ----------
 | v00-04   |
  ----------
