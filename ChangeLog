@@ -1,3 +1,20 @@
+2009-04-09 09:14  engels
+
+	* source/CMakeLists.txt: added BEFORE to INCLUDE_DIRECTORIES (
+	  http://forum.linearcollider.org/index.php?t=tree&goto=1689&rid=151&S=3398831c115e7a3e8c57fa7655ecf42d#msg_1689
+	  )
+
+2009-01-09 11:30  gaede
+
+	* CMakeLists.txt, doc/release.notes: ------------- release v00-05
+	  -----------------
+
+2009-01-09 11:20  gaede
+
+	* ChangeLog, source/include/lccd/DBInterface.hh,
+	  source/src/DBInterface.cc:  added functions: findCollections(),
+	  dump2File(), findAllCollections() (B.Lutz)
+
 2008-11-04 11:32  meyern
 
 	* source/include/lccd/ConditionsMap.hh: ConditionsMap: allow also
