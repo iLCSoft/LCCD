@@ -39,7 +39,10 @@ namespace lccd {
   
   void ConditionsHandlerBase::notifyListeners() {
     
-    
+
+    // let the change listerners know the collection name:
+    _col->parameters().setValue("CollectionName", name() ) ;
+
     std::for_each( _changeListeners.begin() , 
 		   _changeListeners.end() , 
 		   std::bind2nd( std::mem_fun

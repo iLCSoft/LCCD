@@ -95,7 +95,7 @@ namespace lccd {
   
   void  DBFileHandler::init() {
     
-    _lcReader = LCFactory::getInstance()->createLCReader() ;
+    _lcReader = LCFactory::getInstance()->createLCReader( LCReader::directAccess ) ;
     
     _lcReader->open( _fileName ) ;
     

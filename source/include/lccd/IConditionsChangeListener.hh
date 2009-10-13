@@ -20,7 +20,12 @@ public:
   virtual ~IConditionsChangeListener() {} 
 
   /** The callback - use updated conditions data collection as needed, e.g.
-   *  repopulate a calibration map.
+   *  repopulate a calibration map. Implementors can access the collection name 
+   *  through the collection parameter "CollectionName": <br>
+   *  <pre>  
+   *    std::string colName = col->getParameters().getStringVal("CollectionName") ;
+   *  </pre>
+   *  if needed. 
    */ 
   virtual void conditionsChanged( lcio::LCCollection* col ) = 0 ;
   

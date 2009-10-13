@@ -29,8 +29,11 @@ public:
   
   void conditionsChanged( LCCollection* col ) {
     
+    std::string colName = col->getParameters().getStringVal("CollectionName") ;
+
     std::cout << " TestListener::conditionsChanged for event time stamp : "
 	      << (*_evt)->getTimeStamp() 
+	      << " collection name : "  << colName
 	      <<  std::endl ;
     
     LCTOOLS::printLCGenericObjects( col ) ;

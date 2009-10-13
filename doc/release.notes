@@ -1,6 +1,17 @@
 ====================
  LCCD release notes
 ====================
+
+ --------
+| v00-06 |
+ --------
+      -  added collection name to collection parameter "CollectionName" in 
+         IConditionsChangeListener::conditionsChanged(lcio::LCCollection* col)
+         so that implementors can acces it, via:
+            std::string colName = col->getParameters().getStringVal("CollectionName") ;
+
+      - ...
+
  --------
 | v00-05 |
  --------
