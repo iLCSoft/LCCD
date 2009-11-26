@@ -44,19 +44,23 @@ namespace lccd {
       //       std::cout << "DBCondHandler::update: reading constants from db for time stamp : " 
       // 		<< timeStamp << std::endl ;
             
+      LCCollection* col = _db->findCollection( timeStamp , _validSince,  _validTill,  _tag ) ;
 
-      if( _col != 0 )  delete _col ;
+      col = _db->findCollection( timeStamp , _validSince,  _validTill,  _tag ) ;
       
-      _col = _db->findCollection( timeStamp , _validSince,  _validTill,  _tag ) ;
-      
-      if( _col == 0 ) {
+      if( col == 0 ) {
 	
 	std::stringstream mess ;
 	mess << "DBCondHandler::update: no collection found for time stamp: " 
-	     << timeStamp << " and name " << name () << std::ends ;
-	throw lcio::Exception( mess.str() ) ;
+	     << timeStamp << " and name " << name() << std::ends ;
+	//	throw lcio::Exception( mess.str() ) ;
+	std::cout << mess << std::endl;
 	
       }
+
+      if( _col != 0 )  delete _col ;
+      
+      _col = col;
       
       notifyListeners() ;
       
