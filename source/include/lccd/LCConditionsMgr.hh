@@ -29,10 +29,12 @@ namespace lccd {
    */
 
   class LCConditionsMgr {
+
+  protected:
+
+    LCConditionsMgr() ;
     
   public:
-    
-    LCConditionsMgr() ;
 
     ~LCConditionsMgr() {} ;
 
