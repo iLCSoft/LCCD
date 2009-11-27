@@ -73,7 +73,7 @@ Contents:
 mysqld_safe --datadir=/tmp/mysqlDB &
 
 or:
-mysqld_safe --datadir=/tmp/mysqlDB --log-error=mysql.log --pid-file=/var/tmp/mysql.pid  &
+mysqld_safe --datadir=/tmp/mysqlDB --socket=/tmp/mysql.sock --log-error=mysql.log --pid-file=mysql.pid  &
 
 
 [ 3b) you can stop the database  - no need to do it now ]
