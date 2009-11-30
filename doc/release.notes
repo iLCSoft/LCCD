@@ -9,8 +9,19 @@
          IConditionsChangeListener::conditionsChanged(lcio::LCCollection* col)
          so that implementors can acces it, via:
             std::string colName = col->getParameters().getStringVal("CollectionName") ;
-
-      - ...
+      -  A new method added DBInterface::findNextValidCollection which retrieves the next valid 
+          collection from the given point in time, searching forward in time - returns 
+	  NULL if no data is found.
+      -  findNextValidCollection is used in DBCondHandler::update to prevent the DB from being repeatedly 
+     	 querried for every event while no collection is available. Using the valid_from_time of the 
+	 object returned by findNextValidCollection and the timestamp of the current event, the 
+	 start and end times of the period containing no collection are set.  
+	 In the case that no collection is found a warning is printed and an exception thrown which is caught
+    	 by the LCConditionsManager. 
+    	 It should be noted that the ChangeListeners will not be notified. And no further warning will
+	 be issued before a new object is found and another period of time without a ConditionsCollection
+    	 is encoutered.
+      -  bug fixed in DBCondHandler::update to ensure that it cannot delete using a NULL pointer.
 
  --------
 | v00-05 |
