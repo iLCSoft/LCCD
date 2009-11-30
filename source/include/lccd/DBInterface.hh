@@ -133,6 +133,36 @@ namespace lccd {
     lcio::LCCollection* findCollection( LCCDTimeStamp timeStamp, 
 					LCCDTimeStamp& since, LCCDTimeStamp& till,
 					const std::string& tag="" ) ; 
+
+
+
+    /** Retrieves the next valid collection from the given point in time, searching forward in time - returns NULL if 
+     *  no data is found.<br>
+     *  This expects the LCIO collection type to be decoded in the object description:<br>
+     *  "LCIO_COL_TYPE: some description" -  storeCollection() does this automatically.<br>
+     *  Some parameters are added to the collection:<br>
+     *  <ul>
+     *  <li>DBName:  name of the (MySQL) database</li>
+     *  <li>DBFolder: data base folder </li>
+     *  <li>DBTag: the tag used for the query - possibly HEAD at that time. </li>
+     *  <li>DBQueryTime: the time the conditions data was extracted from the data base. </li>
+     *  <li>DBInsertionTime: the time the conditions data was inserted into the data base. </li>
+     *  <li>DBSince: the start of the vaidity intervall</li>
+     *  <li>DBTill: the end of the validity intervall</li>
+     *  <li>DBLayer: the layer number of this data set</li>
+     *  </ul> 
+     *  DBQueryTime, DBInsertionTime, DBSince and DBTill are string vectors with two elements: 
+     *  the 64bit time stamp and the date in human readable format.
+     * 
+     *  @param timeStamp: the point in time from which to search foward for conditions data
+     *  @param since:  return the begin of the validity interval of the conditions data returned
+     *  @param end:  return the end of the validity interval of the conditions data returned
+     *  @param tag: the tag to be used for the query, if omitted HEAD is used
+     */
+
+    lcio::LCCollection* findNextValidCollection( LCCDTimeStamp timeStamp, 
+						 LCCDTimeStamp& since, LCCDTimeStamp& till,
+						 const std::string& tag="" ) ; 
     
     /** Retrieves the collection for the given point in time - returns NULL if it 
      *  no data is found.<br>

@@ -201,7 +201,7 @@ namespace lccd {
     
     if( condObject == 0 ){
       
-      std::cout << "DBInterface::findCollection: No object found in database folder " << _folder << " for timestamp : " 
+      std::cout << "DBInterface::findCollection: Warning: No object found in database folder " << _folder << " for timestamp : " 
 		<< point
 		<< std::endl ;
       return 0 ;
@@ -215,6 +215,38 @@ namespace lccd {
     CondDBObjFactory::destroyCondDBObject(condObject);
     
     return  col ;
+  }
+
+
+  lcio::LCCollection*  DBInterface::findNextValidCollection( LCCDTimeStamp timeStamp, 
+							     LCCDTimeStamp& since, LCCDTimeStamp& till,
+							     const std::string& tag ) { 
+    
+    ICondDBObject* condObject = 0;
+
+    _condDBmgr->startRead(); // dummy method for now 
+
+    CondDBKey searchPoint =  timeStamp ;
+
+    condDataAccess()->findNextValidCondDBObject( condObject, _folder, searchPoint , tag );
+
+    if( condObject == 0 ){
+      
+      std::cout << "DBInterface::findNextValidCollection: Warning: No further object found in database folder " << _folder << " from timestamp : " 
+		<< searchPoint
+		<< std::endl ;
+      return 0 ;
+    }
+
+    since = condObject->validSince() ;
+    till = condObject->validTill() ;
+    
+    lcio::LCCollection*  col = collectionFromCondDBObject( condObject, tag )  ;
+    
+    CondDBObjFactory::destroyCondDBObject(condObject);
+    
+    return  col ;
+
   }
 
 
