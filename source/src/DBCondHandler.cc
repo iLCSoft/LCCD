@@ -45,13 +45,28 @@ namespace lccd {
       // 		<< timeStamp << std::endl ;
             
       LCCollection* col = _db->findCollection( timeStamp , _validSince,  _validTill,  _tag ) ;
-
-      col = _db->findCollection( timeStamp , _validSince,  _validTill,  _tag ) ;
       
       if( col == 0 ) {
-	
+
+	// no valid collection is available
+	// record this time as being the start of validity of NULL return
+	_validSince = timeStamp ;
+
+	// try to get next valid collection 
+	LCCDTimeStamp nextObectsValidSince = LCCDPlusInf ;
+	LCCDTimeStamp nextObectsValidTil = LCCDMinusInf ;
+	LCCollection* nextCol =  _db->findNextValidCollection( timeStamp , nextObectsValidSince, nextObectsValidTil,  _tag ) ;
+
+	if( nextCol != 0 ) { // oject found so set the end of validity of the NULL pointer return to the start of validity of the object found
+	  _validTill = nextObectsValidSince ;
+	} else { // as no more objects exist for this point in time set the end of validity of the NULL pointer return to +inf
+	  _validTill = LCCDPlusInf ;
+	  std::cout << "DBCondHandler::update: Warning: No further collection avialible from this point in time on: time stamp: " 
+		    << timeStamp << " and name " << name() << std::endl;
+	} 
+
 	std::stringstream mess ;
-	mess << "DBCondHandler::update: no collection found for time stamp: " 
+	mess << "DBCondHandler::update: No collection found for time stamp: " 
 	     << timeStamp << " and name " << name() << std::ends ;
 	throw lcio::Exception( mess.str() ) ;
 	// std::cout << mess << std::endl;
@@ -61,7 +76,7 @@ namespace lccd {
       if( _col != 0 )  delete _col ;
       
       _col = col;
-      
+
       notifyListeners() ;
       
     }
