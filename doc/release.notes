@@ -20,8 +20,10 @@
     	 by the LCConditionsManager. 
     	 It should be noted that the ChangeListeners will not be notified. And no further warning will
 	 be issued before a new object is found and another period of time without a ConditionsCollection
-    	 is encoutered.
+    	 is encoutered.	 
       -  bug fixed in DBCondHandler::update to ensure that it cannot delete using a NULL pointer.
+      	 
+      -  this version is only compatible with ConDBMySQL version CondDBMySQL_ILC-0-7-3 and later
 
  --------
 | v00-05 |
