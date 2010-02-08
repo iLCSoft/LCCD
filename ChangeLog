@@ -1,7 +1,29 @@
+2010-02-08 17:32  /C=DE/O=GermanGrid/OU=DESY/CN=Steven Aplin
+
+	* doc/release.notes: ------------------- patch release v00-06-01
+	  -----------------------
+
+2010-02-08 17:31  /C=DE/O=GermanGrid/OU=DESY/CN=Steven Aplin
+
+	* CMakeLists.txt: corrected version numbers in CMakeLists.txt
+
+2009-11-30 18:39  /C=DE/O=GermanGrid/OU=DESY/CN=Steven Aplin
+
+	* .: ---------------- release v00-06 ----------------
+
+2009-11-30 18:37  /C=DE/O=GermanGrid/OU=DESY/CN=Steven Aplin
+
+	* --------------- v00-06 --------------------
+	  with updated note on ConDBMySQL depedency in the release notes
+
+2009-11-30 18:30  /C=DE/O=GermanGrid/OU=DESY/CN=Steven Aplin
+
+	* ------------------- v00-06 -------------------
+
 2009-11-30 18:26  /C=DE/O=GermanGrid/OU=DESY/CN=Steven Aplin
 
-	* source/src/DBCondHandler.cc: findNextValidCollection is used in
-	  DBCondHandler::update to prevent the DB from being repeatedly
+	* findNextValidCollection is used in DBCondHandler::update to
+	  prevent the DB from being repeatedly
 	  querried for every event while no collection is available. Using
 	  the valid_from_time of the
 	  object returned by findNextValidCollection and the timestamp of
@@ -21,8 +43,7 @@
 
 2009-11-30 18:24  /C=DE/O=GermanGrid/OU=DESY/CN=Steven Aplin
 
-	* source/include/lccd/DBInterface.hh, source/src/DBInterface.cc: A
-	  new method added DBInterface::findNextValidCollection which
+	* A new method added DBInterface::findNextValidCollection which
 	  retrieves the next valid
 	  collection from the given point in time, searching forward in
 	  time - returns NULL if
@@ -30,709 +51,582 @@
 
 2009-11-27 10:40  /C=DE/O=GermanGrid/OU=DESY/CN=Steven Aplin
 
-	* example/calomap/README: removed problematic option cmake
-	  instruction
+	* removed problematic option cmake instruction
 
 2009-11-27 09:36  /C=DE/O=GermanGrid/OU=DESY/CN=Steven Aplin
 
-	* README: added socket argument to DB creation example
+	* added socket argument to DB creation example
 
 2009-11-26 19:34  /C=DE/O=GermanGrid/OU=DESY/CN=Steven Aplin
 
-	* source/src/ConditionsHandlerBase.cc: added additional comments
+	* added additional comments
 
 2009-11-26 18:49  /C=DE/O=GermanGrid/OU=DESY/CN=Steven Aplin
 
-	* source/src/DBCondHandler.cc: reinstated thrown exception,
-	  incorrectly removed in r152
+	* reinstated thrown exception, incorrectly removed in r152
 
 2009-11-26 18:44  /C=DE/O=GermanGrid/OU=DESY/CN=Steven Aplin
 
-	* source/src/DBCondHandler.cc: protected against deletion with NULL
-	  pointer
+	* protected against deletion with NULL pointer
 
 2009-11-26 18:42  /C=DE/O=GermanGrid/OU=DESY/CN=Steven Aplin
 
-	* source/include/lccd/LCConditionsMgr.hh: made contructor
-	  protected, so as to ensure correct singleton behaviour
+	* made contructor protected, so as to ensure correct singleton
+	  behaviour
 
 2009-10-13 15:11  gaede
 
-	* doc/release.notes,
-	  source/include/lccd/IConditionsChangeListener.hh,
-	  source/src/ConditionsHandlerBase.cc, source/src/DBFileHandler.cc,
-	  source/test/testdbfile.cc: added collection name to collection
-	  parameter "CollectionName" in
+	* added collection name to collection parameter "CollectionName" in
 	  IConditionsChangeListener::conditionsChanged(lcio::LCCollection*
 	  col)
 
 2009-10-09 09:19  gaede
 
-	* README: no change really
+	* no change really
 
 2009-10-07 13:28  gaede
 
-	* README: updated documentation on running the examples and
-	  starting a test database
+	* updated documentation on running the examples and starting a test
+	  database
 
 2009-07-13 10:44  gaede
 
-	* ChangeLog: ------------- actual release v00-05 -----------------
+	* ------------- actual release v00-05 -----------------
 
 2009-04-09 07:14  engels
 
-	* source/CMakeLists.txt: added BEFORE to INCLUDE_DIRECTORIES (
+	* added BEFORE to INCLUDE_DIRECTORIES (
 	  http://forum.linearcollider.org/index.php?t=tree&goto=1689&rid=151&S=3398831c115e7a3e8c57fa7655ecf42d#msg_1689
 	  )
 
 2009-01-09 10:30  gaede
 
-	* CMakeLists.txt, doc/release.notes: ------------- release v00-05
-	  -----------------
+	* ------------- release v00-05 -----------------
 
 2009-01-09 10:20  gaede
 
-	* ChangeLog, source/include/lccd/DBInterface.hh,
-	  source/src/DBInterface.cc: added functions: findCollections(),
-	  dump2File(), findAllCollections() (B.Lutz)
+	* added functions: findCollections(), dump2File(),
+	  findAllCollections() (B.Lutz)
 
 2008-11-04 10:32  meyern
 
-	* source/include/lccd/ConditionsMap.hh: ConditionsMap: allow also
-	  constant publ;ic member functions
+	* ConditionsMap: allow also constant publ;ic member functions
 
 2008-10-23 15:21  engels
 
-	* CMakeLists.txt, doc/release.notes: ---------- v00-04 ----------
+	* ---------- v00-04 ----------
 
 2008-10-20 14:28  engels
 
-	* example/calomap/README: added cmake build instructions
+	* added cmake build instructions
 
 2008-10-20 14:17  engels
 
-	* example/calomap/CMakeLists.txt: added CMakeLists.txt for calomap
-	  example
+	* added CMakeLists.txt for calomap example
 
 2008-10-20 13:49  engels
 
-	* source/CMakeLists.txt: replaced ${${PROJECT_NAME}_SOURCE_DIR}
-	  with equivalent ${PROJECT_SOURCE_DIR}
+	* replaced ${${PROJECT_NAME}_SOURCE_DIR} with equivalent
+	  ${PROJECT_SOURCE_DIR}
 
 2008-10-14 13:48  engels
 
-	* CMakeLists.txt, LCCDConfig.cmake.in, source/CMakeLists.txt: added
-	  32 bit compatibility option;
+	* added 32 bit compatibility option;
 	  made cmake 2.6 compatible
 
 2008-08-18 09:10  engels
 
-	* source/src/DBConnectionMgr.cc: bug fixed
+	* bug fixed
 
 2008-08-13 19:55  meyern
 
-	* source/src/DBConnectionMgr.cc, source/src/DBInterface.cc:
-	  DBConnectionMgr and DBInterface: Comment out some debug messages
+	* DBConnectionMgr and DBInterface: Comment out some debug messages
 
 2008-05-29 08:47  engels
 
-	* CMakeLists.txt: bug fix: INSTALL_DOC wasn't being correctly
-	  written to cache
+	* bug fix: INSTALL_DOC wasn't being correctly written to cache
 
 2008-05-28 10:02  engels
 
-	* source/src/lccd.cc: patched to make gcc4.3 compliant
+	* patched to make gcc4.3 compliant
 
 2008-02-15 13:14  engels
 
-	* LCCDConfig.cmake.in: bug fix: -DUSE_LCCD definition was missing
+	* bug fix: -DUSE_LCCD definition was missing
 
 2008-01-22 08:54  engels
 
-	* LCCDConfig.cmake.in: set both variables INCLUDE_DIR and
-	  INCLUDE_DIRS for compatibility
+	* set both variables INCLUDE_DIR and INCLUDE_DIRS for compatibility
 
 2008-01-07 14:05  engels
 
-	* CMakeLists.txt: bug fix: using CMAKE_MODULE_PATH with multiple
-	  paths wouldn't work
+	* bug fix: using CMAKE_MODULE_PATH with multiple paths wouldn't
+	  work
 
 2007-11-26 15:50  engels
 
-	* BuildSetup.cmake: updated versions for ilcsoft release v01-03
+	* updated versions for ilcsoft release v01-03
 
 2007-11-23 15:13  engels
 
-	* BuildSetup.cmake: updated for ilcsoft release v01-03
+	* updated for ilcsoft release v01-03
 
 2007-11-16 10:27  engels
 
-	* BuildSetup.cmake: updated for release v01-03
+	* updated for release v01-03
 
 2007-11-06 16:14  engels
 
-	* CMakeLists.txt: removed LCCD_DB_INIT_DEFAULT from the exported
-	  list of definitions in LCCDConfig.cmake
+	* removed LCCD_DB_INIT_DEFAULT from the exported list of
+	  definitions in LCCDConfig.cmake
 
 2007-11-05 17:37  engels
 
-	* CMakeLists.txt, LCCDConfig.cmake.in, source/CMakeLists.txt: added
-	  changes for exporting build definitions to LCCDConfig.cmake
+	* added changes for exporting build definitions to LCCDConfig.cmake
 
 2007-10-30 15:23  engels
 
-	* LCCDConfig.cmake.in: bug fixed (as reported by J. Samson)
+	* bug fixed (as reported by J. Samson)
 
 2007-09-12 07:53  engels
 
-	* CMakeLists.txt: replaced CMAKE_XXX_DIR with PROJECT_XXX_DIR
+	* replaced CMAKE_XXX_DIR with PROJECT_XXX_DIR
 
 2007-07-16 15:00  engels
 
-	* CMakeLists.txt: bug fix: LCCD version wasn't being set correctly
-	  in the documentation
+	* bug fix: LCCD version wasn't being set correctly in the
+	  documentation
 
 2007-07-13 16:22  gaede
 
-	* ChangeLog, doc/release.notes: ----- release v00-03-06
-	  -----------------
+	* ----- release v00-03-06 -----------------
 
 2007-07-13 16:19  gaede
 
-	* BuildSetup.cmake: updated pathes
+	* updated pathes
 
 2007-07-13 14:15  engels
 
-	* README: updated
+	* updated
 
 2007-07-12 13:04  engels
 
-	* README: updated
+	* updated
 
 2007-07-10 09:48  engels
 
-	* BuildSetup.cmake: updated
+	* updated
 
 2007-07-10 09:46  engels
 
-	* BuildSetup.cmake: updated
+	* updated
 
 2007-07-06 13:25  engels
 
-	* README: updated
+	* updated
 
 2007-07-05 15:24  engels
 
-	* README: added cmake build instructions
+	* added cmake build instructions
 
 2007-07-04 14:02  engels
 
-	* CMakeLists.txt: added rpath for apple
+	* added rpath for apple
 
 2007-07-03 12:50  engels
 
-	* BuildSetup.cmake: more user friendly
+	* more user friendly
 
 2007-07-02 12:49  engels
 
-	* BuildSetup.cmake, CMakeLists.txt: added BuildSetup.cmake
+	* added BuildSetup.cmake
 
 2007-06-27 13:37  engels
 
-	* CMakeLists.txt: replaced SEND_ERROR with STATUS
+	* replaced SEND_ERROR with STATUS
 
 2007-06-22 12:29  engels
 
-	* CMakeLists.txt: small bug fix
+	* small bug fix
 
 2007-06-22 12:18  engels
 
-	* CMakeLists.txt: small bug fix
+	* small bug fix
 
 2007-06-22 12:03  engels
 
-	* CMakeLists.txt, source/CMakeLists.txt: retabed files
+	* retabed files
 
 2007-06-19 13:12  engels
 
-	* CMakeLists.txt: added documentation target
+	* added documentation target
 
 2007-05-29 16:27  engels
 
-	* CMakeLists.txt: updated version
+	* updated version
 
 2007-05-16 13:23  engels
 
-	* source/CMakeLists.txt: removed EXCLUDE_FROM_ALL from bin targets
+	* removed EXCLUDE_FROM_ALL from bin targets
 
 2007-05-16 13:13  engels
 
-	* CMakeLists.txt: bug fix: variable was being written to cache in
-	  wrong place
+	* bug fix: variable was being written to cache in wrong place
 
 2007-05-16 12:54  engels
 
-	* source/CMakeLists.txt: moved dependencies code to a macro
+	* moved dependencies code to a macro
 
 2007-05-11 08:08  engels
 
-	* CMakeLists.txt, source/CMakeLists.txt: removed cmake backwards
-	  compatibility 2.2
+	* removed cmake backwards compatibility 2.2
 
 2007-05-07 11:44  engels
 
-	* CMakeLists.txt, source/src/DBConnectionMgr.cc,
-	  source/src/LCGenericObjectStreamer.cc,
-	  source/src/VCollectionStreamer.cc, source/src/Xdr.cc: bug fix:
-	  CondDBMySQL is now optional but not required for building LCCD
+	* bug fix: CondDBMySQL is now optional but not required for
+	  building LCCD
 
 2007-04-27 15:52  gaede
 
-	* ChangeLog, doc/release.notes: tag v00-03-05
+	* tag v00-03-05
 
 2007-04-27 13:30  gaede
 
-	* CMakeLists.txt: changed version to 0.3.5
+	* changed version to 0.3.5
 
 2007-04-27 13:27  gaede
 
-	* source/src/ConditionsHandlerBase.cc, source/src/DBCondHandler.cc,
-	  source/src/DBConnectionMgr.cc, source/src/DBFileHandler.cc,
-	  source/src/DBInterface.cc, source/src/DataFileHandler.cc,
-	  source/src/LCConditionsMgr.cc, source/src/SimpleFileHandler.cc,
-	  source/src/StreamerMgr.cc, source/src/VCollectionStreamer.cc,
-	  source/src/lccd.cc: removed ; at end of namespace
+	* removed ; at end of namespace
 
 2007-04-27 13:21  gaede
 
-	* env.sh, source/include/lccd.h,
-	  source/include/lccd/ConditionsHandlerBase.hh,
-	  source/include/lccd/ConditionsMap.hh,
-	  source/include/lccd/DBCondHandler.hh,
-	  source/include/lccd/DBConnectionMgr.hh,
-	  source/include/lccd/DBFileHandler.hh,
-	  source/include/lccd/DBInterface.hh,
-	  source/include/lccd/DataFileHandler.hh,
-	  source/include/lccd/IConditionsChangeListener.hh,
-	  source/include/lccd/IConditionsHandler.hh,
-	  source/include/lccd/LCConditionsMgr.hh,
-	  source/include/lccd/LCGenericObjectStreamer.hh,
-	  source/include/lccd/SimpleFileHandler.hh,
-	  source/include/lccd/StreamerMgr.hh,
-	  source/include/lccd/VCollectionStreamer.hh: removed ; at end of
-	  namespace
+	* removed ; at end of namespace
 
 2007-04-25 12:50  engels
 
-	* CMakeLists.txt, source/CMakeLists.txt: improved build_shared_libs
+	* improved build_shared_libs
 
 2007-04-25 12:24  engels
 
-	* CMakeLists.txt, source/CMakeLists.txt: moved options to top-level
-	  CMakefile
+	* moved options to top-level CMakefile
 
 2007-04-25 09:52  engels
 
-	* CMakeLists.txt: bug fix: install_prefix
+	* bug fix: install_prefix
 
 2007-04-25 08:56  engels
 
-	* CMakeLists.txt, source/CMakeLists.txt: moved dependencies to
-	  top-level CMakeLists.txt
+	* moved dependencies to top-level CMakeLists.txt
 
 2007-04-24 16:35  engels
 
-	* source/CMakeLists.txt: bug fix: OPTION needs a description
+	* bug fix: OPTION needs a description
 
 2007-04-24 14:40  engels
 
-	* CMakeLists.txt, LCCDConfig.cmake.in, cmake_uninstall.cmake.in,
-	  source/CMakeLists.txt: added CMake files
+	* added CMake files
 
 2006-11-16 15:04  gaede
 
-	* ChangeLog: .
+	* .
 
 2006-11-16 15:04  gaede
 
-	* ChangeLog, env.sh: ----- tag v00-03-04
+	* ----- tag v00-03-04
 
 2006-11-16 15:01  gaede
 
-	* source/include/lccd/ConditionsMap.hh: include Exception (gcc 4.x
-	  ?)
+	* include Exception (gcc 4.x ?)
 
 2006-11-16 15:01  gaede
 
-	* env.sh: updated version
+	* updated version
 
 2006-11-15 16:31  gaede
 
-	* example/calomap/README, example/calomap/src/GNUmakefile,
-	  example/calomap/steer.xml: added xml steering file and updated
-	  makefile
+	* added xml steering file and updated makefile
 
 2006-11-14 17:48  gaede
 
-	* ChangeLog: .
+	* .
 
 2006-11-14 17:47  gaede
 
-	* ChangeLog: ----- tag v00-03-03
+	* ----- tag v00-03-03
 
 2006-11-14 17:42  gaede
 
-	* source/src/DBFileHandler.cc: patch for error printout (S.Schmidt)
+	* patch for error printout (S.Schmidt)
 
 2006-11-14 17:34  gaede
 
-	* source/include/lccd/ConditionsMap.hh,
-	  source/include/lccd/DBConnectionMgr.hh,
-	  source/include/lccd/DBInterface.hh,
-	  source/src/DBConnectionMgr.cc, source/src/DBInterface.cc,
-	  source/test/GNUmakefile, source/test/multiblefolders.cc: added
-	  reference counting for db connections (DBConnectionMgr)
+	* added reference counting for db connections (DBConnectionMgr)
 
 2006-06-16 14:33  gaede
 
-	* source/src/DBCondHandler.cc: print collection name in Exception
-	  for 'no timestamp'
+	* print collection name in Exception for 'no timestamp'
 
 2006-05-03 12:52  gaede
 
-	* ChangeLog, env.sh: uopdated to v00-03-01
+	* uopdated to v00-03-01
 
 2006-05-03 10:52  gaede
 
-	* source/src/LCConditionsMgr.cc: allow to update handlers w/o
-	  conditions data - print exceptions
+	* allow to update handlers w/o conditions data - print exceptions
 
 2005-09-09 09:00  gaede
 
-	* ChangeLog, env.sh, example/calomap/env.sh: updated to v00-03
+	* updated to v00-03
 
 2005-09-09 08:42  gaede
 
-	* source/src/LCGenericObjectStreamer.cc: patch for empty
-	  collections (from G.Gaycken)
+	* patch for empty collections (from G.Gaycken)
 
 2005-09-09 08:31  gaede
 
-	* ChangeLog: added for documentation
+	* added for documentation
 
 2005-09-09 08:09  gaede
 
-	* source/include/lccd/Xdr.hh, source/src/Xdr.cc: fixed seg fault
-	  with -O3: template specialization moved to class declaration
+	* fixed seg fault with -O3: template specialization moved to class
+	  declaration
 
 2005-08-30 13:36  gaede
 
-	* source/include/lccd/SimpleFileHandler.hh,
-	  source/src/SimpleFileHandler.cc: fixed bug with static bool
-	  firstCall (made member variable)
+	* fixed bug with static bool firstCall (made member variable)
 
 2005-08-30 13:35  gaede
 
-	* example/calomap/src/GNUmakefile: modfied for usage with Marlin
-	  v00-09 (or higher)
+	* modfied for usage with Marlin v00-09 (or higher)
 
 2005-04-22 14:26  gaede
 
-	* source/test/calfilefromdb.cc: changed atoi to atol
+	* changed atoi to atol
 
 2005-03-11 13:56  gaede
 
-	* doc/overview.html: fixed new homepage
+	* fixed new homepage
 
 2005-03-11 13:54  gaede
 
-	* doc/overview.html, source/GNUmakefile: fixed automatic version in
-	  API doc
+	* fixed automatic version in API doc
 
 2005-03-11 11:39  gaede
 
-	* env.sh, example/calomap/env.sh: updated pathes
+	* updated pathes
 
 2005-03-08 16:35  gaede
 
-	* example/calomap/README, example/calomap/env.sh,
-	  example/calomap/src/CaloMapProcessor.cc: improved documentation
+	* improved documentation
 
 2005-03-08 09:51  gaede
 
-	* doc/lccd_to_do.txt, env.sh, example, example/calomap,
-	  example/calomap/env.sh, example/calomap/include,
-	  example/calomap/include/CaloMapProcessor.h,
-	  example/calomap/include/ChannelToCellID.h,
-	  example/calomap/my.steer, example/calomap/src,
-	  example/calomap/src/CaloMapProcessor.cc,
-	  example/calomap/src/GNUmakefile,
-	  example/calomap/src/createmaps.cc: added extended example
+	* added extended example
 
 2005-02-25 17:30  gaede
 
-	* source/src/LCConditionsMgr.cc: throw exception in
-	  registerChangeListener
+	* throw exception in registerChangeListener
 
 2005-02-25 17:29  gaede
 
-	* source/include/lccd/ConditionsMap.hh: nicer erroe message if key
-	  not found
+	* nicer erroe message if key not found
 
 2005-02-25 17:28  gaede
 
-	* source/include/lccd/DataFileHandler.hh,
-	  source/src/DataFileHandler.cc: bug fix: update -> updateEvent
+	* bug fix: update -> updateEvent
 
 2005-02-24 17:23  gaede
 
-	* doc/lccd_to_do.txt: initial version
+	* initial version
 
 2005-02-24 08:34  gaede
 
-	* README, env.sh: doc updated
+	* doc updated
 
 2005-02-24 08:32  gaede
 
-	* source/include/lccd/ConditionsMap.hh: added find method
+	* added find method
 
 2005-02-23 15:13  gaede
 
-	* README: added gmake doc
+	* added gmake doc
 
 2005-02-22 18:55  gaede
 
-	* source/include/lccd/ConditionsHandlerBase.hh,
-	  source/include/lccd/IConditionsHandler.hh,
-	  source/src/ConditionsHandlerBase.cc, source/test/readdatafile.cc,
-	  source/test/testdbfile.cc: renamed update to updateEvent
+	* renamed update to updateEvent
 
 2005-02-22 18:55  gaede
 
-	* source/src/SimpleFileHandler.cc: bug fix: enforce update on first
-	  call only
+	* bug fix: enforce update on first call only
 
 2005-02-22 18:54  gaede
 
-	* source/include/lccd/LCConditionsMgr.hh,
-	  source/src/LCConditionsMgr.cc: initial version
+	* initial version
 
 2005-02-22 11:27  gaede
 
-	* source/src/LCGenericObjectStreamer.cc: make sure stored
-	  collections are not transient (flagbit)
+	* make sure stored collections are not transient (flagbit)
 
 2005-02-21 13:01  gaede
 
-	* env.sh, source/src/DBInterface.cc, source/test/calfilefromdb.cc,
-	  source/test/calfiletodb.cc: added debug code
+	* added debug code
 
 2005-02-18 16:51  gaede
 
-	* source/GNUmakefile, source/include/lccd.h,
-	  source/include/lccd/DBInterface.hh, source/src/DBInterface.cc,
-	  source/src/lccd.cc, source/test/calfiletodb.cc,
-	  source/test/createdbfile.cc, source/test/tagdbfolder.cc: added
-	  lccd::getDBInitString to evaluate $LCCD_DB_INIT
+	* added lccd::getDBInitString to evaluate $LCCD_DB_INIT
 
 2005-02-18 16:51  gaede
 
-	* source/test/calfilefromdb.cc: bug fix: evt->takeCollection at the
-	  wrong position
+	* bug fix: evt->takeCollection at the wrong position
 
 2005-02-18 14:39  gaede
 
-	* source/test/calfilefromdb.cc: added test for createSimpleFile()
+	* added test for createSimpleFile()
 
 2005-02-18 14:39  gaede
 
-	* doc/overview.html: updated documentation
+	* updated documentation
 
 2005-02-18 14:38  gaede
 
-	* source/include/lccd/DBInterface.hh, source/src/DBInterface.cc:
-	  added findCollections() and createSimpleFile() for vertical
+	* added findCollections() and createSimpleFile() for vertical
 	  browsing
 
 2005-02-18 14:37  gaede
 
-	* source/include/lccd.h, source/src/lccd.cc: added DBTIMESTAMP
+	* added DBTIMESTAMP
 
 2005-02-17 15:52  gaede
 
-	* source/include/lccd/DBInterface.hh: documentation update
+	* documentation update
 
 2005-02-17 15:45  gaede
 
-	* source/include/lccd.h, source/include/lccd/DBInterface.hh,
-	  source/include/lccd/Xdr.hh, source/src/DBInterface.cc,
-	  source/src/lccd.cc: cosmetics (string constants, documentation)
+	* cosmetics (string constants, documentation)
 
 2005-02-17 12:21  gaede
 
-	* README, conddb.patch, doc/overview.html, source/GNUmakefile,
-	  source/include/lccd.h, source/include/lccd/DataFileHandler.hh:
-	  updated documentation
+	* updated documentation
 
 2005-02-17 11:49  gaede
 
-	* doc/Doxyfile, doc/manual, doc/manual/manual.tex,
-	  doc/overview.html: Added documentation
+	* Added documentation
 
 2005-02-16 11:02  gaede
 
-	* source/include/lccd/DataFileHandler.hh,
-	  source/src/DataFileHandler.cc: initial version
+	* initial version
 
 2005-02-16 11:02  gaede
 
-	* source/test/GNUmakefile, source/test/readdatafile.cc: test
-	  program for DataFileHandler
+	* test program for DataFileHandler
 
 2005-02-16 11:01  gaede
 
-	* source/include/lccd/DBFileHandler.hh, source/test/readcalfile.cc:
-	  cosmetics
+	* cosmetics
 
 2005-02-16 09:31  gaede
 
-	* README, conddb.patch: patch for CondDBMysQL
+	* patch for CondDBMysQL
 
 2005-02-16 09:27  gaede
 
-	* README, source/src/LCGenericObjectStreamer.cc: removed debug
-	  printout
+	* removed debug printout
 
 2005-02-15 16:35  gaede
 
-	* source/test/calfilefromdb.cc: cosmetics
+	* cosmetics
 
 2005-02-15 16:35  gaede
 
-	* source/include/lccd/DBFileHandler.hh,
-	  source/src/DBFileHandler.cc: initial version
+	* initial version
 
 2005-02-15 16:34  gaede
 
-	* source/test/GNUmakefile, source/test/testdbfile.cc: added test
-	  for DBFileHandler
+	* added test for DBFileHandler
 
 2005-02-15 16:33  gaede
 
-	* source/src/DBInterface.cc: finished createDBFile( tag )
+	* finished createDBFile( tag )
 
 2005-02-14 18:16  gaede
 
-	* source/test/calfilefromdb.cc: comsetics - added test for
-	  findCollections
+	* comsetics - added test for findCollections
 
 2005-02-14 18:16  gaede
 
-	* source/test/GNUmakefile, source/test/createdbfile.cc: added
-	  createdbfile
+	* added createdbfile
 
 2005-02-14 18:15  gaede
 
-	* source/src/lccd.cc: added fromSimpleTime
+	* added fromSimpleTime
 
 2005-02-14 18:14  gaede
 
-	* source/include/lccd/DBInterface.hh, source/src/DBInterface.cc:
-	  added methods for vertically browsing a folder and creating an
+	* added methods for vertically browsing a folder and creating an
 	  LCIO-dbfile
 
 2005-02-14 18:11  gaede
 
-	* source/include/lccd.h: function to convert SImpleTime to
-	  LCCDTimestamp
+	* function to convert SImpleTime to LCCDTimestamp
 
 2005-02-14 10:30  gaede
 
-	* source/include/lccd/DBInterface.hh, source/src/DBInterface.cc:
-	  Added collection parameters that describe the data at the time of
+	* Added collection parameters that describe the data at the time of
 	  the query
 
 2005-02-14 10:29  gaede
 
-	* source/include/lccd/ConditionsMap.hh,
-	  source/test/CalibrationConstant.hh: cosmetics
+	* cosmetics
 
 2005-02-11 15:51  gaede
 
-	* README, env.sh: initial version of readme
+	* initial version of readme
 
 2005-02-11 15:36  gaede
 
-	* source/test/calfiletodb.cc: removed COndDB headers
+	* removed COndDB headers
 
 2005-02-11 15:36  gaede
 
-	* source/test/calfilefromdb.cc: included example for ConditionsMap
+	* included example for ConditionsMap
 
 2005-02-11 15:35  gaede
 
-	* source/include/lccd/DBInterface.hh, source/src/DBInterface.cc:
-	  moved CondDB headers from .hh to .cc
+	* moved CondDB headers from .hh to .cc
 
 2005-02-11 15:34  gaede
 
-	* source/include/lccd/ConditionsMap.hh: added member function
-	  pointer for function returning key
+	* added member function pointer for function returning key
 
 2005-02-11 12:31  gaede
 
-	* source/include/lccd/ConditionsMap.hh: initial version -
-	  experimental !
+	* initial version - experimental !
 
 2005-02-11 11:05  gaede
 
-	* source/src/GNUmakefile, source/test/GNUmakefile: create bin(test)
-	  and libdir
+	* create bin(test) and libdir
 
 2005-02-11 11:04  gaede
 
-	* source/test/CalibrationConstant.cc: removed static _typeName and
-	  _dataDescription (new LCGenericObject API)
+	* removed static _typeName and _dataDescription (new
+	  LCGenericObject API)
 
 2005-02-11 11:03  gaede
 
-	* source/test/readcalfile.cc: added nice time printout with LCTime
+	* added nice time printout with LCTime
 
 2005-02-11 11:02  gaede
 
-	* source/test/CalibrationConstant.hh: modified to use LCFixedObject
-	  template
+	* modified to use LCFixedObject template
 
 2005-02-10 12:17  gaede
 
-	* README, doc, doc/Doxyfile, env.sh, source, source/GNUmakefile,
-	  source/include, source/include/lccd, source/include/lccd.h,
-	  source/include/lccd/ConditionsHandlerBase.hh,
-	  source/include/lccd/DBCondHandler.hh,
-	  source/include/lccd/DBInterface.hh,
-	  source/include/lccd/IConditionsChangeListener.hh,
-	  source/include/lccd/IConditionsHandler.hh,
-	  source/include/lccd/LCGenericObjectStreamer.hh,
-	  source/include/lccd/SimpleFileHandler.hh,
-	  source/include/lccd/StreamerMgr.hh,
-	  source/include/lccd/VCollectionStreamer.hh,
-	  source/include/lccd/Xdr.hh, source/src,
-	  source/src/ConditionsHandlerBase.cc, source/src/DBCondHandler.cc,
-	  source/src/DBInterface.cc, source/src/GNUmakefile,
-	  source/src/LCGenericObjectStreamer.cc,
-	  source/src/SimpleFileHandler.cc, source/src/StreamerMgr.cc,
-	  source/src/VCollectionStreamer.cc, source/src/Xdr.cc,
-	  source/src/lccd.cc, source/test,
-	  source/test/CalibrationConstant.cc,
-	  source/test/CalibrationConstant.hh, source/test/GNUmakefile,
-	  source/test/calfilefromdb.cc, source/test/calfiletodb.cc,
-	  source/test/createcalfile.cc, source/test/readcalfile.cc,
-	  source/test/tagdbfolder.cc: This commit was generated by cvs2svn
-	  to compensate for changes in r2,
+	* This commit was generated by cvs2svn to compensate for changes in
+	  r2,
 	  which included commits to RCS files with non-trunk default
 	  branches.
 
 2005-02-10 12:17  
 
-	* .: Standard project directories initialized by cvs2svn.
+	* Standard project directories initialized by cvs2svn.
 

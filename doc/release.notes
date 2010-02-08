@@ -2,12 +2,6 @@
  LCCD release notes
 ====================
 
- -----------
-| v00-06-01 |
- -----------
-
-      -  corrected the version number in CMakeLists.txt, as it had not been incremented from v00-05 for v00-06
-
  --------
 | v00-06 |
  --------
