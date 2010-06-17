@@ -16,6 +16,10 @@ SET( CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS TRUE )
 # project name
 PROJECT( LCCD )
 
+# needed for using ctest
+ENABLE_TESTING()
+INCLUDE(CTest)
+
 # project version
 SET( LCCD_MAJOR_VERSION 0 )
 SET( LCCD_MINOR_VERSION 6 )
