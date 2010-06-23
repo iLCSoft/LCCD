@@ -13,7 +13,9 @@ INCLUDE_DIRECTORIES( BEFORE "${PROJECT_SOURCE_DIR}/source/include" )
 # install include files
 INSTALL( DIRECTORY "${PROJECT_SOURCE_DIR}/source/include" DESTINATION .
         PATTERN "*~" EXCLUDE
-        PATTERN "*CVS*" EXCLUDE )
+        PATTERN "*CVS*" EXCLUDE
+        PATTERN "*/.svn*" EXCLUDE
+        )
 
 
 ####################################################################################################

@@ -149,7 +149,9 @@ IF( INSTALL_DOC )
     # install documentation
     INSTALL( DIRECTORY "${LCCD_SOURCE_DIR}/doc"
             DESTINATION .
-            PATTERN "*CVS*" EXCLUDE )
+            PATTERN "*CVS*" EXCLUDE
+            PATTERN "*/.svn*" EXCLUDE
+            )
 ENDIF()
 
 ##########################################################################################

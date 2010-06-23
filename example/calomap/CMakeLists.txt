@@ -82,7 +82,9 @@ INCLUDE_DIRECTORIES( "../../source/include" )
 INSTALL( DIRECTORY "${PROJECT_SOURCE_DIR}/include"
         DESTINATION .
         PATTERN "*~" EXCLUDE
-        PATTERN "*CVS*" EXCLUDE )
+        PATTERN "*CVS*" EXCLUDE
+        PATTERN "*/.svn*" EXCLUDE
+        )
 
 
 ### SOURCES ##################################################################
