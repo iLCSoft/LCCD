@@ -250,6 +250,39 @@ namespace lccd {
   }
 
 
+  lcio::LCCollection*  DBInterface::findLastValidCollection( LCCDTimeStamp timeStamp, 
+							     LCCDTimeStamp& since, LCCDTimeStamp& till,
+							     const std::string& tag ) { 
+    
+    ICondDBObject* condObject = 0;
+
+    _condDBmgr->startRead(); // dummy method for now 
+
+    CondDBKey searchPoint =  timeStamp ;
+
+    condDataAccess()->findLastValidCondDBObject( condObject, _folder, searchPoint , tag );
+
+    if( condObject == 0 ){
+      
+      std::cout << "DBInterface::findLastValidCollection: Warning: No further object found in database folder " << _folder << " before timestamp : " 
+		<< searchPoint
+		<< std::endl ;
+      return 0 ;
+    }
+
+    since = condObject->validSince() ;
+    till = condObject->validTill() ;
+    
+    lcio::LCCollection*  col = collectionFromCondDBObject( condObject, tag )  ;
+    
+    CondDBObjFactory::destroyCondDBObject(condObject);
+    
+    return  col ;
+
+  }
+
+
+
   void DBInterface::findCollections( ColVec& colVec, const std::string& tag ){ 
 
     _condDBmgr->startRead(); // dummy method for now 

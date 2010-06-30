@@ -21,13 +21,13 @@ ENABLE_TESTING()
 INCLUDE(CTest)
 
 # project version
-SET( LCCD_MAJOR_VERSION 0 )
-SET( LCCD_MINOR_VERSION 6 )
-SET( LCCD_PATCH_LEVEL 1 )
+SET( LCCD_MAJOR_VERSION 1 )
+SET( LCCD_MINOR_VERSION 0 )
+SET( LCCD_PATCH_LEVEL 0 )
 
 # project options
 OPTION( BUILD_SHARED_LIBS "Set to OFF to build static libraries" ON )
-OPTION( BUILD_32BIT_COMPATIBLE "Set to ON to build in 32 bit compatibility mode" ON )
+OPTION( BUILD_32BIT_COMPATIBLE "Set to ON to build in 32 bit compatibility mode" OFF )
 OPTION( BUILD_LCCD_TESTS "Set to ON to build LCCD tests" OFF )
 OPTION( BUILD_CONDDB_TESTS "Set to ON to build CondDB tests" OFF )
 OPTION( INSTALL_DOC "Set to OFF to skip build/install Documentation" ON )

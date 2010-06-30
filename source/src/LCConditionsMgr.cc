@@ -44,12 +44,14 @@ namespace lccd{
     
     for( HandlerMap::iterator it =  _map.begin() ; it != _map.end() ; it++ ){
       
-      try {
-	it->second->updateEvent( evt ) ;
-      }
-      catch(lcio::Exception e ){
-	std::cout << " LCConditionsMgr::updateEvent: an exception occured: " << e.what() << std::endl ;
-      }
+      it->second->updateEvent( evt ) ;
+
+//      try {
+//	it->second->updateEvent( evt ) ;
+//      }
+//      catch(lcio::Exception e ){
+//	std::cout << "LCConditionsMgr::updateEvent: an exception occured: " << e.what() << std::endl ;
+//      }
     }
   }
   
@@ -57,12 +59,14 @@ namespace lccd{
 
     for( HandlerMap::iterator it =  _map.begin() ; it != _map.end() ; it++ ){
       
-      try {
       it->second->update( timestamp ) ;
-      }
-      catch(lcio::Exception e ){
-	std::cout << " LCConditionsMgr::update: an exception occured: " << e.what() << std::endl ;
-      }
+
+//      try {
+//      it->second->update( timestamp ) ;
+//      }
+//      catch(lcio::Exception e ){
+//	std::cout << " LCConditionsMgr::update: an exception occured: " << e.what() << std::endl ;
+//      }
     }
 
   }
@@ -77,6 +81,7 @@ namespace lccd{
       return 0 ;  
   }
   
+
   
   void LCConditionsMgr::registerHandler( const std::string&  name, IConditionsHandler* handler) {
     
@@ -84,7 +89,7 @@ namespace lccd{
 
     if( it != _map.end() ) {
 
-      throw lcio::Exception(" LCConditionsMgr::registerHandler: a handler allready exists"
+      throw lcio::Exception(" LCConditionsMgr::registerHandler: a handler already exists"
 			    " for name " + name ) ; 
     }
 
@@ -101,7 +106,6 @@ namespace lccd{
 
     _map.clear() ;
   }
-
 
 }
 

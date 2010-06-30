@@ -5,6 +5,7 @@
 #include "IO/LCReader.h"
 
 #include <iostream>
+#include <sstream>
 
 using namespace lcio ;
 
@@ -24,7 +25,7 @@ namespace lccd {
     if( _inputCollection.size() == 0 ) 
       _inputCollection = name ;
 
-    _col = 0 ;
+   _col = NULL ;
 
   }
   
@@ -33,6 +34,32 @@ namespace lccd {
     delete _col ;
   }
   
+ void SimpleFileHandler::registerDefaultCollection( lcio::LCCollection* col){
+
+    std::stringstream mess ;
+    mess << "SimpleFileHandler::registerDefaultCollection is not implemented for SimpleFileCondHandler. Name of handler: "  << this->name() << std::ends ;
+    throw lcio::Exception( mess.str() ) ; 
+    
+  }
+
+
+  lcio::LCCollection* SimpleFileHandler::defaultCollection(){
+
+    std::stringstream mess ;
+    mess << "SimpleFileHandler::defaultCollection is not implemented for SimpleFileCondHandler. Name of handler: " <<  this->name() << std::ends ;
+    throw lcio::Exception( mess.str() ) ; 
+    
+  }
+
+
+  lcio::LCCollection* SimpleFileHandler::lastValidCollection(){
+
+    std::stringstream mess ;
+    mess << "SimpleFileHandler::lastValidCollection is not implemented for SimpleFileCondHandler. Name of handler: " <<  this->name() << std::ends ;
+    throw lcio::Exception( mess.str() ) ; 
+    
+  }
+
   
   void SimpleFileHandler::update( LCCDTimeStamp timestamp ) {
     
@@ -64,6 +91,7 @@ namespace lccd {
       _validSince =  LCCDMinusInf ;
       _validTill = LCCDPlusInf ;
       
+      _col->parameters().setValue("CollectionName", this->name() ) ;
       notifyListeners() ;
       
       lcReader->close() ;

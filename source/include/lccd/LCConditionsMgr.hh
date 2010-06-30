@@ -3,7 +3,7 @@
 
 // 
 #include "lccd.h"
-#include "IConditionsHandler.hh"
+#include "lccd/IConditionsHandler.hh"
 
 // -- lcio headers
 // #include "lcio.h"
@@ -24,7 +24,7 @@ namespace lccd {
    *  
    *  Singleton.
    * 
-   *  @author F.Gaede, DESY
+   *  @author F.Gaede,  DESY
    *  @version $Id: LCConditionsMgr.hh,v 1.2 2007-04-27 13:21:31 gaede Exp $
    */
 
@@ -63,7 +63,7 @@ namespace lccd {
     /** Returns the handler for the given name - Null
      *  if not registered.
      */
-    IConditionsHandler * getHandler( const std::string&  name) ;
+    IConditionsHandler* getHandler( const std::string&  name) ;
 
     /** Call IConditionsHandler::updateEvent() for all registered handlers. 
      */
@@ -75,6 +75,7 @@ namespace lccd {
 
     /** Clear the map and delete all handlers */
     void clear() ;
+
 
   private:
     HandlerMap _map ;

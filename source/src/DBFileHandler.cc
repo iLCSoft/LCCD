@@ -41,29 +41,43 @@ namespace lccd {
     if( _inputCollection.size() == 0 ) 
       _inputCollection = name ;
 
-    _col = 0 ;
-
+    _col = NULL;
+    _defaultCollection = NULL;
+    _lastValidCollection = NULL;
     init() ;
 
   }
   
   DBFileHandler::~DBFileHandler() {
-    delete _col ;
+    if( _col != _defaultCollection ) delete _col ;
+    delete _lastValidCollection;
     _lcReader->close() ;
     delete _lcReader ;
   }
   
-
+  void DBFileHandler::registerDefaultCollection( lcio::LCCollection* col){
+    if( _defaultCollection == 0 ) {
+      _defaultCollection = col;
+      //std::cout << "DBFileHandler::registerDefaultCollection registering Default collection for CondHandler: "  << this->name() << "  " << _defaultCollection << std::endl ;
+    } else {
+      std::stringstream mess ;
+      mess << "DBFileHandler::registerDefaultCollection Default collection already set for CondHandler: "  << this->name() << "  " << _defaultCollection << std::ends ;
+      throw lcio::Exception( mess.str() ) ; 
+    }
+  }
 
   void DBFileHandler::update( LCCDTimeStamp timestamp ) {
     
+    //std::cout << "DBFileHandler::update: reading constants from file for time stamp : " 
+    //	      << timestamp << std::endl ;
+
     static bool firstEvent = true ;
 
     if( timestamp < _validSince  || timestamp >= _validTill ) { // true for first call  ! 
-      
 
-      int evtNum = findEventNumber( timestamp ) ;
-      
+      int evtNum = 0;
+      LCCollection* col = 0;
+
       if( timestamp < _validSince && ! firstEvent ) { 
 	
 	std::cout << " DBFileHandler::update: events not ordered w.r.t. time stamps \n"
@@ -74,17 +88,44 @@ namespace lccd {
       }
 
 
-      LCEvent* evt = _lcReader->readEvent( 0 , evtNum ) ;
+      try{
 
-      if( _col != 0 ) 
-	delete _col ;
+	evtNum = findEventNumber( timestamp ) ;
+	LCEvent* evt = _lcReader->readEvent( 0 , evtNum ) ;
+	
+	col = evt->takeCollection( _inputCollection ) ;
+	// set current validity range
+	_validSince =  _valVec[ evtNum ].first  ;
+	_validTill = _valVec[ evtNum ].second  ;    
+	//std::cout << "DBFileHandler::update: setting validity range:" << _validSince << " " << _validTill << std::endl ;		
+	
+      } catch(Exception) {
+	
+	//std::cout << "DBFileHandler::update: evtNum not found" << std::endl ;	
+	
+	if (_defaultCollection) {
+	  col = _defaultCollection; 
+	  // set the valid's here to only this timestamp, this ensures that a new search will be made for any other time stamp
+	  _validSince = timestamp;
+	  _validTill = timestamp + 1LL ; // + 1 nsec
+	  //std::cout << "DBFileHandler:: default collection being used for Conditions Hander: " << this->name() << std::endl;
+	} 
+	else {
+	  std::stringstream mess ;
+	  mess << "DBFileHandler::update: No default collection set for Conditions Hander:" <<  this->name() << std::ends ;
+	  throw lcio::Exception( mess.str() ) ;
+	}
+      }
       
-      _col = evt->takeCollection( _inputCollection ) ;
-      
-      // set current validity range
-      _validSince =  _valVec[ evtNum ].first  ;
-      _validTill = _valVec[ evtNum ].second  ;
-      
+      if( _col != _defaultCollection ){	  
+	delete _lastValidCollection ;
+	_lastValidCollection = _col ;
+      }
+
+      _col = col; 
+
+      if( _col!=_defaultCollection ) _col->parameters().setValue("CollectionName", this->name() ) ;
+
       notifyListeners() ;
       
       firstEvent = false ; 

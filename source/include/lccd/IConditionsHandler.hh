@@ -17,9 +17,9 @@ namespace lccd {
   /** Abstract handler for conditions data. Need one implementation instance 
    *  for every data set. Check documentation of concrete implemetation for
    *  behaviour on update, e.g. a simple file handler might ignore calls to 
-   *  update and allways hold the same data set.
+   *  update and always hold the same data set.
    * 
-   *  @author F.Gaede, DESY
+   *  @author F.Gaede, S.Aplin,  DESY
    *  @version $Id: IConditionsHandler.hh,v 1.3 2007-04-27 13:21:31 gaede Exp $
    */
 
@@ -41,22 +41,36 @@ namespace lccd {
      *  See implementation classes for details.
      */
     virtual void update( LCCDTimeStamp timestamp ) = 0;
-    
+     
     /** Returns the current collection of conditions data
      */
     virtual lcio::LCCollection* currentCollection() = 0;
-    
     
     /** Every IConditionsChangeListener will be notified if the conditions data
      *  of this instance has changed.
      */
     virtual void registerChangeListener( IConditionsChangeListener* cl) = 0;
-    
-    
+
     /** Remove the specified listener from list of registered listeners ;
      */
     virtual void removeChangeListener( IConditionsChangeListener* cl) = 0;
     
+    /** checks if the changeListner is Registered
+     */ 
+    virtual bool isChangeListenerRegistered( IConditionsChangeListener* cl ) = 0;
+
+    /** Register a pointer to a default collection which will be passed to the
+     *  IConditionsChangeListener if no data can be found for a given time stamp 
+     */
+     virtual void registerDefaultCollection( lcio::LCCollection* col) = 0;
+    
+    /** The default collection registered with the handler 
+     */
+    virtual lcio::LCCollection* defaultCollection() = 0 ;    
+
+    /** The last valid collection held by the handler 
+     */
+    virtual lcio::LCCollection* lastValidCollection() = 0 ;    
     
     /** The name of this conditions handler - used, e.g. as name of the collection
      *  in update( lcio::LCEvent* evt ).

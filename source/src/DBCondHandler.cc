@@ -4,6 +4,9 @@
 #include "lccd/DBInterface.hh"
 
 #include "lcio.h"
+#include <IMPL/LCCollectionVec.h>
+#include <EVENT/LCGenericObject.h>
+#include "UTIL/LCTime.h"
 
 #include <iostream>
 #include <sstream>
@@ -24,58 +27,111 @@ namespace lccd {
     
     
     _db = new lccd::DBInterface( _dbInit , _folder ) ;
-    _col = 0 ;
-  }
+    _col = NULL ;
+    _defaultCollection = NULL;
+    _lastValidCollection = NULL;
+}
   
 
   DBCondHandler::~DBCondHandler() {
     //     std::cout << " in DBCondHandler::~DBCondHandler() " << std::endl ;
-    delete _col ;
+    if( _col != _defaultCollection ) delete _col ;
+    delete _lastValidCollection;
     delete _db ;
   }
   
-  
+ 
+  void DBCondHandler::registerDefaultCollection( lcio::LCCollection* col){
+    if( _defaultCollection == 0 ) {
+      _defaultCollection = col;
+      //std::cout << "DBCondHandler::registerDefaultCollection registering Default collection for CondHandler: "  << this->name() << "  " << _defaultCollection << std::endl ;
+    } else {
+      std::stringstream mess ;
+      mess << "DBCondHandler::registerDefaultCollection Default collection already set for CondHandler: "  << this->name() << "  " << _defaultCollection << std::ends ;
+      throw lcio::Exception( mess.str() ) ; 
+    }
+  }
+
+ 
   //  void DBCondHandler::update( LCCDTimeStamp timeStamp ) throw (lcio::Exception) {
   void DBCondHandler::update( LCCDTimeStamp timeStamp )  {
 
     if( timeStamp < _validSince  || timeStamp >= _validTill ) { 
       
       
-      //       std::cout << "DBCondHandler::update: reading constants from db for time stamp : " 
+      //std::cout << "DBCondHandler::update: reading constants from db for time stamp : " 
       // 		<< timeStamp << std::endl ;
             
       LCCollection* col = _db->findCollection( timeStamp , _validSince,  _validTill,  _tag ) ;
-      
+
       if( col == 0 ) {
 
 	// no valid collection is available
-	// record this time as being the start of validity of NULL return
-	_validSince = timeStamp ;
+//	// record this time as being the start of validity of NULL return
+//	_validSince = timeStamp ;
+
+	// std::cout << "DBCondHandler:: no valid collection is available" << std::endl ;
 
 	// try to get next valid collection 
 	LCCDTimeStamp nextObectsValidSince = LCCDPlusInf ;
-	LCCDTimeStamp nextObectsValidTil = LCCDMinusInf ;
-	LCCollection* nextCol =  _db->findNextValidCollection( timeStamp , nextObectsValidSince, nextObectsValidTil,  _tag ) ;
+	LCCDTimeStamp nextObectsValidTill = LCCDMinusInf ;
+	LCCollection* nextCol =  _db->findNextValidCollection( timeStamp , nextObectsValidSince, nextObectsValidTill,  _tag ) ;
 
-	if( nextCol != 0 ) { // oject found so set the end of validity of the NULL pointer return to the start of validity of the object found
+	if( nextCol != 0 ) { // object found so set the end of validity to the start of validity of the object found
+
+	  //std::cout << "DBCondHandler:: found valid collection starting at: " << nextObectsValidSince << std::endl ;
 	  _validTill = nextObectsValidSince ;
-	} else { // as no more objects exist for this point in time set the end of validity of the NULL pointer return to +inf
+
+	} else { // as no more objects exist for this point in time set the end of validity to +inf
+
+	  //std::cout << "DBCondHandler:: did not find a valid collection in the future" << std::endl ;
 	  _validTill = LCCDPlusInf ;
-	  std::cout << "DBCondHandler::update: Warning: No further collection avialible from this point in time on: time stamp: " 
-		    << timeStamp << " and name " << name() << std::endl;
+	  //	  std::cout << "DBCondHandler::update: Warning: No further collection avialible from this point in time on: time stamp: " 
+	  //		    << timeStamp << " and name " << name() << std::endl;
 	} 
 
+	// try to get last valid collection 
+	LCCDTimeStamp lastObectsValidSince = LCCDPlusInf ;
+	LCCDTimeStamp lastObectsValidTill = LCCDMinusInf ;
+	LCCollection* lastCol =  _db->findLastValidCollection( timeStamp , lastObectsValidSince, lastObectsValidTill,  _tag ) ;
+
+	if( lastCol != 0 ) { // ojbect found - so set the beginning of validity to the end of the validity of the object found
+
+	  //std::cout << "DBCondHandler:: found valid collection ending at: " << lastObectsValidTill << std::endl ;
+	  _validSince = lastObectsValidTill ; 
+
+	} else { // as no objects exist before this point in time -- set the begining of validity to -inf
+	  //std::cout << "DBCondHandler:: did not find a valid collection in the past" << std::endl ;
+	  _validSince =  LCCDMinusInf;
+	  //	  std::cout << "DBCondHandler::update: Warning: No further collection avialible before this point in time: time stamp: " 
+	  //		    << timeStamp << " and name " << name() << std::endl;
+	} 
+
+
 	std::stringstream mess ;
-	mess << "DBCondHandler::update: No collection found for time stamp: " 
-	     << timeStamp << " and name " << name() << std::ends ;
-	throw lcio::Exception( mess.str() ) ;
+	mess << "DBCondHandler::update: No default collection set for Conditions Hander: " <<  this->name() << std::ends ;
+	
+	// here don't throw exception - but send the default collection
+	if (_defaultCollection) {
+	  //std::cout << "DBCondHandler:: default collection being used for Conditions Hander: " << this->name() << std::endl;
+	  col = _defaultCollection; }
+	else {
+	  throw lcio::Exception( mess.str() ) ;
+	}
+	
+	//	throw lcio::Exception( mess.str() ) ;
 	// std::cout << mess << std::endl;
 	
       }
 
-      if( _col != 0 )  delete _col ;
+      if( _col != _defaultCollection )  {
+	delete _lastValidCollection ;
+	_lastValidCollection = _col;
+      }
       
       _col = col;
+
+      if( _col!=_defaultCollection ) _col->parameters().setValue("CollectionName", this->name() ) ;
 
       notifyListeners() ;
       

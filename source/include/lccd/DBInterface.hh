@@ -99,6 +99,10 @@ namespace lccd {
      */
     const std::string& folderName() {  return _folder ; } 
 
+    /** The db name used for this DB access.
+     */
+    const std::string& dbName() {  return _dbName ; } 
+
 
     /** Stores the given collection in the database 
      */
@@ -164,6 +168,36 @@ namespace lccd {
 						 LCCDTimeStamp& since, LCCDTimeStamp& till,
 						 const std::string& tag="" ) ; 
     
+
+    /** Retrieves the last valid collection before the given point in time, searching backwards in time - returns NULL if 
+     *  no data is found.<br>
+     *  This expects the LCIO collection type to be decoded in the object description:<br>
+     *  "LCIO_COL_TYPE: some description" -  storeCollection() does this automatically.<br>
+     *  Some parameters are added to the collection:<br>
+     *  <ul>
+     *  <li>DBName:  name of the (MySQL) database</li>
+     *  <li>DBFolder: data base folder </li>
+     *  <li>DBTag: the tag used for the query - possibly HEAD at that time. </li>
+     *  <li>DBQueryTime: the time the conditions data was extracted from the data base. </li>
+     *  <li>DBInsertionTime: the time the conditions data was inserted into the data base. </li>
+     *  <li>DBSince: the start of the vaidity intervall</li>
+     *  <li>DBTill: the end of the validity intervall</li>
+     *  <li>DBLayer: the layer number of this data set</li>
+     *  </ul> 
+     *  DBQueryTime, DBInsertionTime, DBSince and DBTill are string vectors with two elements: 
+     *  the 64bit time stamp and the date in human readable format.
+     * 
+     *  @param timeStamp: the point in time from which to search backwards for conditions data
+     *  @param since:  return the begin of the validity interval of the conditions data returned
+     *  @param end:  return the end of the validity interval of the conditions data returned
+     *  @param tag: the tag to be used for the query, if omitted HEAD is used
+     */
+
+    lcio::LCCollection* findLastValidCollection( LCCDTimeStamp timeStamp, 
+						 LCCDTimeStamp& since, LCCDTimeStamp& till,
+						 const std::string& tag="" ) ; 
+
+
     /** Retrieves the collection for the given point in time - returns NULL if it 
      *  no data is found.<br>
      *  Same as above, except that no information on the validity interval is returned.
@@ -192,12 +226,12 @@ namespace lccd {
      */
     void findCollections( ColVec& colVec, LCCDTimeStamp timeStamp ) ; 
 
-    /** @brief Creates collections for all conditions data in current folder.<br>
-     *  @brief <b> This does not respect tags! </b>
+    /** @brief Debug Method: Creates collections for all conditions data in current folder.<br>
+     *  @brief <b> This does not respect tags. </b>
      *
      *  Description parameters are added to the collections as in  findCollection()
      *  plus DBLayer.
-     *  @warning This does not respect tags!
+     *  @warning This does not respect tags.
      */
     void findAllCollections( ColVec& colVec ) ; 
 
@@ -229,15 +263,15 @@ namespace lccd {
      */
     void createSimpleFile( LCCDTimeStamp timeStamp, const std::string& tag, bool allLayers=false ) ;
 
-    /** @brief Creates an LCIO file with the all conditions data in the folder.<br>
-     *  @brief <b> This file does not respect tags! It is not meant ot be used with the DBFileHandler. </b>
+    /** @brief Debug Method: Creates an LCIO file with the all conditions data in the folder.<br>
+     *  @brief <b> This file does not respect tags. It is not meant to be used with the DBFileHandler. </b>
      *
      *  The collections are sorted w.r.t. their validity time intervall and attached to 
      *  consecutive events. The run header holds a map of validity time intervalls to events.
      *  in the parameters DBSince and DBTill.<br>
      *  The name of the file will be of the form "conddb_COLNAME_YYYYMMDD_HHMMSS.slcio"
      *  where the specified time is the creation time.
-     *  @warning This file does not respect tags! It is not meant ot be used with the DBFileHandler.
+     *  @warning This file does not respect tags. It is not meant ot be used with the DBFileHandler.
      */
     void dump2File( ) ;
 

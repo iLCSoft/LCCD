@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <functional> 
+#include <sstream>
 
 using namespace lcio ;
 
@@ -22,11 +23,22 @@ namespace lccd {
   
     
   }
-  
+
   
   void ConditionsHandlerBase::registerChangeListener( IConditionsChangeListener* cl ) {
-    
     _changeListeners.push_back( cl ) ;
+    cl->registeredWithHandler(this) ;
+  }
+
+
+  bool ConditionsHandlerBase::isChangeListenerRegistered( IConditionsChangeListener* cl ) {
+
+    if( std::find(_changeListeners.begin(), _changeListeners.end(), cl ) != _changeListeners.end()) {
+      return true; 
+    } else {
+      return false;
+    }
+
   }
   
 
@@ -34,18 +46,16 @@ namespace lccd {
     
     // remove all occurences of cl :
     // remove only puts things to remove at the end and we need to erase them
+    cl->deRegisteredWithHandler(this);
     _changeListeners.erase ( std::remove( _changeListeners.begin() , 
 					  _changeListeners.end() , 
 					  cl ) ,
 			     _changeListeners.end() ) ;
   }
   
-  
+
   void ConditionsHandlerBase::notifyListeners() {
     
-
-    // let the change listerners know the collection name:
-    _col->parameters().setValue("CollectionName", name() ) ;
 
     std::for_each( _changeListeners.begin() , 
 		   _changeListeners.end() , 

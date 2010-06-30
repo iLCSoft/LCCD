@@ -2,6 +2,54 @@
  LCCD release notes
 ====================
 
+
+ -----------
+| v01-00    |
+ -----------
+
+      -  Changes to the API 
+      -  IConditionsChangeListener is no longer a pure abstract base class and now contains the two additional call back methods:	
+
+      	 - virtual void registeredWithHandler( IConditionsHandler* ch ) ;
+	 - virtual void deRegisteredWithHandler( IConditionsHandler* ch ) ;
+
+	 These are used to maintain a std::list of pointers to the handlers with which the listener has been registered.
+
+      -  The ConditionsHandlerBase class has been declared a friend class of IConditionsChangeListener and uses these 
+         call-back methods when a listener is registered or de-registered respectively, providing a pointer to itself 
+	 as the argument.
+
+      -  The IConditionsHandler has been extended to take a default collection which should be used as the current 
+         collection in the case that no collection is available for the current time interval. In such case this
+	  default collection is the one sent to the registered IConditionsChangeListeners.
+
+	 - Note: this functionality is only implemented in the DBCondHandler and DBFileHandler classes and not in
+	         SimpleFileHandler and DataFileHandler classes. For the latter two classes calling the methods: 
+
+		     virtual void registerDefaultCollection( lcio::LCCollection* col);
+		     virtual lcio::LCCollection* defaultCollection() ;    
+		     virtual lcio::LCCollection* lastValidCollection()  ;
+		     
+		 will cause an exception to be thrown, otherwise their functionality remains unchanged.
+
+         - Note: if no default collection is registered for a given handler and no data is available an exception 
+	         will be thrown by the handler which will not be caught by the LCConditionsMgr.
+
+      -  The IConditionsHandler has also been extended to hold the last valid collection. This is again only implemented 
+      	 in the DBCondHandler and DBFileHandler classes and not in SimpleFileHandler and DataFileHandler classes.
+
+	    	     virtual lcio::LCCollection* lastValidCollection() = 0;	      
+
+      -	 The IConditionsHandler has also been extended to check if a given IConditionsChangeListener is register with it 
+
+      	             virtual bool isChangeListenerRegistered( IConditionsChangeListener* cl ) ;
+
+      -  LCConditionsMgr no longer catches exceptions in the update and updateEvent methods.
+
+      -  CMakeLists.txt: OPTION( BUILD_32BIT_COMPATIBLE "Set to ON to build in 32 bit compatibility mode" OFF )
+
+      -  Note: due to changes in DBCondHandler, v01-00 is only compatible with CondDBMySQL version CondDBMySQL_ILC-0-8
+
  -----------
 | v00-06-01 |
  -----------
