@@ -1,8 +1,6 @@
 #ifndef DBCondHandler_h
 #define DBCondHandler_h
 
-#ifdef USE_CONDDB
-
 #include "lccd.h"
 #include "ConditionsHandlerBase.hh"
 
@@ -104,7 +102,5 @@ namespace lccd {
 
   };
 }  //end namespace
-
-#endif  // USE_CONDDB
 
 #endif // DBCondHandler_h

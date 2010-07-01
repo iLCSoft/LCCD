@@ -1,4 +1,3 @@
-#ifdef USE_CONDDB
 
 #include "lccd/DBCondHandler.hh"
 #include "lccd/DBInterface.hh"
@@ -16,6 +15,8 @@ using namespace lcio ;
 namespace lccd {
 
 
+
+#ifdef USE_CONDDB
 
   DBCondHandler::DBCondHandler(const std::string& dbInit,  const std::string& folder,
 			       const std::string& name,  const std::string& tag  ) :
@@ -138,6 +139,23 @@ namespace lccd {
     }
   }
   
-}
+
+
+
+#else // not linked with CondDBMysql ========================================================================
+
+  DBCondHandler::DBCondHandler(const std::string& dbInit,  const std::string& folder,
+			       const std::string& name,  const std::string& tag  ) {
+
+    throw lcio::Exception("DBCondHandler: cannot instantiate - not linked with CondDBMysql ...." ) ; 
+  }
+
+  DBCondHandler::~DBCondHandler() {}
+  void DBCondHandler::registerDefaultCollection( lcio::LCCollection* col){}
+
+  void DBCondHandler::update( LCCDTimeStamp timeStamp )  {}
+
 
 #endif // USE_CONDDB
+
+}
