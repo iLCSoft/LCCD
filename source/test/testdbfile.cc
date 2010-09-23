@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 
 // LCIO headers
 #include "lcio.h"
