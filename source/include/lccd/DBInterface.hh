@@ -243,6 +243,13 @@ namespace lccd {
     void tagFolder( const std::string& tagName, const std::string& description="", std::string usingTagName = "");
 
 
+    /** Checks if the folder given in the constructor or one of its sub folders is already tagged
+     *  with the tag given in tagName. Result is "true" if the tag was already applied to the folder
+     *  or a sub folder.
+     */
+    bool folderBranchContainsTag ( const std::string& tagName ) ;
+  
+
     /** Creates an LCIO file with the all conditions data in the folder for the given tag.
      *  The collections are sorted w.r.t. their validity time intervall and attached to 
      *  consecutive events. The run header holds a map of validity time intervalls to events.

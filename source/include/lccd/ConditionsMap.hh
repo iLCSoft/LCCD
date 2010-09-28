@@ -2,6 +2,8 @@
 #define ConditionsMap_h
 
 #include "lcio.h"
+#include "lccd.h"
+
 #include "EVENT/LCCollection.h"
 #include "Exceptions.h"
 
@@ -62,7 +64,7 @@ namespace lccd {
       if( it == _map.end() ){
 	std::stringstream err ;
 	err << "ConditionsMap::find: no entry for key: " << key ;
-	throw lcio::Exception( err.str() ) ;
+	throw lccd::DataNotAvailableException( err.str() ) ;
       }
       else
 	return it->second ;

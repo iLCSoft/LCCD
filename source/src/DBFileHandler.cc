@@ -62,7 +62,7 @@ namespace lccd {
     } else {
       std::stringstream mess ;
       mess << "DBFileHandler::registerDefaultCollection Default collection already set for CondHandler: "  << this->name() << "  " << _defaultCollection << std::ends ;
-      throw lcio::Exception( mess.str() ) ; 
+      throw lccd::LCCDException( mess.str() ) ; 
     }
   }
 
@@ -113,7 +113,7 @@ namespace lccd {
 	else {
 	  std::stringstream mess ;
 	  mess << "DBFileHandler::update: No default collection set for Conditions Hander:" <<  this->name() << std::ends ;
-	  throw lcio::Exception( mess.str() ) ;
+	  throw lccd::LCCDException( mess.str() ) ;
 	}
       }
       
@@ -148,7 +148,7 @@ namespace lccd {
     rHdr->parameters().getStringVals( "DBTill" , tillVec ) ;
 
     if( sinceVec.size() != tillVec.size()   || sinceVec.size() == 0 ) 
-      throw Exception(" Wrong format of validity time intervall"
+      throw lccd::LCCDException(" Wrong format of validity time intervall"
 		      " specification in DBSince and DBTill " ) ;
     
 
@@ -188,7 +188,7 @@ namespace lccd {
       err << "DBFileHandler::findEventNumber: no conditions data in file for time stamp: " 
 	  << ts.getDateString() << " (" << timestamp << ") in file " << _fileName;
 
-      throw Exception( err.str() ) ;
+      throw lccd::DataNotAvailableException( err.str() ) ;
     }
 
     return evtNum ;

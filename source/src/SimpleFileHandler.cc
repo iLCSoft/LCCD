@@ -38,7 +38,7 @@ namespace lccd {
 
     std::stringstream mess ;
     mess << "SimpleFileHandler::registerDefaultCollection is not implemented for SimpleFileCondHandler. Name of handler: "  << this->name() << std::ends ;
-    throw lcio::Exception( mess.str() ) ; 
+    throw lccd::MemberNotImplementedException( mess.str() ) ; 
     
   }
 
@@ -47,7 +47,7 @@ namespace lccd {
 
     std::stringstream mess ;
     mess << "SimpleFileHandler::defaultCollection is not implemented for SimpleFileCondHandler. Name of handler: " <<  this->name() << std::ends ;
-    throw lcio::Exception( mess.str() ) ; 
+    throw lccd::MemberNotImplementedException( mess.str() ) ; 
     
   }
 
@@ -56,7 +56,7 @@ namespace lccd {
 
     std::stringstream mess ;
     mess << "SimpleFileHandler::lastValidCollection is not implemented for SimpleFileCondHandler. Name of handler: " <<  this->name() << std::ends ;
-    throw lcio::Exception( mess.str() ) ; 
+    throw lccd::MemberNotImplementedException( mess.str() ) ; 
     
   }
 
@@ -80,7 +80,7 @@ namespace lccd {
       LCEvent* evt = lcReader->readNextEvent() ;
       
       if( evt == 0 ) 
-	throw Exception("SimpleFileHandler::update: No event found in file: "+_fileName) ;
+	throw lccd::DataNotAvailableException("SimpleFileHandler::update: No event found in file: "+_fileName) ;
       
       if( _col != 0 ) 
 	delete _col ;

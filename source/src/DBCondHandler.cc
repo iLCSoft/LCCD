@@ -49,7 +49,7 @@ namespace lccd {
     } else {
       std::stringstream mess ;
       mess << "DBCondHandler::registerDefaultCollection Default collection already set for CondHandler: "  << this->name() << "  " << _defaultCollection << std::ends ;
-      throw lcio::Exception( mess.str() ) ; 
+      throw lccd::LCCDException( mess.str() ) ; 
     }
   }
 
@@ -117,11 +117,8 @@ namespace lccd {
 	  //std::cout << "DBCondHandler:: default collection being used for Conditions Hander: " << this->name() << std::endl;
 	  col = _defaultCollection; }
 	else {
-	  throw lcio::Exception( mess.str() ) ;
+	  throw lccd::LCCDException( mess.str() ) ;
 	}
-	
-	//	throw lcio::Exception( mess.str() ) ;
-	// std::cout << mess << std::endl;
 	
       }
 
@@ -147,7 +144,7 @@ namespace lccd {
   DBCondHandler::DBCondHandler(const std::string& dbInit,  const std::string& folder,
 			       const std::string& name,  const std::string& tag  ) {
 
-    throw lcio::Exception("DBCondHandler: cannot instantiate - not linked with CondDBMysql ...." ) ; 
+    throw lccd::DatabaseException("DBCondHandler: cannot instantiate - not linked with CondDBMysql ...." ) ; 
   }
 
   DBCondHandler::~DBCondHandler() {}

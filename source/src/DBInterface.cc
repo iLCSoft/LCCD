@@ -37,7 +37,7 @@
 #include <sstream>
 
 namespace lccd {
-
+  
   /** Helper class to sort collections of conditions data w.r.t. to their validity time intervall */
   struct less_wrt_validity : public binary_function<lcio::LCCollection*,lcio::LCCollection*,bool>{
     bool operator() (lcio::LCCollection*  c0, lcio::LCCollection* c1) const {
@@ -134,13 +134,13 @@ namespace lccd {
 				     const std::string& description ){
 
     if( ! _update ) 
-      throw lcio::Exception(" DBInterface::storeCollection: not in update mode !" ) ;
+      throw lccd::ReadOnlyException(" DBInterface::storeCollection: not in update mode !" ) ;
 
     lccd::VCollectionStreamer* colStr = 
       lccd::StreamerMgr::instance()->getStreamer( col->getTypeName() )  ;
     
     if( colStr == 0  )
-      throw lcio::Exception( " DBInterface::storeCollection: no streamer found for collection of type " 
+      throw lccd::LCCDException( " DBInterface::storeCollection: no streamer found for collection of type " 
 			     + col->getTypeName() ) ;
     
     // create auto pointer to prevent memory leaks if exceptions are thrown
@@ -174,7 +174,7 @@ namespace lccd {
       // this exception seems to never get thrown - 
       // instead it is 'caught' beforehand by some CondDBMySQL code ...
       // FIXME: should understand this
-      throw lcio::Exception("DBInterface::storeCollection" +  std::string(e.getMessage()) ) ;
+      throw lccd::DatabaseException("DBInterface::storeCollection" +  std::string(e.getMessage()) ) ;
     }
     
   }
@@ -456,7 +456,7 @@ namespace lccd {
       lccd::StreamerMgr::instance()->getStreamer( colType )  ;
     
     if( colStr == 0  ){
-      throw lcio::Exception( " DBInterface::findCollection: no streamer found for collection of type " 
+      throw lccd::LCCDException( " DBInterface::findCollection: no streamer found for collection of type " 
  			     + colType ) ;
     }
     
@@ -806,14 +806,31 @@ namespace lccd {
 
 
   void DBInterface::tagFolder( const std::string& tag,  const std::string& description, std::string usingTagName) {
-   
+    
     if( ! _update ) 
-      throw lcio::Exception(" DBInterface::tagFolder: not in update mode !" ) ;
-
-    condTagMgr()->createCondDBTag( tag, description ) ;
-    condTagMgr()->tag( _folder , tag , usingTagName ) ;
-
+      throw lccd::ReadOnlyException(" DBInterface::tagFolder: not in update mode !" ) ;
+    try 
+      {
+	condTagMgr()->createCondDBTag( tag, description ) ;
+      }
+    catch ( CondDBException condbexc )
+      {
+	std::cout << " WARNING: DBInterface::tagFolder: "<<condbexc.getMessage()<< " CondDB error code: "<<condbexc.getErrorCode()<<std::endl;
+      }
+    if ( folderBranchContainsTag(tag) ) 
+      {
+	std::stringstream message;
+	message<<"Tag \""<<tag<<"\" has been already applied to \""<<_folder<<"\" and/or one of its sub folders. No Action Performed.";
+	throw lccd::InconsistencyException( message.str() ) ;
+      } else {
+      condTagMgr()->tag( _folder , tag , usingTagName ) ;
+    }
   }
-
+  
+  bool DBInterface::folderBranchContainsTag( const std::string& tagName ) {
+    return ( condTagMgr()->isTagged( _folder , tagName ) );
+  }
+  
 }
+
 #endif

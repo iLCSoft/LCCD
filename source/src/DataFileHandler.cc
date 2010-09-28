@@ -27,7 +27,7 @@ namespace lccd {
     
     std::stringstream mess ;
     mess << "DataFileHandler::registerDefaultCollection is not implemented for DataFileCondHandler. Name of handler: "  << this->name() << std::ends ;
-    throw lcio::Exception( mess.str() ) ; 
+    throw lccd::MemberNotImplementedException( mess.str() ) ; 
     
   }
   
@@ -35,7 +35,7 @@ namespace lccd {
     
     std::stringstream mess ;
     mess << "DataFileHandler::defaultCollection is not implemented for DataFileCondHandler. Name of handler: " <<  this->name() << std::ends ;
-    throw lcio::Exception( mess.str() ) ; 
+    throw lccd::MemberNotImplementedException( mess.str() ) ; 
     
   }
   
@@ -43,7 +43,7 @@ namespace lccd {
     
     std::stringstream mess ;
     mess << "DataFileHandler::lastValidCollection is not implemented for DataFileCondHandler. Name of handler: " <<  this->name() << std::ends ;
-    throw lcio::Exception( mess.str() ) ; 
+    throw lccd::MemberNotImplementedException( mess.str() ) ; 
     
   }
   

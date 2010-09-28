@@ -26,7 +26,7 @@ namespace lccd{
       it->second->registerChangeListener( cl ) ;
     }      
     else
-      throw lcio::Exception(" LCConditionsMgr::registerChangeListener: no handler "
+      throw lccd::LCCDException(" LCConditionsMgr::registerChangeListener: no handler "
 			    " for name: " + name ) ; 
   }
   
@@ -89,7 +89,7 @@ namespace lccd{
 
     if( it != _map.end() ) {
 
-      throw lcio::Exception(" LCConditionsMgr::registerHandler: a handler already exists"
+      throw lccd::LCCDException(" LCConditionsMgr::registerHandler: a handler already exists"
 			    " for name " + name ) ; 
     }
 

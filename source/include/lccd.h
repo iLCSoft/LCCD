@@ -1,6 +1,7 @@
 #ifndef lccd_h
 #define lccd_h 1
 
+#include "lccd_exceptions.h"
 #include "lcio.h"
 
 #include <bitset>
