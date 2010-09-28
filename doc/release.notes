@@ -2,6 +2,13 @@
  LCCD release notes
 ====================
 
+ -----------
+| v01-01    |
+ -----------
+
+        Improvements from R. Diener. Needs update of CondDBMySQL.
+        - DBInterface::tagFolder now handles folders previously tagged of whose subfolders are tagged with the tag supplied to tagFolder. 
+        - Replaced lcio exceptions with new LCCD exceptions. 
 
  -----------
 | v01-00    |
