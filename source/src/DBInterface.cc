@@ -828,7 +828,10 @@ namespace lccd {
   }
   
   bool DBInterface::folderBranchContainsTag( const std::string& tagName ) {
-    return ( condTagMgr()->isTagged( _folder , tagName ) );
+    //return ( condTagMgr()->isTagged( _folder , tagName ) );
+    //SJA:TEMP: return false for now until CondDBMYSQL is updated
+    //          this means it will just act as before ...
+    return false;
   }
   
 }
