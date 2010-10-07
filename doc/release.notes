@@ -11,6 +11,8 @@
         - Replaced lcio exceptions with new LCCD exceptions. 
         - Exception throw when try to create a SimpleFile for a timestamp where no collection present 
 
+      -  Note: due to changes in DBCondHandler, v01-01 is only compatible with CondDBMySQL version CondDBMySQL_ILC-0-9  
+
  -----------
 | v01-00    |
  -----------

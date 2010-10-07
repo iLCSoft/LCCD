@@ -22,7 +22,7 @@ INCLUDE(CTest)
 
 # project version
 SET( LCCD_MAJOR_VERSION 1 )
-SET( LCCD_MINOR_VERSION 0 )
+SET( LCCD_MINOR_VERSION 1 )
 SET( LCCD_PATCH_LEVEL 0 )
 
 # project options
