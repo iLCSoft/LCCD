@@ -46,12 +46,6 @@ namespace lccd{
       
       it->second->updateEvent( evt ) ;
 
-//      try {
-//	it->second->updateEvent( evt ) ;
-//      }
-//      catch(lcio::Exception e ){
-//	std::cout << "LCConditionsMgr::updateEvent: an exception occured: " << e.what() << std::endl ;
-//      }
     }
   }
   
@@ -61,12 +55,6 @@ namespace lccd{
       
       it->second->update( timestamp ) ;
 
-//      try {
-//      it->second->update( timestamp ) ;
-//      }
-//      catch(lcio::Exception e ){
-//	std::cout << " LCConditionsMgr::update: an exception occured: " << e.what() << std::endl ;
-//      }
     }
 
   }

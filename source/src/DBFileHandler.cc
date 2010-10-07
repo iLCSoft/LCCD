@@ -92,23 +92,23 @@ namespace lccd {
 
 	evtNum = findEventNumber( timestamp ) ;
 	LCEvent* evt = _lcReader->readEvent( 0 , evtNum ) ;
-	
+	//	std::cout << "DBFileHandler::update: evtNum found " << evtNum << std::endl ;	
 	col = evt->takeCollection( _inputCollection ) ;
 	// set current validity range
 	_validSince =  _valVec[ evtNum ].first  ;
 	_validTill = _valVec[ evtNum ].second  ;    
-	//std::cout << "DBFileHandler::update: setting validity range:" << _validSince << " " << _validTill << std::endl ;		
+	//	std::cout << "DBFileHandler::update: setting validity range:" << _validSince << " " << _validTill << std::endl ;		
 	
-      } catch(Exception) {
+      } catch(lccd::DataNotAvailableException) {
 	
-	//std::cout << "DBFileHandler::update: evtNum not found" << std::endl ;	
+	//	std::cout << "DBFileHandler::update: evtNum not found" << std::endl ;	
 	
 	if (_defaultCollection) {
 	  col = _defaultCollection; 
 	  // set the valid's here to only this timestamp, this ensures that a new search will be made for any other time stamp
 	  _validSince = timestamp;
 	  _validTill = timestamp + 1LL ; // + 1 nsec
-	  //std::cout << "DBFileHandler:: default collection being used for Conditions Hander: " << this->name() << std::endl;
+	  std::cout << "DBFileHandler:: No Collection available for timestamp "<< timestamp << " : default collection being sent for Conditions Hander: " << this->name() << std::endl;
 	} 
 	else {
 	  std::stringstream mess ;

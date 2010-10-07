@@ -54,7 +54,6 @@ namespace lccd {
   }
 
  
-  //  void DBCondHandler::update( LCCDTimeStamp timeStamp ) throw (lcio::Exception) {
   void DBCondHandler::update( LCCDTimeStamp timeStamp )  {
 
     if( timeStamp < _validSince  || timeStamp >= _validTill ) { 

@@ -11,9 +11,6 @@ namespace lccd {
 
   void ConditionsHandlerBase::updateEvent( LCEvent* evt ) {
     
-    // if no collection is found then update will throw an lcio exception
-    // which is then caught by the LCConditionsManager
-    // this ensures that only a valid collection is added to the event
     update( LCCDTimeStamp( evt->getTimeStamp() ) ) ;
     
     evt->addCollection( currentCollection() , name()  ) ;

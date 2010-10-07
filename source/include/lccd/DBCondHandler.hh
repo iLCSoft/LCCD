@@ -25,7 +25,7 @@ namespace lccd {
    *  The Default Collection should be set via the method registerDefaultCollection( lcio::LCCollection* col)
    *  In the case of no collection found and no Default Collection set an exception will be raised. Only one 
    *  Default Collection may be registered per Conditions Handler. Trying to register additional Default Collections 
-   *  will cause an lcio::Exception( std::string ) to be thrown. 
+   *  will cause an lccd::Exception( std::string ) to be thrown. 
    *
    *  The default collection may be accessed via the method defaultCollection(), and if so desired this method 
    *  should be used by the IConditionsChangeListener to verify if this is the collection provided via the 
@@ -63,8 +63,6 @@ namespace lccd {
      *  Notifies all registered listeners if conditions have changed.
      */
     virtual void update( LCCDTimeStamp timeStamp ) ;
-//     virtual void update( LCCDTimeStamp timeStamp )  throw (lcio::Exception)  ;
-
 
     /** Register a pointer to a default collection which will be passed to the
      *  IConditionsChangeListener if no data can be found for a given time stamp

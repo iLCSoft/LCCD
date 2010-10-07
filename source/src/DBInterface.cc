@@ -123,8 +123,9 @@ namespace lccd {
 	
   	_condDBmgr->commit();
       }
-//      else
+//      else {
 //        std::cout << "CondDBFolder already exists...proceding!" << std::endl;
+//      }
     }    
   }
 
@@ -716,6 +717,24 @@ namespace lccd {
 
 
   void DBInterface::createSimpleFile( LCCDTimeStamp timeStamp, const std::string& tag, bool allLayers ) {
+
+    lcio::LCCollection* col = findCollection( timeStamp, tag ) ; 
+
+    if( col == NULL ) 
+      {
+	std::stringstream mess;
+	mess << std::endl 
+	     << std::endl 
+	     << " DBInterface::createSimpleFile: Cannot create simple file. " 
+	     << std::endl 
+	     << " No collection present in DB for"
+	     << " time: " << timeStamp
+	     << " and tag: " <<  tag
+	     << std::endl; 
+	throw lccd::DataNotAvailableException( mess.str() ) ;
+	
+      }
+    
     
     lcio::LCWriter* wrt = lcio::LCFactory::getInstance()->createLCWriter() ;
     
@@ -770,7 +789,6 @@ namespace lccd {
 
     lcio::LCEventImpl* evt = new lcio::LCEventImpl ;
 
-    lcio::LCCollection* col = findCollection( timeStamp, tag ) ; 
 
     evt->addCollection(  col , colName  ) ;  
 
@@ -815,12 +833,12 @@ namespace lccd {
       }
     catch ( CondDBException condbexc )
       {
-	std::cout << " WARNING: DBInterface::tagFolder: "<<condbexc.getMessage()<< " CondDB error code: "<<condbexc.getErrorCode()<<std::endl;
+	//	std::cout << " WARNING: DBInterface::tagFolder: "<<condbexc.getMessage() << std::endl;
       }
     if ( folderBranchContainsTag(tag) ) 
       {
 	std::stringstream message;
-	message<<"Tag \""<<tag<<"\" has been already applied to \""<<_folder<<"\" and/or one of its sub folders. No Action Performed.";
+	message<<" DBInterface::tagFolder: Tag \""<<tag<<"\" has been already applied to \""<<_folder<<"\" and/or one of its sub folders. No Action Performed.";
 	throw lccd::InconsistencyException( message.str() ) ;
       } else {
       condTagMgr()->tag( _folder , tag , usingTagName ) ;
@@ -828,10 +846,9 @@ namespace lccd {
   }
   
   bool DBInterface::folderBranchContainsTag( const std::string& tagName ) {
-    //return ( condTagMgr()->isTagged( _folder , tagName ) );
-    //SJA:TEMP: return false for now until CondDBMYSQL is updated
-    //          this means it will just act as before ...
-    return false;
+    
+    return ( condTagMgr()->isTagged( _folder , tagName ) );
+
   }
   
 }
