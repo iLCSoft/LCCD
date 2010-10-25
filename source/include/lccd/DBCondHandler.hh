@@ -61,6 +61,11 @@ namespace lccd {
     /** Retrieves the conditions data from the data base if time stamp 
      *  exceeds current validity time range.<br>
      *  Notifies all registered listeners if conditions have changed.
+     *  Note in the case that no valid collection is available for timeStamp,
+     *  the default collection will be sent if registered, otherwise an 
+     *  exception will be thrown which can not be caught in user code.
+     *  If sent the default collection will have the following attributes attached
+     *  as collection parameters: DBSINCE, DBTILL and DBQUERYTIME
      */
     virtual void update( LCCDTimeStamp timeStamp ) ;
 
