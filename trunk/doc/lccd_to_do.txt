@@ -1,0 +1,17 @@
+############################################################
+#
+#  TO DO list  for LCCD
+#
+#  F.Gaede
+############################################################
+
+
+ from v00-01:
+ ------------
+
+ * DBInsertionTime is local time (from SimpleTime in CondDB) all other times
+   are UTC/GMT
+
+ * calfilefromdb crashes when timestamp on boundary between validity intervall
+   -> probably a bug in ConditionsDBMySQL: validity intervalls are
+      since <= timestamp < till !??

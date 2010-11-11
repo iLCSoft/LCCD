@@ -1,0 +1,196 @@
+######################################################
+#
+#  LCCD - Linear Collider Conditions Data framework
+#
+#  F.Gaede, DESY
+#  31-01-2005
+#
+######################################################
+
+--------------------------------------------------------------------
+
+Contents:
+
+ 1. Build instructions
+ 2. Start test database
+ 3. Run examples
+
+
+
+--------------------------------------------------------------------
+1. Build instructions
+--------------------------------------------------------------------
+
+
+ 1st: edit the file BuildSetup.cmake according to your
+      system setup.
+ 
+ 2nd: type the following commands:
+ 
+    mkdir build
+
+    cd build
+
+    cmake -C ../BuildSetup.cmake ..
+
+    # or, building all tests against an installed ilcsoft version :
+
+    cmake -C ../BuildSetup.cmake   -C ~/ilcsoft/v01-06/ILCSoft.cmake -D BUILD_CONDDB_TESTS=ON -D BUILD_LCCD_TESTS=ON ..
+
+    make install
+
+
+ For more information on CMake for the ILCSoftware check:
+ http://ilcsoft.desy.de/portal/general_documentation/index_eng.html
+
+ CMake's official website:
+ http://www.cmake.org
+
+
+--------------------------------------------------------------------
+ 2. Start test database
+--------------------------------------------------------------------
+
+
+0) select the mysql version you want to use, e.g.
+
+   export PATH=/opt/products/mysql/5.0.26/bin:$PATH
+
+
+1) create a data directory
+
+  mkdir /tmp/mysqlDB
+
+
+2) init the database
+
+  mysql_install_db --datadir=/tmp/mysqlDB
+
+
+3) start the database
+
+
+mysqld_safe --datadir=/tmp/mysqlDB &
+
+or:
+mysqld_safe --datadir=/tmp/mysqlDB --socket=/tmp/mysql.sock --log-error=mysql.log --pid-file=mysql.pid  &
+
+
+[ 3b) you can stop the database  - no need to do it now ]
+     mysqladmin -u root -p shutdown  
+
+
+4) set root password (and remember it)
+
+ mysqladmin -u root password <mypassword>
+
+
+
+5) create users for LCCD [NOTE: THIS IS FOR TESTING ONLY - BE CAREFUL WITH USER RIGHTS/PRIVILEGES !!!!!]
+
+   mysql -u root -p 
+
+   grant all privileges on *.* to calvin@localhost identified by 'hobbes' with grant option ;
+   grant all privileges on *.* to calvin@"%" identified by 'hobbes' with grant option ; 
+   quit
+
+
+--------------------------------------------------------------------
+ 3. Run examples
+--------------------------------------------------------------------
+ 
+
+
+If you built against CondDBMysql and built the tests, you can run them as follows:
+
+
+--------------------------------------------------------------------
+
+  cd ../test
+
+ ./createcalfile hcal.slcio hcal
+
+ ./readcalfile hcal.slcio hcal
+
+
+ ./calfiletodb hcal.slcio hcal myhcal 100 200
+ ./calfiletodb hcal.slcio hcal myhcal 200 300
+ ./calfiletodb hcal.slcio hcal myhcal 300 400
+ ./calfiletodb hcal.slcio hcal myhcal 400 500
+
+ ./tagdbfolder /lccd/myhcal mytag01 "just a test tag"
+
+ 
+ ./calfiletodb hcal.slcio hcal myhcal 0 500
+
+
+ ./calfilefromdb myhcal 120 fromdb.slcio mytag01
+
+ ./calfilefromdb myhcal 20 fromdb.slcio 
+
+
+
+########################################################################################3=
+It might be instructive to read the code in parallel and inspect the MySQL database, e.g. 
+
+  mysql -u calvin -p
+
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 16 to server version: 5.0.26
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql> show databases ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| lccd_test          |
+| mysql              |
+| test               |
++--------------------+
+4 rows in set (0.00 sec)
+
+
+mysql> use lccd_test
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+
+
+mysql> show tables ;
++-----------------------+
+| Tables_in_lccd_test   |
++-----------------------+
+| data_tbl_3_1          |
+| databases_tbl         |
+| folders_tbl           |
+| object_key_tbl_3      |
+| object_key_tbl_head_3 |
+| partition_tbl_3       |
+| tag2folder_tbl        |
+| tag2obj_tbl_3         |
+| tags_tbl              |
++-----------------------+
+9 rows in set (0.01 sec)
+
+
+mysql> select * from tags_tbl ;
++--------+---------------------+---------+---------+------------------------+
+| tag_id | insert_t            | tname   | tattr   | tdesc                  |
++--------+---------------------+---------+---------+------------------------+
+|      1 | 2009-10-07 15:16:50 | HEAD    | NO ATTR | Latest objects version |
+|      2 | 2009-10-07 15:17:14 | mytag01 | NULL    | just a test tag        |
++--------+---------------------+---------+---------+------------------------+
+2 rows in set (0.00 sec)
+
+
+...
+
+
+
+
+
+
