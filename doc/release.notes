@@ -10,7 +10,7 @@
         - DBInterface::tagFolder now handles folders previously tagged of whose subfolders are tagged with the tag supplied to tagFolder. 
         - Replaced lcio exceptions with new LCCD exceptions. 
         - Exception throw when try to create a SimpleFile for a timestamp where no collection present 
-
+        - Added DBSINCE, DBTILL and DBQUERYTIME for default collections
       -  Note: due to changes in DBCondHandler, v01-01 is only compatible with CondDBMySQL version CondDBMySQL_ILC-0-9-1
 
  -----------
