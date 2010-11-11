@@ -90,7 +90,11 @@ namespace lccd {
      *  <li>and there is an event in the file that has a corresponding validity range as defined
      *      by the string vector parameters DBSince and DBTill in the run header</li>
      *  </lu>
-     *  
+     *  Note in the case that no valid collection is available for timeStamp,
+     *  the default collection will be sent if registered, otherwise an 
+     *  exception will be thrown which can not be caught in user code.
+     *  If sent the default collection will have the following attributes attached
+     *  as collection parameters: DBSINCE, DBTILL and DBQUERYTIME
      */
     virtual void update( LCCDTimeStamp timestamp ) ;
     

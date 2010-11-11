@@ -128,10 +128,39 @@ namespace lccd {
       
       _col = col;
 
-      if( _col!=_defaultCollection ) _col->parameters().setValue("CollectionName", this->name() ) ;
+      if( _col!=_defaultCollection ) 
+	{
+	  _col->parameters().setValue("CollectionName", this->name() ) ;
+	}
+      else 
+	{
 
+	  lcio::StringVec strVec ;
+	  
+	  std::stringstream sinceStr ;
+	  sinceStr << _validSince ;
+	  strVec.push_back(  sinceStr.str() ) ;
+	  strVec.push_back( lcio::LCTime( _validSince ).getDateString() ) ;
+	  _col->parameters().setValues( lccd::DBSINCE ,  strVec ) ;
+	  strVec.clear() ;
+	  
+	  std::stringstream tillStr ;
+	  tillStr << _validTill ;
+	  strVec.push_back(  tillStr.str() ) ;
+	  strVec.push_back( lcio::LCTime( _validTill ).getDateString() ) ;
+	  _col->parameters().setValues( lccd::DBTILL ,  strVec ) ;
+	  strVec.clear() ;
+	  	  
+	  std::stringstream nowStr ;
+	  lcio::LCTime now ;
+	  nowStr << now.timeStamp() ;
+	  strVec.push_back(  nowStr.str() ) ;
+	  strVec.push_back( now.getDateString() ) ;
+	  _col->parameters().setValues( lccd::DBQUERYTIME ,  strVec ) ;
+	  strVec.clear() ;
+
+	}      
       notifyListeners() ;
-      
     }
   }
   
