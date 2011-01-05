@@ -3,109 +3,45 @@
 # @author Jan Engels, DESY
 #################################
 
-####################################################################################################
-### INCLUDES
-####################################################################################################
 
-# include directories
+# omit warning about preprocessor definitions being escaped
+IF(COMMAND CMAKE_POLICY)
+    CMAKE_POLICY(SET CMP0005 OLD)
+ENDIF()
+
+IF( CondDBMySQL_FOUND )
+    INCLUDE_DIRECTORIES( ${CondDBMySQL_INCLUDE_DIRS} )
+    LINK_LIBRARIES( ${CondDBMySQL_LIBRARIES} )
+    ADD_DEFINITIONS( ${CondDBMySQL_DEFINITIONS} )
+ENDIF()
+
+# specific LCCD variable
+IF( NOT LCCD_DB_INIT )
+    SET( LCCD_DB_INIT "localhost:lccd_test:calvin:hobbes" )
+ENDIF()
+
+#----- need long long for int64 for now ------
+#FIXME: should establish wether we are on a 32bit or 64 bit machine ....
+ADD_DEFINITIONS( "-Wno-long-long" )
+ADD_DEFINITIONS( "-DLCCD_DB_INIT_DEFAULT=\\\"${LCCD_DB_INIT}\\\"" )
+
+
+INCLUDE_DIRECTORIES( ${LCIO_INCLUDE_DIRS} )
 INCLUDE_DIRECTORIES( BEFORE "${PROJECT_SOURCE_DIR}/source/include" )
-
-# install include files
-INSTALL( DIRECTORY "${PROJECT_SOURCE_DIR}/source/include" DESTINATION .
-        PATTERN "*~" EXCLUDE
-        PATTERN "*CVS*" EXCLUDE
-        PATTERN "*/.svn*" EXCLUDE
-        )
+INSTALL_DIRECTORY( ./include DESTINATION . )
 
 
-####################################################################################################
-### SOURCES
-####################################################################################################
-
-# get list of all source files
-AUX_SOURCE_DIRECTORY( src lib_srcs )
-
-SET_SOURCE_FILES_PROPERTIES(
-  ${lib_srcs} PROPERTIES
-  COMPILE_FLAGS "-Wall -ansi -pedantic"
+# add library
+SET( libname lccd )
+AUX_SOURCE_DIRECTORY( ./src library_sources )
+SET_SOURCE_FILES_PROPERTIES( ${library_sources}
+    PROPERTIES COMPILE_FLAGS "-Wall -ansi -pedantic"
 )
-
-####################################################################################################
-### LIBRARY
-####################################################################################################
-
-# create library
-ADD_LIBRARY( lib_${PROJECT_NAME} ${lib_srcs} )
-
-# create symbolic lib target for calling target lib_XXX
-ADD_CUSTOM_TARGET( lib DEPENDS lib_${PROJECT_NAME} )
-
-# change lib_target properties
-SET_TARGET_PROPERTIES( lib_${PROJECT_NAME} PROPERTIES
-    # create *nix style library versions + symbolic links
-    VERSION ${${PROJECT_NAME}_VERSION}
-    SOVERSION ${${PROJECT_NAME}_SOVERSION}
-    # allow creating static and shared libs without conflicts
-    CLEAN_DIRECT_OUTPUT 1
-    # avoid conflicts between library and binary target names
-    OUTPUT_NAME lccd )
-
-# install library
-INSTALL( TARGETS lib_${PROJECT_NAME} DESTINATION lib PERMISSIONS
-        OWNER_READ OWNER_WRITE OWNER_EXECUTE
-        GROUP_READ GROUP_EXECUTE
-        WORLD_READ WORLD_EXECUTE )
+ADD_SHARED_LIBRARY( ${libname} ${library_sources} )
+INSTALL_SHARED_LIBRARY( ${libname} DESTINATION lib )
+TARGET_LINK_LIBRARIES( ${libname} ${LCIO_LIBRARIES} )
 
 
-####################################################################################################
-### BINS
-####################################################################################################
-
-# LCCD tests
-SET( lccd_tests
-    createcalfile
-    readcalfile
-    readdatafile
-    testdbfile
-)
-
-# CondDB tests
-SET( conddb_tests
-    calfilefromdb
-    calfiletodb
-    createdbfile
-    tagdbfolder
-    multiblefolders
-)
-
-IF( BUILD_LCCD_TESTS )
-    LIST( APPEND test_bins ${lccd_tests} )
-ENDIF()
-IF( BUILD_CONDDB_TESTS )
-    LIST( APPEND test_bins ${conddb_tests} )
-ENDIF()
-
-
-IF( test_bins )
-    # create symbolic bin target for calling targets bin_XXX
-    ADD_CUSTOM_TARGET( bin )
-
-    # loop through list of binaries
-    FOREACH( bin ${test_bins} )
-        SET_SOURCE_FILES_PROPERTIES( test/${bin}.cc PROPERTIES
-            # FIXME -pedantic crashes with gcc 3.4.6
-          COMPILE_FLAGS "-Wall -ansi"
-        )
-        # create target for binary
-        ADD_EXECUTABLE( bin_${bin} test/${bin}.cc test/CalibrationConstant.cc )
-        # tell bin target to call this bin_XXX target
-        ADD_DEPENDENCIES( bin bin_${bin} )
-        # avoid conflicts between library and binary target names
-        SET_TARGET_PROPERTIES( bin_${bin} PROPERTIES OUTPUT_NAME ${bin} )
-        # link against project library and DLL lib
-        TARGET_LINK_LIBRARIES( bin_${bin} lib_${PROJECT_NAME} )
-        # install binary commando
-        INSTALL( TARGETS bin_${bin} DESTINATION test )
-    ENDFOREACH()
-ENDIF()
+# add tests
+ADD_SUBDIRECTORY( ./test )
 

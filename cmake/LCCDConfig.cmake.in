@@ -1,0 +1,87 @@
+##############################################################################
+# cmake configuration file for LCCD
+#
+# requires:
+#   MacroCheckPackageLibs.cmake for checking package libraries
+#
+# returns following variables:
+#
+#   LCCD_FOUND      : set to TRUE if LCCD found
+#       if FIND_PACKAGE called with REQUIRED and COMPONENTS arguments
+#       LCCD_FOUND is only set to TRUE if ALL components are also found
+#       if REQUIRED is NOT set components may or may not be available
+#
+#   LCCD_ROOT       : path to this LCCD installation
+#   LCCD_LIBRARIES  : list of LCCD libraries (NOT including COMPONENTS)
+#   LCCD_INCLUDE_DIRS  : list of paths to be used with INCLUDE_DIRECTORIES
+#   LCCD_LIBRARY_DIRS  : list of paths to be used with LINK_DIRECTORIES
+#   LCCD_COMPONENT_LIBRARIES      : list of LCCD component libraries
+#   LCCD_${COMPONENT}_FOUND       : set to TRUE or FALSE for each library
+#   LCCD_${COMPONENT}_LIBRARY     : path to individual libraries
+#   LCCD_${COMPONENT}_LIB_DEPENDS : individual library dependencies
+#
+# @author Jan Engels, Desy
+##############################################################################
+
+SET( LCCD_ROOT "@CMAKE_INSTALL_PREFIX@" )
+
+
+# ---------- include dirs -----------------------------------------------------
+# do not store find results in cache
+SET( LCCD_INCLUDE_DIRS LCCD_INCLUDE_DIRS-NOTFOUND )
+MARK_AS_ADVANCED( LCCD_INCLUDE_DIRS )
+
+FIND_PATH( LCCD_INCLUDE_DIRS
+	NAMES lccd.h
+	PATHS ${LCCD_ROOT}
+    PATH_SUFFIXES include source/include
+	NO_DEFAULT_PATH
+)
+
+
+
+# ---------- libraries --------------------------------------------------------
+INCLUDE( ${LCCD_ROOT}/cmake/MacroCheckPackageLibs.cmake ) # FIXME full path ?!
+
+# only standard libraries should be passed as arguments to CHECK_PACKAGE_LIBS
+# additional components are set by cmake in variable PKG_FIND_COMPONENTS
+# first argument should be the package name
+CHECK_PACKAGE_LIBS( LCCD lccd )
+
+
+
+
+# ---------- libraries dependencies -------------------------------------------
+# this sets LCCD_${COMPONENT}_LIB_DEPENDS variables
+INCLUDE( "${LCCD_ROOT}/lib/cmake/LCCDLibDeps.cmake" )
+ 
+
+
+
+# ---------- final checking ---------------------------------------------------
+INCLUDE( FindPackageHandleStandardArgs )
+# set LCCD_FOUND to TRUE if all listed variables are TRUE and not empty
+# LCCD_COMPONENT_VARIABLES will be set if FIND_PACKAGE is called with REQUIRED argument
+FIND_PACKAGE_HANDLE_STANDARD_ARGS( LCCD DEFAULT_MSG LCCD_ROOT LCCD_INCLUDE_DIRS LCCD_LIBRARIES ${LCCD_COMPONENT_VARIABLES} )
+
+
+
+# ---------- definitions ------------------------------------------------------
+# LCCD_DEFINITIONS should only include definitions absolutely necessary to compile
+# against LCCD (e.g. -Wno-long-long )
+IF( LCCD_FOUND )
+    SET( LCCD_DEFINITIONS "-DUSE_LCCD" ) # FIXME : USE_LCCD should not be defined HERE !!!
+    MARK_AS_ADVANCED( LCCD_DEFINITIONS )
+ENDIF( LCCD_FOUND )
+
+
+
+# ---------- bug fix for cmake versions < 2.8 ---------------------------------
+# LCCD_FIND_REQUIRED is not reset between FIND_PACKAGE calls, i.e. the following
+# code fails when component xxx is not available: (fixed in cmake 2.8)
+# FIND_PACKAGE( LCCD REQUIRED )
+# FIND_PACKAGE( LCCD COMPONENTS xxx QUIET )
+IF( "${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 2.8 )
+    SET( LCCD_FIND_REQUIRED )
+ENDIF()
+
