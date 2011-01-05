@@ -70,9 +70,6 @@ MESSAGE( STATUS "BUILD_CONDDB_TESTS = ${BUILD_CONDDB_TESTS}" )
 MESSAGE( STATUS "LCCD_DB_INIT = ${LCCD_DB_INIT}" )
 MESSAGE( STATUS )
 
-# write LCCD_DB_INIT to cache
-SET( LCCD_DB_INIT "${LCCD_DB_INIT}" CACHE STRING "DB initialization" FORCE )
-
 # export library dependencies (keep this as the last line in the file)
 EXPORT_LIBRARY_DEPENDENCIES( "LCCDLibDeps.cmake" )
 INSTALL( FILES "${PROJECT_BINARY_DIR}/LCCDLibDeps.cmake" DESTINATION lib/cmake )

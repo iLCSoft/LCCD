@@ -19,6 +19,9 @@ ENDIF()
 IF( NOT LCCD_DB_INIT )
     SET( LCCD_DB_INIT "localhost:lccd_test:calvin:hobbes" )
 ENDIF()
+# write LCCD_DB_INIT to cache
+SET( LCCD_DB_INIT "${LCCD_DB_INIT}" CACHE STRING "DB initialization" FORCE )
+
 
 #----- need long long for int64 for now ------
 #FIXME: should establish wether we are on a 32bit or 64 bit machine ....
