@@ -18,10 +18,15 @@ SET( LCCD_VERSION_PATCH 0 )
 
 ### SETTINGS ################################################################
 
-# ilcsoft_default_settings.cmake needs to be in CMAKE_MODULE_PATH
+# try to load ilcsoft CMakeModules from CMAKE_MODULE_PATH
+INCLUDE( ilcsoft_cmake_modules )
+IF( NOT ILCSOFT_CMAKE_MODULES_FOUND )
+    MESSAGE( FATAL_ERROR "Could not find ilcsoft CMakeModules in CMAKE_MODULE_PATH" )
+ENDIF( NOT ILCSOFT_CMAKE_MODULES_FOUND )
+ILCSOFT_CMAKE_MODULES_MINIMUM_REQUIRED( 0.10.1.1 )
 INCLUDE( ilcsoft_default_settings )
 
-
+OPTION( BUILD_LCCD_TESTS "Set to ON to build LCCD tests" OFF )
 
 ### DEPENDENCIES ############################################################
 
@@ -78,8 +83,8 @@ ADD_SUBDIRECTORY( ./source )
 # display some variables and write them to cache
 DISPLAY_STD_VARIABLES()
 
+MESSAGE( STATUS "LCCD_CONDDB = ${LCCD_CONDDB}" )
 MESSAGE( STATUS "BUILD_LCCD_TESTS = ${BUILD_LCCD_TESTS}" )
-MESSAGE( STATUS "BUILD_CONDDB_TESTS = ${BUILD_CONDDB_TESTS}" )
 MESSAGE( STATUS "LCCD_DB_INIT = ${LCCD_DB_INIT}" )
 MESSAGE( STATUS )
 
