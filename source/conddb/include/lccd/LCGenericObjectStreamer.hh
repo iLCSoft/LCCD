@@ -1,10 +1,6 @@
 #ifndef LCGenericObjectStreamer_h
 #define LCGenericObjectStreamer_h
 
-#include "LCCDConfig.h"
-
-#ifdef LCCD_CONDDB
-
 #include "lccd.h"
 #include "VCollectionStreamer.hh"
 
@@ -52,5 +48,5 @@ namespace lccd {
 
 } //end namespace
 
-#endif // LCCD_CONDDB
 #endif // LCGenericObjectStreamer_h
+

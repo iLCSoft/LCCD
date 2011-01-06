@@ -1,11 +1,6 @@
 #ifndef DBConnectionMgr_h
 #define DBConnectionMgr_h
 
-#include "LCCDConfig.h"
-
-#ifdef LCCD_CONDDB
-
-// 
 #include "lccd.h"
 // #include "lccd/DBInterface.hh"
 
@@ -65,5 +60,5 @@ namespace lccd {
 
 }  //end namespace
 
-#endif // LCCD_CONDDB
 #endif // DBConnectionMgr_h
+

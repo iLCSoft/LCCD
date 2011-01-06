@@ -1,11 +1,7 @@
 #ifndef DBInterface_h
 #define DBInterface_h
 
-#include "LCCDConfig.h"
 
-#ifdef LCCD_CONDDB
-
-// 
 #include "lccd.h"
 
 
@@ -312,5 +308,5 @@ namespace lccd {
 
 }  //end namespace
 
-#endif // LCCD_CONDDB
 #endif // DBInterface_h
+

@@ -1,11 +1,6 @@
 #ifndef VCollectionStreamer_h
 #define VCollectionStreamer_h
 
-#include "LCCDConfig.h"
-
-#ifdef LCCD_CONDDB
-
-// 
 #include "lccd.h"
 
 // -- lcio headers
@@ -65,5 +60,4 @@ namespace lccd {
 
 } //end namespace
 
-#endif // LCCD_CONDDB
 #endif // VCollectionStreamer_h
