@@ -5,10 +5,10 @@
 
 INCLUDE_DIRECTORIES( . )
 
+# helper macro for adding tests
 ADD_CUSTOM_TARGET( tests )
 MACRO( ADD_LCCD_TEST _testname )
 
-        #ADD_EXECUTABLE( ${_testname} ./${_test}.cc ./CalibrationConstant.cc )
         IF( BUILD_LCCD_TESTS )
             ADD_EXECUTABLE( ${_testname} ${ARGN} )
         ELSE()
