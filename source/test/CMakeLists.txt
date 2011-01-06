@@ -26,18 +26,18 @@ ENDMACRO( ADD_LCCD_TEST )
 
 # ---------------------------------------------------------------
 
-ADD_LCCD_TEST( createcalfile ./createcalfile.cc ./CalibrationConstant.cc )
+ADD_LCCD_TEST( createcalfile ./createcalfile.cc )
 ADD_LCCD_TEST( readcalfile ./readcalfile ./CalibrationConstant.cc )
-ADD_LCCD_TEST( readdatafile ./readdatafile ./CalibrationConstant.cc )
-ADD_LCCD_TEST( testdbfile ./testdbfile ./CalibrationConstant.cc )
+ADD_LCCD_TEST( readdatafile ./readdatafile )
+ADD_LCCD_TEST( testdbfile ./testdbfile )
 
 IF( LCCD_CONDDB )
 
-    ADD_LCCD_TEST( calfilefromdb ./conddbtests/calfilefromdb ./CalibrationConstant.cc )
-    ADD_LCCD_TEST( calfiletodb ./conddbtests/calfiletodb ./CalibrationConstant.cc )
-    ADD_LCCD_TEST( createdbfile ./conddbtests/createdbfile ./CalibrationConstant.cc )
-    ADD_LCCD_TEST( tagdbfolder ./conddbtests/tagdbfolder ./CalibrationConstant.cc )
-    ADD_LCCD_TEST( multiblefolders ./conddbtests/multiblefolders ./CalibrationConstant.cc )
+    ADD_LCCD_TEST( calfilefromdb ./conddbtests/calfilefromdb )
+    ADD_LCCD_TEST( calfiletodb ./conddbtests/calfiletodb )
+    ADD_LCCD_TEST( createdbfile ./conddbtests/createdbfile )
+    ADD_LCCD_TEST( tagdbfolder ./conddbtests/tagdbfolder )
+    ADD_LCCD_TEST( multiblefolders ./conddbtests/multiblefolders )
 
 ENDIF()
 
