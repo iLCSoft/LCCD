@@ -6,6 +6,8 @@
 
 #---------- DOCUMENTATION ---------------------------------------------------
 
+FIND_PACKAGE( Doxygen REQUIRED )
+
 # build documentation out-of-source
 SET( DOC_SRC_DIR "${PROJECT_SOURCE_DIR}/doc" )
 SET( DOC_BIN_DIR "${PROJECT_BINARY_DIR}/docbuild" )
@@ -57,6 +59,8 @@ ELSE()
     # --- out-of-source installations ---
     INSTALL_DIRECTORY( "${DOC_BIN_DIR}/" DESTINATION "doc/lccd"
         PATTERN "*Doxyfile*" EXCLUDE
+        PATTERN "*latex*" EXCLUDE
+        PATTERN "*manual*" EXCLUDE
         PATTERN "*overview.html*" EXCLUDE
         PATTERN "*.txt" EXCLUDE
     )

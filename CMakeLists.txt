@@ -26,7 +26,11 @@ ENDIF( NOT ILCSOFT_CMAKE_MODULES_FOUND )
 ILCSOFT_CMAKE_MODULES_MINIMUM_REQUIRED( 0.10.1.1 )
 INCLUDE( ilcsoft_default_settings )
 
+# option for building LCCD tests
+# build target: 'make tests'
 OPTION( BUILD_LCCD_TESTS "Set to ON to build LCCD tests" OFF )
+
+
 
 ### DEPENDENCIES ############################################################
 
@@ -45,24 +49,7 @@ ENDIF()
 OPTION( INSTALL_DOC "Set to OFF to skip build/install Documentation" ON )
 
 IF( INSTALL_DOC )
-
-    FIND_PACKAGE( Doxygen )
-    FIND_PACKAGE( LATEX )
-
-    IF( DOXYGEN_FOUND AND LATEX_COMPILER AND MAKEINDEX_COMPILER )
-        ADD_SUBDIRECTORY( ./doc )
-    ELSE()
-        IF( NOT DOXYGEN_FOUND )
-            MESSAGE( STATUS "Doxygen not found in your system!!" )
-        ENDIF()
-        IF( NOT LATEX_COMPILER OR NOT MAKEINDEX_COMPILER )
-            MESSAGE( STATUS "Latex not found in your system!!" )
-        ENDIF()
-        IF( INSTALL_DOC )
-            MESSAGE( STATUS "INSTALL_DOC set to OFF" )
-            SET( INSTALL_DOC OFF )
-        ENDIF()
-    ENDIF()
+    ADD_SUBDIRECTORY( ./doc )
 ENDIF()
 
 
@@ -77,8 +64,8 @@ INSTALL( FILES "${PROJECT_BINARY_DIR}/lccd/LCCDConfig.h" DESTINATION "include/lc
 # ---------------------------------------------------------------------------
 
 
-# add tests
 ADD_SUBDIRECTORY( ./source )
+
 
 # display some variables and write them to cache
 DISPLAY_STD_VARIABLES()
@@ -91,3 +78,4 @@ MESSAGE( STATUS )
 # export library dependencies (keep this as the last line in the file)
 EXPORT_LIBRARY_DEPENDENCIES( "LCCDLibDeps.cmake" )
 INSTALL( FILES "${PROJECT_BINARY_DIR}/LCCDLibDeps.cmake" DESTINATION lib/cmake )
+
