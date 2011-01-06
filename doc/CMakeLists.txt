@@ -12,6 +12,18 @@ FIND_PACKAGE( Doxygen REQUIRED )
 SET( DOC_SRC_DIR "${PROJECT_SOURCE_DIR}/doc" )
 SET( DOC_BIN_DIR "${PROJECT_BINARY_DIR}/docbuild" )
 
+SET( DOXYFILE_INPUT "overview.html ${PROJECT_SOURCE_DIR}/source/include" )
+IF( LCCD_CONDDB )
+    SET( DOXYFILE_INPUT "${DOXYFILE_INPUT} ${PROJECT_SOURCE_DIR}/source/conddb/include" )
+ENDIF()
+
+# replace DOXYFILE_INPUT
+CONFIGURE_FILE( "${DOC_SRC_DIR}/Doxyfile.cmake.in" "${DOC_BIN_DIR}/Doxyfile" @ONLY )
+
+# replace @LCCD_VERSION@
+CONFIGURE_FILE( "${DOC_SRC_DIR}/overview.html.in" "${DOC_BIN_DIR}/overview.html" @ONLY )
+
+
 
 ADD_CUSTOM_COMMAND(
     OUTPUT "${DOC_BIN_DIR}/html/index.html" "${DOC_BIN_DIR}/latex/index.tex"
@@ -28,12 +40,6 @@ ADD_CUSTOM_TARGET( doc DEPENDS
     "${DOC_BIN_DIR}/html/index.html"
     "${DOC_BIN_DIR}/latex/index.tex"
 )
-
-# replace INPUT = @LCCD_SOURCE_DIR@/{src,include}
-CONFIGURE_FILE( "${DOC_SRC_DIR}/Doxyfile.cmake.in" "${DOC_BIN_DIR}/Doxyfile" @ONLY )
-
-# replace @LCCD_VERSION@
-CONFIGURE_FILE( "${DOC_SRC_DIR}/overview.html.in" "${DOC_BIN_DIR}/overview.html" @ONLY )
 
 # build documentation before 'make install'
 INSTALL( CODE "EXECUTE_PROCESS( COMMAND ${CMAKE_BUILD_TOOL} doc)" )
