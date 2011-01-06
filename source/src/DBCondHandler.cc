@@ -1,5 +1,5 @@
 
-#include "LCCDConfig.h"
+#include "lccd/LCCDConfig.h"
 
 #include "lccd/DBCondHandler.hh"
 #ifdef LCCD_CONDDB

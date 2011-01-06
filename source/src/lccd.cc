@@ -1,7 +1,5 @@
 #include "lccd.h"
 
-#include "LCCDConfig.h"
-
 #ifdef LCCD_CONDDB
 #include "ConditionsDB/SimpleTime.h"
 #endif

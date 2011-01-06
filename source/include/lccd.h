@@ -1,7 +1,7 @@
 #ifndef lccd_h
 #define lccd_h 1
 
-#include "LCCDConfig.h"
+#include "lccd/LCCDConfig.h"
 #include "lccd_exceptions.h"
 #include "lcio.h"
 
