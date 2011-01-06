@@ -1,6 +1,6 @@
 #include "lccd.h"
 
-#ifdef USE_CONDDB
+#ifdef LCCD_CONDDB
 #include "ConditionsDB/SimpleTime.h"
 #endif
 
@@ -46,7 +46,7 @@ namespace lccd{
   
 
 
-#ifdef USE_CONDDB
+#ifdef LCCD_CONDDB
 
   LCCDTimeStamp fromSimpleTime( SimpleTime st ) {
     // subtract the ns from 1.1.1900 to 1.1.1970 

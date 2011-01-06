@@ -1,7 +1,7 @@
 #ifndef Xdr_h
 #define Xdr_h
 
-#ifdef USE_CONDDB
+#ifdef LCCD_CONDDB
 
 // 
 #include "lccd.h"
@@ -175,5 +175,5 @@ namespace lccd {
   };  // class Xdr
 }  //end namespace
 
-#endif // USE_CONDDB
+#endif // LCCD_CONDDB
 #endif // Xdr_h

@@ -16,7 +16,7 @@ namespace lccd {
 
 
 
-#ifdef USE_CONDDB
+#ifdef LCCD_CONDDB
 
   DBCondHandler::DBCondHandler(const std::string& dbInit,  const std::string& folder,
 			       const std::string& name,  const std::string& tag  ) :
@@ -181,6 +181,6 @@ namespace lccd {
   void DBCondHandler::update( LCCDTimeStamp timeStamp )  {}
 
 
-#endif // USE_CONDDB
+#endif // LCCD_CONDDB
 
 }

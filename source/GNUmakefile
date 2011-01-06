@@ -25,7 +25,7 @@ endif
 
 
 ifdef CondDBMySQL
- LCCDCPPFLAGS += -D USE_CONDDB -I $(CondDBMySQL)/include
+ LCCDCPPFLAGS += -D LCCD_CONDDB -I $(CondDBMySQL)/include
 endif
 
 # to set the same default as in ConditionsDBMySQL, do

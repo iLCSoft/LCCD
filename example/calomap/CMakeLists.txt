@@ -94,7 +94,7 @@ ADD_DEFINITIONS( "-Wall -ansi -pedantic" )
 #----- need long long for int64 for now ------
 ADD_DEFINITIONS( "-Wno-long-long" )
 ADD_DEFINITIONS( "-DUSE_LCCD" )
-ADD_DEFINITIONS( "-DUSE_CONDDB" )
+ADD_DEFINITIONS( "-DLCCD_CONDDB" )
 
 ##########################################################################################
 # End of User section: please try not to modify below this line

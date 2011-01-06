@@ -1,4 +1,4 @@
-#ifdef USE_CONDDB
+#ifdef LCCD_CONDDB
 
 // -- LCCD headers
 #include "lccd.h"

@@ -26,7 +26,12 @@ INCLUDE( ilcsoft_default_settings )
 ### DEPENDENCIES ############################################################
 
 FIND_PACKAGE( LCIO REQUIRED )
-FIND_PACKAGE( CondDBMySQL )
+
+# CondDBMySQL
+OPTION( LCCD_CONDDB "Set to ON to build with CondDBMySQL" OFF )
+IF( LCCD_CONDDB )
+    FIND_PACKAGE( CondDBMySQL REQUIRED )
+ENDIF()
 
 
 
@@ -58,6 +63,14 @@ ENDIF()
 
 
 ### LIBRARY AND TOOLS #######################################################
+
+# -------- generate LCCDConfig.h --------------------------------------------
+CONFIGURE_FILE( "${PROJECT_SOURCE_DIR}/cmake/LCCDConfig.h.cmake.in"
+    "${PROJECT_BINARY_DIR}/lccd/LCCDConfig.h" @ONLY )
+
+INSTALL( FILES "${PROJECT_BINARY_DIR}/lccd/LCCDConfig.h" DESTINATION "include/lccd/" )
+# ---------------------------------------------------------------------------
+
 
 # add tests
 ADD_SUBDIRECTORY( ./source )

@@ -1,4 +1,4 @@
-#ifdef USE_CONDDB
+#ifdef LCCD_CONDDB
 #include "lccd/LCGenericObjectStreamer.hh"
 #include "lccd/Xdr.hh"
 

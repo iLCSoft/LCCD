@@ -1,4 +1,4 @@
-#ifdef USE_CONDDB
+#ifdef LCCD_CONDDB
 #include"lccd/Xdr.hh"
 
 #include <iostream>

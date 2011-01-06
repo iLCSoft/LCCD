@@ -1,6 +1,6 @@
 #include "lccd/DBInterface.hh"
 
-#ifdef USE_CONDDB
+#ifdef LCCD_CONDDB
 
 // lccd headers
 #include "lccd.h"
