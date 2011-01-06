@@ -1,195 +1,102 @@
 ########################################################
 # cmake file for building Marlin example Package
-# @author Jan Engels, DESY
+# @author Jan Engels, Desy IT
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6 FATAL_ERROR)
 ########################################################
-
-
-########################################################
-# CMake compatibility issues: don't modify this, please!
-CMAKE_MINIMUM_REQUIRED( VERSION 2.4.6 )
-#SET( CMAKE_BACKWARDS_COMPATIBILITY 2.4.6 )
-MARK_AS_ADVANCED(CMAKE_BACKWARDS_COMPATIBILITY)
-# allow more human readable "if then else" constructs
-SET( CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS TRUE )
-########################################################
-
-
-
-####################################################################################################
-# User section: modify as needed
-####################################################################################################
 
 
 # project name
 PROJECT( calomap )
 
+
 # project version
-SET( ${PROJECT_NAME}_MAJOR_VERSION 0 )
-SET( ${PROJECT_NAME}_MINOR_VERSION 1 )
-SET( ${PROJECT_NAME}_PATCH_LEVEL 0 )
+SET( ${PROJECT_NAME}_VERSION_MAJOR 0 )
+SET( ${PROJECT_NAME}_VERSION_MINOR 1 )
+SET( ${PROJECT_NAME}_VERSION_PATCH 0 )
 
 
-### SETTINGS #################################################################
+### SETTINGS ################################################################
 
-# project options
-OPTION( BUILD_SHARED_LIBS "Set to OFF to build static libraries" ON )
-OPTION( BUILD_32BIT_COMPATIBLE "Set to ON to build in 32 bit compatibility mode" ON )
+# try to load ilcsoft CMakeModules from CMAKE_MODULE_PATH
+INCLUDE( ilcsoft_cmake_modules )
+IF( NOT ILCSOFT_CMAKE_MODULES_FOUND )
+    MESSAGE( FATAL_ERROR "Could not find ilcsoft CMakeModules in CMAKE_MODULE_PATH" )
+ENDIF( NOT ILCSOFT_CMAKE_MODULES_FOUND )
+ILCSOFT_CMAKE_MODULES_MINIMUM_REQUIRED( 0.10.1.1 )
+INCLUDE( ilcsoft_default_settings )
 
-# project dependencies
-SET( ${PROJECT_NAME}_DEPENDS "Marlin LCIO" )
 
-# set default cmake build type to RelWithDebInfo
-# possible options are: None Debug Release RelWithDebInfo MinSizeRel
-IF( NOT CMAKE_BUILD_TYPE )
-    SET( CMAKE_BUILD_TYPE "RelWithDebInfo" )
-ENDIF()
 
-# set default install prefix to project root directory
-IF( CMAKE_INSTALL_PREFIX STREQUAL "/usr/local" )
-    SET( CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}" )
-ENDIF()
+### DEPENDENCIES ############################################################
 
-#---------------- 32/64 bit issues ---------------------------------------
-IF( CMAKE_SIZEOF_VOID_P EQUAL 4 )
-    MESSAGE( STATUS "32 bit architecture detected" )
-ENDIF()
+# ------- required packages -------------------
+SET( required_packages LCIO LCCD GEAR Marlin )
 
-IF( CMAKE_SIZEOF_VOID_P EQUAL 8 )
-    MESSAGE( STATUS "64 bit architecture detected" )
+# ------- optional packages -------------------
+#SET( optional_packages AIDA )
 
-    IF( BUILD_32BIT_COMPATIBLE )
-        IF( COMMAND SET_PROPERTY )
-            SET_PROPERTY(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS 0)
-            SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32" )
-        ELSE()
-            MESSAGE( FATAL_ERROR "to build in 32 bit compatibility mode you need cmake >= 2.6" )
-        ENDIF()
-        MESSAGE( STATUS "Build in 32 bit compatibility mode" )
+
+# ------- do the search -----------------------
+
+# fix for backwards compatibility
+FOREACH( pkg ${required_packages} ${optional_packages} )
+    IF( NOT ${pkg}_DIR AND DEFINED ${pkg}_HOME )
+        SET( ${pkg}_DIR ${${pkg}_HOME} )
+    ENDIF()
+ENDFOREACH()
+
+FOREACH( pkg ${required_packages} )
+    FIND_PACKAGE( ${pkg} REQUIRED )
+ENDFOREACH()
+
+FOREACH( pkg ${optional_packages} )
+    FIND_PACKAGE( ${pkg} QUIET )
+ENDFOREACH()
+
+FOREACH( pkg ${required_packages} ${optional_packages} )
+    IF( ${pkg}_FOUND )
+        INCLUDE_DIRECTORIES( ${${pkg}_INCLUDE_DIRS} )
+        LINK_LIBRARIES( ${${pkg}_LIBRARIES} )
+        ADD_DEFINITIONS ( ${${pkg}_DEFINITIONS} )
     ELSE()
-        MESSAGE( STATUS "Build in native 64 bit mode" )
+        MESSAGE( STATUS "${pkg} not found" )
     ENDIF()
+ENDFOREACH()
+
+
+
+### DOCUMENTATION ###########################################################
+
+OPTION( INSTALL_DOC "Set to OFF to skip build/install Documentation" ON )
+
+IF( INSTALL_DOC AND EXISTS "${PROJECT_SOURCE_DIR}/doc/CMakeLists.txt" )
+    ADD_SUBDIRECTORY( doc )
+ELSE()
+    MESSAGE( STATUS "INSTALL_DOC set to OFF" )
+    SET( INSTALL_DOC OFF )
 ENDIF()
-#-------------------------------------------------------------------------
 
 
-### INCLUDES #################################################################
 
-#include directories
-INCLUDE_DIRECTORIES( "${PROJECT_SOURCE_DIR}/include" )
-INCLUDE_DIRECTORIES( "../../source/include" )
+### LIBRARY #################################################################
 
-# install include files
-INSTALL( DIRECTORY "${PROJECT_SOURCE_DIR}/include"
-        DESTINATION .
-        PATTERN "*~" EXCLUDE
-        PATTERN "*CVS*" EXCLUDE
-        PATTERN "*/.svn*" EXCLUDE
-        )
+# include directories
+INCLUDE_DIRECTORIES( ./include )
 
+INSTALL_DIRECTORY( ./include DESTINATION . FILES_MATCHING PATTERN "*.h" )
 
-### SOURCES ##################################################################
-
-# require proper c++
+# definitions to pass to the compiler
 ADD_DEFINITIONS( "-Wall -ansi -pedantic" )
-#----- need long long for int64 for now ------
 ADD_DEFINITIONS( "-Wno-long-long" )
-ADD_DEFINITIONS( "-DUSE_LCCD" )
-ADD_DEFINITIONS( "-DLCCD_CONDDB" )
 
-##########################################################################################
-# End of User section: please try not to modify below this line
-##########################################################################################
-
-
-# library *nix style versioning
-SET( ${PROJECT_NAME}_SOVERSION
-    "${${PROJECT_NAME}_MAJOR_VERSION}.${${PROJECT_NAME}_MINOR_VERSION}" )
-SET( ${PROJECT_NAME}_VERSION
-    "${${PROJECT_NAME}_SOVERSION}.${${PROJECT_NAME}_PATCH_LEVEL}" )
-
-# add library install path to the rpath list
-SET( CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib" )
-MARK_AS_ADVANCED( CMAKE_INSTALL_RPATH )
-
-# append link pathes to rpath list
-SET( CMAKE_INSTALL_RPATH_USE_LINK_PATH 1 )
-MARK_AS_ADVANCED( CMAKE_INSTALL_RPATH_USE_LINK_PATH )
-
-# output directories
-SET( EXECUTABLE_OUTPUT_PATH "${PROJECT_BINARY_DIR}/bin" CACHE PATH
-    "EXECUTABLE_OUTPUT_PATH" FORCE )
-SET( LIBRARY_OUTPUT_PATH "${PROJECT_BINARY_DIR}/lib" CACHE PATH
-    "LIBRARY_OUTPUT_PATH" FORCE )
-MARK_AS_ADVANCED( EXECUTABLE_OUTPUT_PATH LIBRARY_OUTPUT_PATH )
-
-# DEPENDENCIES: this code has to be placed before adding any library or
-# executable so that these are linked properly against the dependencies
-IF( DEFINED ${PROJECT_NAME}_DEPENDS OR DEFINED BUILD_WITH OR DEFINED LINK_WITH )
-    IF( NOT DEFINED CMAKE_MODULE_PATH )
-        MESSAGE( FATAL_ERROR "CMAKE_MODULE_PATH not set! Set it with: "
-            "-DCMAKE_MODULE_PATH=\"/path_to_ilcsoft/CMakeModules\"" )
-    ENDIF()
-    # load macro
-    INCLUDE( "MacroCheckDeps" )
-    CHECK_DEPS()
-ENDIF()
-
-# LIBRARY
-ADD_LIBRARY( lib_${PROJECT_NAME} src/CaloMapProcessor.cc )
-# create symbolic lib target for calling target lib_XXX
-ADD_CUSTOM_TARGET( lib DEPENDS lib_${PROJECT_NAME} )
-# change lib_target properties
-SET_TARGET_PROPERTIES( lib_${PROJECT_NAME} PROPERTIES
-    # create *nix style library versions + symbolic links
-    VERSION ${${PROJECT_NAME}_VERSION}
-    SOVERSION ${${PROJECT_NAME}_SOVERSION}
-    # allow creating static and shared libs without conflicts
-    CLEAN_DIRECT_OUTPUT 1
-    # avoid conflicts between library and binary target names
-    OUTPUT_NAME ${PROJECT_NAME} )
+# add library
+ADD_SHARED_LIBRARY( CaloMapProcessor ./src/CaloMapProcessor.cc )
+INSTALL_SHARED_LIBRARY( CaloMapProcessor DESTINATION lib )
 
 # createmaps example
-ADD_EXECUTABLE( createmaps src/createmaps.cc ) 
+ADD_EXECUTABLE( createmaps ./src/createmaps.cc )
 INSTALL( TARGETS createmaps DESTINATION bin )
 
-# install library
-INSTALL( TARGETS lib_${PROJECT_NAME} DESTINATION lib PERMISSIONS
-        OWNER_READ OWNER_WRITE OWNER_EXECUTE
-        GROUP_READ GROUP_EXECUTE
-        WORLD_READ WORLD_EXECUTE )
-
-# display status message for important variables
-MESSAGE( STATUS )
-MESSAGE( STATUS "-------------------------------------------------------------------------------" )
-MESSAGE( STATUS "BUILD_SHARED_LIBS = ${BUILD_SHARED_LIBS}" )
-MESSAGE( STATUS "CMAKE_INSTALL_PREFIX = ${CMAKE_INSTALL_PREFIX}" )
-MESSAGE( STATUS "CMAKE_BUILD_TYPE = ${CMAKE_BUILD_TYPE}" )
-IF( CMAKE_SIZEOF_VOID_P EQUAL 8 )
-    MESSAGE( STATUS "BUILD_32BIT_COMPATIBLE = ${BUILD_32BIT_COMPATIBLE}" )
-ENDIF()
-MESSAGE( STATUS "CMAKE_MODULE_PATH = ${CMAKE_MODULE_PATH}" )
-MESSAGE( STATUS "${PROJECT_NAME}_DEPENDS = \"${${PROJECT_NAME}_DEPENDS}\"" )
-MESSAGE( STATUS "BUILD_WITH = \"${BUILD_WITH}\"" )
-MESSAGE( STATUS "INSTALL_DOC = ${INSTALL_DOC}" )
-MESSAGE( STATUS "Change a value with: cmake -D<Variable>=<Value>" )
-MESSAGE( STATUS "-------------------------------------------------------------------------------" )
-MESSAGE( STATUS )
-
-# force some variables that could be defined in the command line
-# to be written to cache
-SET( BUILD_SHARED_LIBS "${BUILD_SHARED_LIBS}" CACHE BOOL
-    "Set to OFF to build static libraries" FORCE )
-SET( CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}" CACHE PATH
-    "Where to install ${PROJECT_NAME}" FORCE )
-SET( CMAKE_BUILD_TYPE "${CMAKE_BUILD_TYPE}" CACHE STRING
-    "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel." FORCE )
-SET( CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" CACHE PATH
-    "Path to custom CMake Modules" FORCE )
-
-# export build settings
-INCLUDE( CMakeExportBuildSettings )
-CMAKE_EXPORT_BUILD_SETTINGS( "${PROJECT_NAME}BuildSettings.cmake" )
-
-# export library dependencies (keep this as the last line in the file)
-EXPORT_LIBRARY_DEPENDENCIES( "${PROJECT_NAME}LibDeps.cmake" )
+# display some variables and write them to cache
+DISPLAY_STD_VARIABLES()
 
