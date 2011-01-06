@@ -1,4 +1,3 @@
-#ifdef LCCD_CONDDB
 #include "lccd/LCGenericObjectStreamer.hh"
 #include "lccd/Xdr.hh"
 
@@ -212,4 +211,4 @@ namespace lccd {
   
   
 }
-#endif
+

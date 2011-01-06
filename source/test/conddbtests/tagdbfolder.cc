@@ -1,5 +1,3 @@
-#ifdef LCCD_CONDDB
-
 // -- CondDB headers
 #include "ConditionsDB/ICondDBMgr.h"
 #include "ConditionsDB/CondDBMySQLMgrFactory.h"
@@ -60,6 +58,4 @@ int main(int argc, char** argv ) {
 	    << std::endl ; 
 
 }
-
-#endif
 

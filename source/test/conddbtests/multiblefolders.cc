@@ -1,5 +1,3 @@
-#ifdef LCCD_CONDDB
-
 // -- no CondDB headers needed !
 
 // -- LCIO headers
@@ -101,4 +99,3 @@ int main(int argc, char** argv ) {
 
 }
 
-#endif

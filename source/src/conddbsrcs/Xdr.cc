@@ -1,4 +1,3 @@
-#ifdef LCCD_CONDDB
 #include"lccd/Xdr.hh"
 
 #include <iostream>
@@ -57,4 +56,4 @@ namespace lccd{
 
 
 }
-#endif
+

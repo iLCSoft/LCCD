@@ -1,6 +1,8 @@
 #ifndef Xdr_h
 #define Xdr_h
 
+#include "LCCDConfig.h"
+
 #ifdef LCCD_CONDDB
 
 // 

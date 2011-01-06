@@ -1,7 +1,5 @@
 #include "lccd/DBInterface.hh"
 
-#ifdef LCCD_CONDDB
-
 // lccd headers
 #include "lccd.h"
 #include "lccd/StreamerMgr.hh"
@@ -853,4 +851,3 @@ namespace lccd {
   
 }
 
-#endif

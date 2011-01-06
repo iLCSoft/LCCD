@@ -1,6 +1,8 @@
 #ifndef StreamerMgr_h
 #define StreamerMgr_h
 
+#include "LCCDConfig.h"
+
 #ifdef LCCD_CONDDB
 
 // 

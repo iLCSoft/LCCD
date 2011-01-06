@@ -1,5 +1,3 @@
-#ifdef LCCD_CONDDB
-
 // -- LCCD headers
 #include "lccd.h"
 #include "lccd/DBInterface.hh"
@@ -44,4 +42,4 @@ int main(int argc, char** argv ) {
 
 
 }
-#endif
+

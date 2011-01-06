@@ -1,6 +1,8 @@
 #ifndef VCollectionStreamer_h
 #define VCollectionStreamer_h
 
+#include "LCCDConfig.h"
+
 #ifdef LCCD_CONDDB
 
 // 

@@ -1,5 +1,3 @@
-#ifdef LCCD_CONDDB
-
 #include "lcio.h"
 #include "EVENT/LCIO.h"
 
@@ -51,5 +49,4 @@ namespace lccd{
   
   
 }
-#endif // LCCD_CONDDB
 

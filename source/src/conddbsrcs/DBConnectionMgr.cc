@@ -1,4 +1,3 @@
-#ifdef LCCD_CONDDB
 #include "lccd/DBConnectionMgr.hh"
 #include "ConditionsDB/ICondDBMgr.h"
 #include "ConditionsDB/CondDBMySQLMgrFactory.h"
@@ -98,4 +97,4 @@ namespace lccd {
 
 
 }
-#endif
+

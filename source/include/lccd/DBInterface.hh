@@ -1,6 +1,8 @@
 #ifndef DBInterface_h
 #define DBInterface_h
 
+#include "LCCDConfig.h"
+
 #ifdef LCCD_CONDDB
 
 // 

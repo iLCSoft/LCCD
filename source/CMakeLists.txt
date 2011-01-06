@@ -3,16 +3,16 @@
 # @author Jan Engels, DESY
 #################################
 
+INCLUDE_DIRECTORIES( ${LCIO_INCLUDE_DIRS} )
+INCLUDE_DIRECTORIES( BEFORE "${PROJECT_SOURCE_DIR}/source/include" )
+INCLUDE_DIRECTORIES( ${PROJECT_BINARY_DIR}/lccd )
+INSTALL_DIRECTORY( ./include DESTINATION . )
+
+
 
 # omit warning about preprocessor definitions being escaped
 IF(COMMAND CMAKE_POLICY)
     CMAKE_POLICY(SET CMP0005 OLD)
-ENDIF()
-
-IF( CondDBMySQL_FOUND )
-    INCLUDE_DIRECTORIES( ${CondDBMySQL_INCLUDE_DIRS} )
-    LINK_LIBRARIES( ${CondDBMySQL_LIBRARIES} )
-    ADD_DEFINITIONS( ${CondDBMySQL_DEFINITIONS} )
 ENDIF()
 
 # specific LCCD variable
@@ -29,14 +29,18 @@ ADD_DEFINITIONS( "-Wno-long-long" )
 ADD_DEFINITIONS( "-DLCCD_DB_INIT_DEFAULT=\\\"${LCCD_DB_INIT}\\\"" )
 
 
-INCLUDE_DIRECTORIES( ${LCIO_INCLUDE_DIRS} )
-INCLUDE_DIRECTORIES( BEFORE "${PROJECT_SOURCE_DIR}/source/include" )
-INSTALL_DIRECTORY( ./include DESTINATION . )
-
-
 # add library
 SET( libname lccd )
 AUX_SOURCE_DIRECTORY( ./src library_sources )
+
+IF( LCCD_CONDDB )
+    AUX_SOURCE_DIRECTORY( ./src/conddbsrcs library_sources )
+    INCLUDE_DIRECTORIES( ${CondDBMySQL_INCLUDE_DIRS} )
+    LINK_LIBRARIES( ${CondDBMySQL_LIBRARIES} )
+    ADD_DEFINITIONS( ${CondDBMySQL_DEFINITIONS} )
+ENDIF()
+
+
 SET_SOURCE_FILES_PROPERTIES( ${library_sources}
     PROPERTIES COMPILE_FLAGS "-Wall -ansi -pedantic"
 )

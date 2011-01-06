@@ -1,4 +1,6 @@
 
+#include "LCCDConfig.h"
+
 #include "lccd/DBCondHandler.hh"
 #include "lccd/DBInterface.hh"
 

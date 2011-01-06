@@ -1,6 +1,8 @@
 #ifndef DBConnectionMgr_h
 #define DBConnectionMgr_h
 
+#include "LCCDConfig.h"
+
 #ifdef LCCD_CONDDB
 
 // 
