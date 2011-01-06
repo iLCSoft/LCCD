@@ -2,7 +2,9 @@
 #include "LCCDConfig.h"
 
 #include "lccd/DBCondHandler.hh"
+#ifdef LCCD_CONDDB
 #include "lccd/DBInterface.hh"
+#endif
 
 #include "lcio.h"
 #include <IMPL/LCCollectionVec.h>
