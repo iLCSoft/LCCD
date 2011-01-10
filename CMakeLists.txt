@@ -49,7 +49,17 @@ ENDIF()
 OPTION( INSTALL_DOC "Set to OFF to skip build/install Documentation" ON )
 
 IF( INSTALL_DOC )
-    ADD_SUBDIRECTORY( ./doc )
+
+    FIND_PACKAGE( Doxygen )
+
+    IF( DOXYGEN_EXECUTABLE )
+        ADD_SUBDIRECTORY( ./doc )
+    ELSE()
+        MESSAGE( SEND_ERROR "Could not find doxygen required to build documentation" )
+        MESSAGE( "Please install doxygen or set INSTALL_DOC to OFF" )
+        MESSAGE( "" )
+    ENDIF()
+
 ENDIF()
 
 

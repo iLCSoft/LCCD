@@ -6,7 +6,7 @@
 
 #---------- DOCUMENTATION ---------------------------------------------------
 
-FIND_PACKAGE( Doxygen REQUIRED )
+#FIND_PACKAGE( Doxygen REQUIRED ) # does not throw an ERROR if not found (fixed in cmake 2.8 )
 
 # build documentation out-of-source
 SET( DOC_SRC_DIR "${PROJECT_SOURCE_DIR}/doc" )
