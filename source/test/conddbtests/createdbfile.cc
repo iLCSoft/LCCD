@@ -4,6 +4,7 @@
 
 // -- C++ headers 
 #include <iostream>
+#include <cstdlib>
 
 using namespace std ;
 using namespace lcio;
