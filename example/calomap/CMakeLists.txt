@@ -22,7 +22,7 @@ INCLUDE( ilcsoft_cmake_modules )
 IF( NOT ILCSOFT_CMAKE_MODULES_FOUND )
     MESSAGE( FATAL_ERROR "Could not find ilcsoft CMakeModules in CMAKE_MODULE_PATH" )
 ENDIF( NOT ILCSOFT_CMAKE_MODULES_FOUND )
-ILCSOFT_CMAKE_MODULES_MINIMUM_REQUIRED( 0.10.1.1 )
+ILCSOFT_CMAKE_MODULES_MINIMUM_REQUIRED( 0.11 )
 INCLUDE( ilcsoft_default_settings )
 
 
@@ -30,7 +30,7 @@ INCLUDE( ilcsoft_default_settings )
 ### DEPENDENCIES ############################################################
 
 # ------- required packages -------------------
-SET( required_packages LCIO LCCD GEAR Marlin )
+SET( required_packages LCCD GEAR Marlin )
 
 # ------- optional packages -------------------
 #SET( optional_packages AIDA )

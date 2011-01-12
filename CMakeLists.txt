@@ -23,7 +23,7 @@ INCLUDE( ilcsoft_cmake_modules )
 IF( NOT ILCSOFT_CMAKE_MODULES_FOUND )
     MESSAGE( FATAL_ERROR "Could not find ilcsoft CMakeModules in CMAKE_MODULE_PATH" )
 ENDIF( NOT ILCSOFT_CMAKE_MODULES_FOUND )
-ILCSOFT_CMAKE_MODULES_MINIMUM_REQUIRED( 0.10.1.1 )
+ILCSOFT_CMAKE_MODULES_MINIMUM_REQUIRED( 0.11 )
 INCLUDE( ilcsoft_default_settings )
 
 # option for building LCCD tests
@@ -35,6 +35,7 @@ OPTION( BUILD_LCCD_TESTS "Set to ON to build LCCD tests" OFF )
 ### DEPENDENCIES ############################################################
 
 FIND_PACKAGE( LCIO REQUIRED )
+LIST( APPEND LCCD_DEPENDS_INCLUDE_DIRS ${LCIO_INCLUDE_DIRS} )
 
 # CondDBMySQL
 OPTION( LCCD_CONDDB "Set to ON to build with CondDBMySQL" ON )
@@ -86,7 +87,6 @@ MESSAGE( STATUS "LCCD_DB_INIT = ${LCCD_DB_INIT}" )
 MESSAGE( STATUS "INSTALL_DOC = ${INSTALL_DOC}" )
 MESSAGE( STATUS )
 
-# export library dependencies (keep this as the last line in the file)
-EXPORT_LIBRARY_DEPENDENCIES( "LCCDLibDeps.cmake" )
-INSTALL( FILES "${PROJECT_BINARY_DIR}/LCCDLibDeps.cmake" DESTINATION lib/cmake )
+# generate and install following configuration files
+GENERATE_PACKAGE_CONFIGURATION_FILES( LCCDConfig.cmake LCCDConfigVersion.cmake LCCDLibDeps.cmake )
 
