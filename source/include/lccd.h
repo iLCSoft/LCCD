@@ -1,7 +1,7 @@
 #ifndef lccd_h
 #define lccd_h 1
 
-#include "lccd/LCCDConfig.h"
+//#include "lccd/LCCDConfig.h"
 #include "lccd_exceptions.h"
 #include "lcio.h"
 
@@ -9,9 +9,9 @@
 #include <string>
 
 
-#ifdef LCCD_CONDDB
+//#ifdef LCCD_CONDDB
 class SimpleTime ;
-#endif
+//#endif
 
 
 // Provides common definitions and typedefs for LCCD.
@@ -75,12 +75,12 @@ namespace lccd{
   std::string getDBInitString() ;
   
   
-#ifdef LCCD_CONDDB
+  //#ifdef LCCD_CONDDB
   /** Converts the 64bit time stamp in SimpleTime objects (based on 1.1.1900) to the LCIO definition
    *  of time stamps: ns since 1.1.1970 UTC.
    */
-  LCCDTimeStamp fromSimpleTime( SimpleTime st ) ;
-#endif
+  LCCDTimeStamp fromSimpleTime( const SimpleTime& st ) ;
+  //#endif
 
 }
 
