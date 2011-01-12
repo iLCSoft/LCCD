@@ -15,53 +15,24 @@ SET( ${PROJECT_NAME}_VERSION_MINOR 1 )
 SET( ${PROJECT_NAME}_VERSION_PATCH 0 )
 
 
-### SETTINGS ################################################################
-
-# try to load ilcsoft CMakeModules from CMAKE_MODULE_PATH
-INCLUDE( ilcsoft_cmake_modules )
-IF( NOT ILCSOFT_CMAKE_MODULES_FOUND )
-    MESSAGE( FATAL_ERROR "Could not find ilcsoft CMakeModules in CMAKE_MODULE_PATH" )
-ENDIF( NOT ILCSOFT_CMAKE_MODULES_FOUND )
-ILCSOFT_CMAKE_MODULES_MINIMUM_REQUIRED( 0.11 )
-INCLUDE( ilcsoft_default_settings )
-
-
 
 ### DEPENDENCIES ############################################################
 
-# ------- required packages -------------------
-SET( required_packages LCCD GEAR Marlin )
+# FindILCSOFT_CMAKE_MODULES.cmake needs to be in CMAKE_MODULE_PATH
+FIND_PACKAGE( ILCSOFT_CMAKE_MODULES 0.11 REQUIRED )
 
-# ------- optional packages -------------------
-#SET( optional_packages AIDA )
+# load default settings from ILCSOFT_CMAKE_MODULES
+INCLUDE( ilcsoft_default_settings )
 
 
-# ------- do the search -----------------------
+FIND_PACKAGE( Marlin 0.14 REQUIRED )
+INCLUDE_DIRECTORIES( ${Marlin_INCLUDE_DIRS} )
+LINK_LIBRARIES( ${Marlin_LIBRARIES} )
 
-# fix for backwards compatibility
-FOREACH( pkg ${required_packages} ${optional_packages} )
-    IF( NOT ${pkg}_DIR AND DEFINED ${pkg}_HOME )
-        SET( ${pkg}_DIR ${${pkg}_HOME} )
-    ENDIF()
-ENDFOREACH()
 
-FOREACH( pkg ${required_packages} )
-    FIND_PACKAGE( ${pkg} REQUIRED )
-ENDFOREACH()
-
-FOREACH( pkg ${optional_packages} )
-    FIND_PACKAGE( ${pkg} QUIET )
-ENDFOREACH()
-
-FOREACH( pkg ${required_packages} ${optional_packages} )
-    IF( ${pkg}_FOUND )
-        INCLUDE_DIRECTORIES( ${${pkg}_INCLUDE_DIRS} )
-        LINK_LIBRARIES( ${${pkg}_LIBRARIES} )
-        ADD_DEFINITIONS ( ${${pkg}_DEFINITIONS} )
-    ELSE()
-        MESSAGE( STATUS "${pkg} not found" )
-    ENDIF()
-ENDFOREACH()
+FIND_PACKAGE( LCCD 1.2 REQUIRED )
+INCLUDE_DIRECTORIES( ${LCCD_INCLUDE_DIRS} )
+LINK_LIBRARIES( ${LCCD_LIBRARIES} )
 
 
 
