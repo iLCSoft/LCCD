@@ -11,30 +11,22 @@ PROJECT( LCCD )
 
 # project version
 SET( LCCD_VERSION_MAJOR 1 )
-SET( LCCD_VERSION_MINOR 1 )
+SET( LCCD_VERSION_MINOR 2 )
 SET( LCCD_VERSION_PATCH 0 )
-
-
-
-### SETTINGS ################################################################
-
-# try to load ilcsoft CMakeModules from CMAKE_MODULE_PATH
-INCLUDE( ilcsoft_cmake_modules )
-IF( NOT ILCSOFT_CMAKE_MODULES_FOUND )
-    MESSAGE( FATAL_ERROR "Could not find ilcsoft CMakeModules in CMAKE_MODULE_PATH" )
-ENDIF( NOT ILCSOFT_CMAKE_MODULES_FOUND )
-ILCSOFT_CMAKE_MODULES_MINIMUM_REQUIRED( 0.11 )
-INCLUDE( ilcsoft_default_settings )
-
-# option for building LCCD tests
-# build target: 'make tests'
-OPTION( BUILD_LCCD_TESTS "Set to ON to build LCCD tests" OFF )
 
 
 
 ### DEPENDENCIES ############################################################
 
+# FindILCSOFT_CMAKE_MODULES.cmake needs to be in CMAKE_MODULE_PATH
+FIND_PACKAGE( ILCSOFT_CMAKE_MODULES 0.11 REQUIRED )
+
+# load default settings from ILCSOFT_CMAKE_MODULES
+INCLUDE( ilcsoft_default_settings )
+
+
 FIND_PACKAGE( LCIO REQUIRED )
+# export variable LCCD_DEPENDS_INCLUDE_DIRS to LCCDConfig.cmake
 LIST( APPEND LCCD_DEPENDS_INCLUDE_DIRS ${LCIO_INCLUDE_DIRS} )
 
 # CondDBMySQL
@@ -42,7 +34,6 @@ OPTION( LCCD_CONDDB "Set to ON to build with CondDBMySQL" ON )
 IF( LCCD_CONDDB )
     FIND_PACKAGE( CondDBMySQL REQUIRED )
 ENDIF()
-
 
 
 ### DOCUMENTATION ###########################################################
@@ -73,6 +64,11 @@ CONFIGURE_FILE( "${PROJECT_SOURCE_DIR}/cmake/LCCDConfig.h.cmake.in"
 
 INSTALL( FILES "${PROJECT_BINARY_DIR}/lccd/LCCDConfig.h" DESTINATION "include/lccd/" )
 # ---------------------------------------------------------------------------
+
+
+# option for building LCCD tests
+# build target: 'make tests'
+OPTION( BUILD_LCCD_TESTS "Set to ON to build LCCD tests" OFF )
 
 
 ADD_SUBDIRECTORY( ./source )
