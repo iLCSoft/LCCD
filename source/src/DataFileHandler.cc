@@ -65,7 +65,7 @@ namespace lccd {
        _col->parameters().setValue("CollectionName", this->name() ) ;
        notifyListeners() ;
     }
-    catch( DataNotAvailableException ) { // no new data -> simply add current collection
+    catch( lcio::DataNotAvailableException &err ) { // no new data -> simply add current collection
 
       evt->addCollection( currentCollection() , name()  ) ;
       evt->takeCollection( name() ) ;
