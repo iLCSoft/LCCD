@@ -48,7 +48,7 @@ SET_SOURCE_FILES_PROPERTIES( ${library_sources}
     PROPERTIES COMPILE_FLAGS "-Wall -ansi -pedantic"
 )
 ADD_SHARED_LIBRARY( ${libname} ${library_sources} )
-INSTALL_SHARED_LIBRARY( ${libname} DESTINATION lib )
+INSTALL( TARGETS ${libname} DESTINATION lib )
 TARGET_LINK_LIBRARIES( ${libname} ${LCIO_LIBRARIES} )
 
 
