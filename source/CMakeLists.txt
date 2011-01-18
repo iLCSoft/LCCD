@@ -29,19 +29,43 @@ ADD_DEFINITIONS( "-Wno-long-long" )
 ADD_DEFINITIONS( "-DLCCD_DB_INIT_DEFAULT=\\\"${LCCD_DB_INIT}\\\"" )
 
 
+FILE( GLOB lccd_headers ./include/lccd/*.h* )
+
 # add library
 SET( libname lccd )
 AUX_SOURCE_DIRECTORY( ./src library_sources )
 
-IF( LCCD_CONDDBMYSQL )
-    AUX_SOURCE_DIRECTORY( ./conddb/src library_sources )
-    INCLUDE_DIRECTORIES( ./conddb/include )
-    INSTALL_DIRECTORY( ./conddb/include DESTINATION . )
+IF( NOT LCCD_CONDDBMYSQL )
+
+    LIST( REMOVE_ITEM library_sources
+        ./src/DBConnectionMgr.cc
+        ./src/DBInterface.cc
+        ./src/LCGenericObjectStreamer.cc
+        ./src/StreamerMgr.cc
+        ./src/VCollectionStreamer.cc
+        ./src/Xdr.cc
+    )
+
+    LIST( REMOVE_ITEM lccd_headers
+        ./include/lccd/DBConnectionMgr.hh
+        ./include/lccd/DBInterface.hh
+        ./include/lccd/LCGenericObjectStreamer.hh
+        ./include/lccd/StreamerMgr.hh
+        ./include/lccd/VCollectionStreamer.hh
+        ./include/lccd/Xdr.hh
+    )
+
+ELSE()
 
     INCLUDE_DIRECTORIES( ${CondDBMySQL_INCLUDE_DIRS} )
     LINK_LIBRARIES( ${CondDBMySQL_LIBRARIES} )
     ADD_DEFINITIONS( ${CondDBMySQL_DEFINITIONS} )
+
 ENDIF()
+
+INSTALL( FILES ${lccd_headers} DESTINATION include/lccd )
+# FIXME put these files in ./include/lccd and create symlinks
+INSTALL( FILES ./include/lccd.h ./include/lccd_exceptions.h DESTINATION include )
 
 
 SET_SOURCE_FILES_PROPERTIES( ${library_sources}

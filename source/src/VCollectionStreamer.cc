@@ -1,3 +1,5 @@
+// this source requires CONDDBMYSQL
+
 #include "lccd/VCollectionStreamer.hh"
 
 #include "lccd/Xdr.hh"

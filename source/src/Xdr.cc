@@ -1,3 +1,5 @@
+// this source requires CONDDBMYSQL
+
 #include"lccd/Xdr.hh"
 
 #include <iostream>

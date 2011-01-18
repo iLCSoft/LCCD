@@ -1,3 +1,5 @@
+// this source requires CONDDBMYSQL
+
 #include "lcio.h"
 #include "EVENT/LCIO.h"
 

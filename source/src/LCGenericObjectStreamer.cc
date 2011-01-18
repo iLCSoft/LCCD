@@ -1,3 +1,5 @@
+// this source requires CONDDBMYSQL
+
 #include "lccd/LCGenericObjectStreamer.hh"
 #include "lccd/Xdr.hh"
 
