@@ -2,7 +2,7 @@
 #include "lccd/LCCDConfig.h"
 
 #include "lccd/DBCondHandler.hh"
-#ifdef LCCD_CONDDB
+#ifdef LCCD_CONDDBMYSQL
 #include "lccd/DBInterface.hh"
 #endif
 
@@ -20,7 +20,7 @@ namespace lccd {
 
 
 
-#ifdef LCCD_CONDDB
+#ifdef LCCD_CONDDBMYSQL
 
   DBCondHandler::DBCondHandler(const std::string& dbInit,  const std::string& folder,
 			       const std::string& name,  const std::string& tag  ) :
@@ -185,6 +185,6 @@ namespace lccd {
   void DBCondHandler::update( LCCDTimeStamp timeStamp )  {}
 
 
-#endif // LCCD_CONDDB
+#endif // LCCD_CONDDBMYSQL
 
 }

@@ -1,7 +1,7 @@
 #include "lccd.h"
 #include "lccd/LCCDConfig.h"
 
-#ifdef LCCD_CONDDB
+#ifdef LCCD_CONDDBMYSQL
 #include "ConditionsDB/SimpleTime.h"
 #endif
 
@@ -50,7 +50,7 @@ namespace lccd{
 
   LCCDTimeStamp fromSimpleTime( const SimpleTime& st ) {
 
-#ifdef LCCD_CONDDB
+#ifdef LCCD_CONDDBMYSQL
     // subtract the ns from 1.1.1900 to 1.1.1970 
     return TimeT(st) - 2208988800000000000LL ;
 #else

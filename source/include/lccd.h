@@ -9,9 +9,7 @@
 #include <string>
 
 
-//#ifdef LCCD_CONDDB
 class SimpleTime ;
-//#endif
 
 
 // Provides common definitions and typedefs for LCCD.
@@ -75,12 +73,10 @@ namespace lccd{
   std::string getDBInitString() ;
   
   
-  //#ifdef LCCD_CONDDB
   /** Converts the 64bit time stamp in SimpleTime objects (based on 1.1.1900) to the LCIO definition
    *  of time stamps: ns since 1.1.1970 UTC.
    */
   LCCDTimeStamp fromSimpleTime( const SimpleTime& st ) ;
-  //#endif
 
 }
 

@@ -31,7 +31,7 @@ ADD_LCCD_TEST( readcalfile ./readcalfile ./CalibrationConstant.cc )
 ADD_LCCD_TEST( readdatafile ./readdatafile )
 ADD_LCCD_TEST( testdbfile ./testdbfile )
 
-IF( LCCD_CONDDB )
+IF( LCCD_CONDDBMYSQL )
 
     ADD_LCCD_TEST( calfilefromdb ./conddbtests/calfilefromdb )
     ADD_LCCD_TEST( calfiletodb ./conddbtests/calfiletodb )

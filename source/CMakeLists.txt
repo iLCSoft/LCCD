@@ -33,7 +33,7 @@ ADD_DEFINITIONS( "-DLCCD_DB_INIT_DEFAULT=\\\"${LCCD_DB_INIT}\\\"" )
 SET( libname lccd )
 AUX_SOURCE_DIRECTORY( ./src library_sources )
 
-IF( LCCD_CONDDB )
+IF( LCCD_CONDDBMYSQL )
     AUX_SOURCE_DIRECTORY( ./conddb/src library_sources )
     INCLUDE_DIRECTORIES( ./conddb/include )
     INSTALL_DIRECTORY( ./conddb/include DESTINATION . )
