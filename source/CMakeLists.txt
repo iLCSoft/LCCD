@@ -6,8 +6,6 @@
 INCLUDE_DIRECTORIES( ${LCIO_INCLUDE_DIRS} )
 INCLUDE_DIRECTORIES( BEFORE "${PROJECT_SOURCE_DIR}/source/include" )
 INCLUDE_DIRECTORIES( ${PROJECT_BINARY_DIR} )
-INSTALL_DIRECTORY( ./include DESTINATION . )
-
 
 
 # omit warning about preprocessor definitions being escaped
@@ -29,7 +27,7 @@ ADD_DEFINITIONS( "-Wno-long-long" )
 ADD_DEFINITIONS( "-DLCCD_DB_INIT_DEFAULT=\\\"${LCCD_DB_INIT}\\\"" )
 
 
-FILE( GLOB lccd_headers ./include/lccd/*.h* )
+FILE( GLOB lccd_headers RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "./include/lccd/*.h?" )
 
 # add library
 SET( libname lccd )
