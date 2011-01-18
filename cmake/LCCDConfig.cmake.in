@@ -38,11 +38,6 @@ FIND_PATH( LCCD_INCLUDE_DIRS
 	NO_DEFAULT_PATH
 )
 
-SET( LCCD_DEPENDS_INCLUDE_DIRS @LCCD_DEPENDS_INCLUDE_DIRS@ )
-IF( LCCD_INCLUDE_DIRS AND NOT FIND_PACKAGE_SKIP_DEPENDENCIES )
-    LIST( APPEND LCCD_INCLUDE_DIRS ${LCCD_DEPENDS_INCLUDE_DIRS} )
-ENDIF( LCCD_INCLUDE_DIRS AND NOT FIND_PACKAGE_SKIP_DEPENDENCIES )
-
 
 
 # ---------- libraries --------------------------------------------------------
@@ -55,11 +50,14 @@ CHECK_PACKAGE_LIBS( LCCD lccd )
 
 
 
-
-# ---------- libraries dependencies -------------------------------------------
-# this sets LCCD_${COMPONENT}_LIB_DEPENDS variables
-INCLUDE( "${LCCD_ROOT}/lib/cmake/LCCDLibDeps.cmake" )
- 
+# ---------- dependencies -----------------------------------------------------
+INCLUDE( ${Marlin_ROOT}/cmake/MacroExportPackageDeps.cmake ) # FIXME full path ?!
+# exports following package dependencies (if set)
+# first argument of macro should be the package name
+SET( LCCD_DEPENDS_INCLUDE_DIRS  @LCCD_DEPENDS_INCLUDE_DIRS@ )
+SET( LCCD_DEPENDS_LIBRARY_DIRS  @LCCD_DEPENDS_LIBRARY_DIRS@ )
+SET( LCCD_DEPENDS_LIBRARIES  @LCCD_DEPENDS_LIBRARIES@ )
+EXPORT_PACKAGE_DEPENDENCIES( LCCD )
 
 
 
@@ -78,15 +76,4 @@ IF( LCCD_FOUND )
     SET( LCCD_DEFINITIONS "-DUSE_LCCD" ) # FIXME : USE_LCCD should not be defined HERE !!!
     MARK_AS_ADVANCED( LCCD_DEFINITIONS )
 ENDIF( LCCD_FOUND )
-
-
-
-# ---------- bug fix for cmake versions < 2.8 ---------------------------------
-# LCCD_FIND_REQUIRED is not reset between FIND_PACKAGE calls, i.e. the following
-# code fails when component xxx is not available: (fixed in cmake 2.8)
-# FIND_PACKAGE( LCCD REQUIRED )
-# FIND_PACKAGE( LCCD COMPONENTS xxx QUIET )
-IF( "${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 2.8 )
-    SET( LCCD_FIND_REQUIRED )
-ENDIF()
 
