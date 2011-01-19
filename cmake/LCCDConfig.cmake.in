@@ -51,7 +51,7 @@ CHECK_PACKAGE_LIBS( LCCD lccd )
 
 
 # ---------- dependencies -----------------------------------------------------
-INCLUDE( ${Marlin_ROOT}/cmake/MacroExportPackageDeps.cmake ) # FIXME full path ?!
+INCLUDE( ${LCCD_ROOT}/cmake/MacroExportPackageDeps.cmake ) # FIXME full path ?!
 # exports following package dependencies (if set)
 # first argument of macro should be the package name
 SET( LCCD_DEPENDS_INCLUDE_DIRS  @LCCD_DEPENDS_INCLUDE_DIRS@ )
