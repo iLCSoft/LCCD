@@ -21,23 +21,30 @@ Contents:
 1. Build instructions
 --------------------------------------------------------------------
 
+    In order to build LCCD you need LCIO, ILCUTIL, CMake and optionally CondDBMySQL
 
- 1st: edit the file BuildSetup.cmake according to your
-      system setup.
- 
- 2nd: type the following commands:
- 
+    if you have access to /afs/desy.de/ then you will find all this packages under:
+
+        /afs/desy.de/project/ilcsoft/sw/i386_gcc34_sl4/   # SL4 32bit
+        /afs/desy.de/project/ilcsoft/sw/i386_gcc41_sl5/   # SL5 32bit
+        /afs/desy.de/project/ilcsoft/sw/x86_64_gcc41_sl5/ # SL5 64bit
+
+
+    if you do NOT have acces to /afs/desy.de/ or you do not have an SL4/SL5 machine the easiest
+        way is to use ilcinstall (http://ilcsoft.desy.de/portal/software_packages/ilcinstall/).
+        Please use an ilcinstall version >= v01-11. More information under:
+        http://ilcsoft.desy.de/portal/software_packages/ilcinstall_documentation/
+
+
+    Once the dependencies are resolved, issue the following commands:
+
     mkdir build
-
     cd build
-
-    cmake -C ../BuildSetup.cmake ..
-
-    # or, building all tests against an installed ilcsoft version :
-
-    cmake -C ../BuildSetup.cmake   -C ~/ilcsoft/v01-06/ILCSoft.cmake -D BUILD_CONDDB_TESTS=ON -D BUILD_LCCD_TESTS=ON ..
-
+    cmake -C $ILCSOFT/ILCSoft.cmake ..
     make install
+
+    make tests    # optional step to build LCCD tests
+
 
 
  For more information on CMake for the ILCSoftware check:
