@@ -18,7 +18,7 @@ SET( LCCD_VERSION_PATCH 0 )
 
 ### DEPENDENCIES ############################################################
 
-# FindILCSOFT_CMAKE_MODULES.cmake needs to be in CMAKE_MODULE_PATH
+# ILCSOFT_CMAKE_MODULES is a subpackage of the ILCUTIL package
 FIND_PACKAGE( ILCSOFT_CMAKE_MODULES 1.11 REQUIRED )
 
 # load default settings from ILCSOFT_CMAKE_MODULES
@@ -68,11 +68,6 @@ INSTALL( FILES "${PROJECT_BINARY_DIR}/lccd/LCCDConfig.h" DESTINATION "include/lc
 # ---------------------------------------------------------------------------
 
 
-# option for building LCCD tests
-# build target: 'make tests'
-OPTION( BUILD_LCCD_TESTS "Set to ON to build LCCD tests" OFF )
-
-
 ADD_SUBDIRECTORY( ./source )
 
 
@@ -80,7 +75,6 @@ ADD_SUBDIRECTORY( ./source )
 DISPLAY_STD_VARIABLES()
 
 MESSAGE( STATUS "LCCD_CONDDBMYSQL = ${LCCD_CONDDBMYSQL}" )
-MESSAGE( STATUS "BUILD_LCCD_TESTS = ${BUILD_LCCD_TESTS}" )
 MESSAGE( STATUS "LCCD_DB_INIT = ${LCCD_DB_INIT}" )
 MESSAGE( STATUS "INSTALL_DOC = ${INSTALL_DOC}" )
 MESSAGE( STATUS )

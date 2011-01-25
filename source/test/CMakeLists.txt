@@ -9,7 +9,7 @@ INCLUDE_DIRECTORIES( . )
 ADD_CUSTOM_TARGET( tests )
 MACRO( ADD_LCCD_TEST _testname )
 
-        IF( BUILD_LCCD_TESTS )
+        IF( BUILD_TESTING )
             ADD_EXECUTABLE( ${_testname} ${ARGN} )
         ELSE()
             ADD_EXECUTABLE( ${_testname} EXCLUDE_FROM_ALL ${ARGN} )
