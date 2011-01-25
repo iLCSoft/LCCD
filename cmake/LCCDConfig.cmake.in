@@ -68,13 +68,3 @@ INCLUDE( FindPackageHandleStandardArgs )
 # LCCD_COMPONENT_VARIABLES will be set if FIND_PACKAGE is called with REQUIRED argument
 FIND_PACKAGE_HANDLE_STANDARD_ARGS( LCCD DEFAULT_MSG LCCD_ROOT LCCD_INCLUDE_DIRS LCCD_LIBRARIES ${LCCD_COMPONENT_VARIABLES} )
 
-
-
-# ---------- definitions ------------------------------------------------------
-# LCCD_DEFINITIONS should only include definitions absolutely necessary to compile
-# against LCCD (e.g. -Wno-long-long )
-IF( LCCD_FOUND )
-    SET( LCCD_DEFINITIONS "-DUSE_LCCD" ) # FIXME : USE_LCCD should not be defined HERE !!!
-    MARK_AS_ADVANCED( LCCD_DEFINITIONS )
-ENDIF( LCCD_FOUND )
-
