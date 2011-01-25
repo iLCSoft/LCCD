@@ -3,6 +3,39 @@
 ====================
 
  -----------
+| v01-02    |
+ -----------
+
+        - added configuration header file LCCDConfig.h
+            #defines or #undefines LCCD_CONDDBMYSQL (based on how LCCD was built)
+
+        - removed old makefiles
+
+        - cmake changes:
+
+            - simplified cmake files (cmake macros now live in sub-package ILCSOFT_CMAKE_MODULES from package ILCUTIL)
+        
+            - added LCCDConfigVersion.cmake to allow checking version of LCCD at cmake time, e.g.:
+                FIND_PACKAGE( LCCD 1.2 ) # at least version 1.2
+
+            - export of LCIO dependency done through LCCDConfig.cmake, i.e. other packages get LCIO_INCLUDE_DIRS and
+                LCIO_LIBRARIES when building against LCCD, e.g.:
+                    
+                    FIND_PACKAGE( LCCD 1.2 )
+                    INCLUDE_DIRECTORIES( ${LCCD_INCLUDE_DIRS} )       # also includes ${LCIO_INCLUDE_DIRS}
+                    TARGET_LINK_LIBRARIES( mylib ${LCCD_LIBRARIES} )  # also includes ${LCIO_LIBRARIES}
+
+            - removed deprecated LCCD_DEFINITIONS (-DUSE_LCCD) from LCCDConfig.cmake
+            
+            - replaced options BUILD_LCCD_TESTS and BUILD_CONDDB_TESTS with option BUILD_TESTING
+                If BUILD_TESTING is set to ON (default) tests are built with 'make'
+                Otherwise tests are built separately with target 'make tests'
+                (conddb tests are also built if LCCD is built with CondDBMySQL)
+
+            - upgraded CMAKE_MINIMUM_REQUIRED to 2.6
+
+
+ -----------
 | v01-01    |
  -----------
 
