@@ -13,10 +13,10 @@ SET( DOC_SRC_DIR "${PROJECT_SOURCE_DIR}/doc" )
 SET( DOC_BIN_DIR "${PROJECT_BINARY_DIR}/docbuild" )
 
 SET( DOX_INPUT overview.html ../source )
-#IF( LCCD_CONDDBMYSQL )
-#    SET( DOX_PREDEFINED LCCD_CONDDBMYSQL )
-#    SET( DOXYFILE_INPUT "${DOXYFILE_INPUT} ${PROJECT_SOURCE_DIR}/source/conddb/include" )
-#ENDIF()
+
+IF( LCCD_CONDDBMYSQL )
+    SET( DOX_PREDEFINED "LCCD_CONDDBMYSQL" ) # TODO test !!
+ENDIF()
 
 # custom command to build documentation
 ADD_CUSTOM_COMMAND(
@@ -25,11 +25,13 @@ ADD_CUSTOM_COMMAND(
             DOX_PROJECT_NUMBER="${${PROJECT_NAME}_VERSION}"
             DOX_OUTPUT_DIRECTORY="${DOC_BIN_DIR}"
             DOX_INPUT="${DOX_INPUT}"
+            DOX_PREDEFINED="${DOX_PREDEFINED}"
             "${DOXYGEN_EXECUTABLE}"
     WORKING_DIRECTORY "${DOC_SRC_DIR}"
     COMMENT "Building API Documentation..."
     DEPENDS Doxyfile CMakeLists.txt
         ../source/include/lccd/*
+        ../source/include/*
         ../source/src/*
 )
 
