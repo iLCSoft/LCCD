@@ -23,7 +23,7 @@ INCLUDE(CTest)
 # project version
 SET( LCCD_MAJOR_VERSION 1 )
 SET( LCCD_MINOR_VERSION 1 )
-SET( LCCD_PATCH_LEVEL 0 )
+SET( LCCD_PATCH_LEVEL 1 )
 
 # project options
 OPTION( BUILD_SHARED_LIBS "Set to OFF to build static libraries" ON )
