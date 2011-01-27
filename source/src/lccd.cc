@@ -54,6 +54,7 @@ namespace lccd{
     // subtract the ns from 1.1.1900 to 1.1.1970 
     return TimeT(st) - 2208988800000000000LL ;
 #else
+    throw lccd::LCCDException(" LCCDTimeStamp fromSimpleTime( const SimpleTime& st ) is only availible when lccd is build against CONDDBMYSQL" ) ;
     return -1 ;
 #endif
 
