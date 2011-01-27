@@ -34,6 +34,10 @@
 
             - upgraded CMAKE_MINIMUM_REQUIRED to 2.6
 
+        - fixed lcio::DataNotAvailableException bug in DataFileHandler
+
+        - fixed forward declarations from CondDBMySQL
+
 
  -----------
 | v01-01    |
