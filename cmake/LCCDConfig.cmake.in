@@ -3,6 +3,7 @@
 #
 # requires:
 #   MacroCheckPackageLibs.cmake for checking package libraries
+#   MacroExportPackageDeps.cmake for exporting package dependencies
 #
 # returns following variables:
 #
