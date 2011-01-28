@@ -61,7 +61,7 @@ ADD_DEFINITIONS( "-Wno-long-long" )
 
 # add library
 ADD_SHARED_LIBRARY( CaloMapProcessor ./src/CaloMapProcessor.cc )
-INSTALL( TARGETS CaloMapProcessor DESTINATION lib )
+INSTALL_SHARED_LIBRARY( CaloMapProcessor DESTINATION lib )
 
 # createmaps example
 ADD_EXECUTABLE( createmaps ./src/createmaps.cc )
