@@ -37,7 +37,7 @@ LINK_LIBRARIES( ${LCCD_LIBRARIES} )
 
 ### DOCUMENTATION ###########################################################
 
-OPTION( INSTALL_DOC "Set to OFF to skip build/install Documentation" ON )
+OPTION( INSTALL_DOC "Set to OFF to skip build/install Documentation" OFF )
 
 IF( INSTALL_DOC AND EXISTS "${PROJECT_SOURCE_DIR}/doc/CMakeLists.txt" )
     ADD_SUBDIRECTORY( doc )
