@@ -13,6 +13,7 @@
 #       if REQUIRED is NOT set components may or may not be available
 #
 #   LCCD_ROOT       : path to this LCCD installation
+#   LCCD_VERSION    : package version
 #   LCCD_LIBRARIES  : list of LCCD libraries (NOT including COMPONENTS)
 #   LCCD_INCLUDE_DIRS  : list of paths to be used with INCLUDE_DIRECTORIES
 #   LCCD_LIBRARY_DIRS  : list of paths to be used with LINK_DIRECTORIES
@@ -25,6 +26,7 @@
 ##############################################################################
 
 SET( LCCD_ROOT "@CMAKE_INSTALL_PREFIX@" )
+SET( LCCD_VERSION "@LCCD_VERSION@" )
 
 
 # ---------- include dirs -----------------------------------------------------
