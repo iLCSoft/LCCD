@@ -41,6 +41,7 @@ Contents:
     mkdir build
     cd build
     cmake -C $ILCSOFT/ILCSoft.cmake ..
+    # ccmake ..   # optional step to configure cmake options (e.g. turn OFF/ON LCCD_CONDDBMYSQL )
     make install
 
     make tests    # optional step to build LCCD tests
