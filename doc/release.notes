@@ -9,6 +9,8 @@
        - fixed lcio namespace issue in DataFileHandler.cc
          - missing namespace meant lcio exception DataNotAvailableException was not caught as intended
 
+       - made gcc4 compliant
+
  -----------
 | v01-01    |
  -----------
