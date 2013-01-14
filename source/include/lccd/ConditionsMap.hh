@@ -40,11 +40,11 @@ namespace lccd {
 
     /** Constructor: provide the pointer to the member fuction that
         returns the key */
-    ConditionsMap( PMF pmf ) : _pmf(pmf) { _isPMFconst = false; }
+    ConditionsMap( PMF pmf ) : _pmf(pmf), _pmfc(NULL) { _isPMFconst = false; }
 
     /** Constructor: provide the pointer to the member fuction that
         returns the key if it is declared const */
-    ConditionsMap( PMFC pmfc ) : _pmfc(pmfc) { _isPMFconst = true; }
+    ConditionsMap( PMFC pmfc ) : _pmf(NULL), _pmfc(pmfc) { _isPMFconst = true; }
 
 
     /** The d'tor.*/
