@@ -87,7 +87,7 @@ namespace lccd {
     
     for( unsigned i=0 ; i< nObj ; i++ ){
       
-      unsigned nInt, nFloat, nDouble ;
+      unsigned nInt = 0, nFloat = 0, nDouble = 0;
       
       if( ! isFixedSize || ( isFixedSize && (i==0) )   ) { 
 	
