@@ -46,7 +46,6 @@ namespace lccd {
         returns the key if it is declared const */
     ConditionsMap( PMFC pmfc ) : _pmf(NULL), _pmfc(pmfc) { _isPMFconst = true; }
 
-
     /** The d'tor.*/
     virtual ~ConditionsMap() {} 
 
