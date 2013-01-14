@@ -31,6 +31,7 @@ namespace lccd {
     /** Default c'tor - need a name for the conditions data set.
      */
     ConditionsHandlerBase(const std::string& name) : 
+      _col(NULL),
       _name( name),
       _validSince( LCCDPlusInf ) ,   // initially we don't have a valid time range
       _validTill(  LCCDMinusInf ) {
