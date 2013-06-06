@@ -2,6 +2,11 @@
  LCCD release notes
 ====================
  -----------
+| v01-02-02 |
+ -----------
+			- fix wrong declaration logic (made obvious by coverity bugfix): move declaration and initialization outside loop in LCObjectStreamer
+
+ -----------
 | v01-02-01 |
  -----------
 			- Ch. Rosemann: coverity bugfixes
