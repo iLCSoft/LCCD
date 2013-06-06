@@ -83,11 +83,10 @@ namespace lccd {
     writeParameters( s ) ;
     
     Xdr::tostream( s , &nObj , 1 ) ;
-    
+
+    unsigned nInt(0), nFloat(0), nDouble(0);
     
     for( unsigned i=0 ; i< nObj ; i++ ){
-      
-      unsigned nInt = 0, nFloat = 0, nDouble = 0;
       
       if( ! isFixedSize || ( isFixedSize && (i==0) )   ) { 
 	
