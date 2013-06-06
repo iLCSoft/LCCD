@@ -115,6 +115,8 @@ namespace lccd {
     if( _update ) {
        _condDBmgr->startUpdate();
 
+       // std::cout << "DBInterface::init: checking if folder exists " << _folder << std::endl;
+
       if (! _condFolderMgr->exist( _folder) ) {
 	
  	std::cout << "DBInterface::init: folder does not exist, creating folder " << _folder << std::endl;

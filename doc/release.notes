@@ -1,11 +1,21 @@
 ====================
  LCCD release notes
 ====================
- -----------
-| v01-02-02 |
- -----------
-			- fix wrong declaration logic (made obvious by coverity bugfix): move declaration and initialization outside loop in LCObjectStreamer
+ --------
+| v01-03 |
+ --------
+     - updated all database test binaries 
+         source/test/conddbtests/multiblefolders.cc
+         source/test/conddbtests/calfiletodb.cc
+         source/test/conddbtests/calfilefromdb.cc
+         source/test/conddbtests/createdbfile.cc
+       to take the db folder as argument on the command line as part of the DBcol name
+       example:
+       ./bin/calfiletodb condDB_channelmapping_HEAD_20130604_155014.slcio channelmapping /lctpc/test/channelmapping 0 999999
 
+     - bug fix: wrong declaration logic (made obvious by coverity bugfix):
+       move declaration and initialization outside loop in LCGenericObjectStreamer
+       
  -----------
 | v01-02-01 |
  -----------

@@ -67,7 +67,7 @@ namespace lccd {
       
       refs.Mgr = condDBmgr ;
 
-      // std::cout << " DBConnectionMgr::getDBConnection( " << dbInit << ")" << std::endl ;
+      std::cout << " DBConnectionMgr::getDBConnection( " << dbInit << ")" << std::endl ;
     }
 
     refs.Set.insert( dbInterface ) ; // keep track of users ...

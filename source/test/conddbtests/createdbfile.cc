@@ -1,6 +1,7 @@
 // -- LCCD headers
 #include "lccd.h"
 #include "lccd/DBInterface.hh"
+#include "folderpath.h"
 
 // -- C++ headers 
 #include <iostream>
@@ -25,12 +26,17 @@ int main(int argc, char** argv ) {
   
   // read file name and collection name from command line 
   if( argc < 2) {
-    cout << " usage: createdbfile <db collection name> [<tag>]" << endl ;
+    cout << " usage: createdbfile </folder/db collection name> [<tag>]" << endl ;
     exit(1) ;
   }
   
-  string colName( argv[1] ) ;
-  string folder( "/lccd/" + colName ) ;
+  // string colName( argv[1] ) ;
+  // string folder( "/lccd/" + colName ) ;
+
+  string colName ;
+  string folder ; 
+  split_folder_col(  argv[1] , folder, colName ) ;
+
   string tag("") ;
   
   if( argc > 2 )

@@ -24,6 +24,7 @@
 #include "lccd/ConditionsMap.hh"
 
 #include "CalibrationConstant.hh"
+#include "folderpath.h"
 
 // -- C++ headers 
 #include <iostream>
@@ -52,17 +53,20 @@ int main(int argc, char** argv ) {
 
   // read file name and collection name from command line 
   if( argc < 4) {
-    cout << " usage: calfilefromdb <db collection name> <timestamp> <output-file> [<tag>]" << endl ;
+    cout << " usage: calfilefromdb </folder/db collection name> <timestamp> <output-file> [<tag>]" << endl ;
     exit(1) ;
   }
 
-  string colName( argv[1] ) ;
+  //string colName( argv[1] ) ;
   string timeStr( argv[2] ) ;
   string fileName( argv[3] ) ;
 
   lccd::LCCDTimeStamp  timeStamp ( atol( timeStr.c_str() ) )   ;  
   
-  string folder( "/lccd/" + colName ) ;
+  //  string folder( "/lccd/" + colName ) ;
+  string colName ;
+  string folder ; 
+  split_folder_col(  argv[1] , folder, colName ) ;
 
   string tag("") ;
 
@@ -88,18 +92,21 @@ int main(int argc, char** argv ) {
 //     new lccd::DBCondHandler( "localhost:lccd_test:calvin:hobbes", folder, colName, tag ) ;
   
 
-  // ------ testing: create a calibration map ------------------
-  typedef lccd::ConditionsMap<int,CalibrationConstant> CalMap ;
+  // // ------ testing: create a calibration map ------------------
+  // typedef lccd::ConditionsMap<int,CalibrationConstant> CalMap ;
   
-  CalMap calMap( &CalibrationConstant::getCellID )   ;
+  // CalMap calMap( &CalibrationConstant::getCellID )   ;
   
-  conData->registerChangeListener(  &calMap )  ;
+  // conData->registerChangeListener(  &calMap )  ;
   
-  conData->update( timeStamp ) ;
+  // conData->update( timeStamp ) ;
   
-  calMap.print( std::cout ) ;
+  // calMap.print( std::cout ) ;
   //--------------- end calibration map -----------------------
 
+  // ======= read the requested collection from the database : ==================
+
+   conData->update( timeStamp ) ;
 
 
   lcio::LCTime t0 ( conData->validSince()  ) ;

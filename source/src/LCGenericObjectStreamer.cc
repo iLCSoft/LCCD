@@ -16,23 +16,27 @@ using namespace lcio ;
 
 namespace lccd {
 
+#define DEBUG 0
 
   LCGenericObjectStreamer::LCGenericObjectStreamer() {
 
-//     std::cout << " LCGenericObjectStreamer::LCGenericObjectStreamer() : " 
-// 	      << this << std::endl ; 
- 
-
+#if DEBUG
+    std::cout << " LCGenericObjectStreamer::LCGenericObjectStreamer() : " 
+ 	      << this << std::endl ; 
+#endif 
+    
   }
   
   void LCGenericObjectStreamer::storeToDB(std::string &s) const {
     
     
-//     std::cout << " LCGenericObjectStreamer::storeToDB() : " 
-// 	      << this 
-// 	      << " _col : " << _col 
-// 	      << std::endl ; 
-
+#if DEBUG
+    std::cout << " LCGenericObjectStreamer::storeToDB() : " 
+ 	      << this 
+ 	      << " _col : " << _col 
+ 	      << std::endl ; 
+#endif 
+    
     bool isFixedSize = true ;
 
     unsigned int nObj = _col->getNumberOfElements() ;
@@ -72,6 +76,13 @@ namespace lccd {
     }
 
 
+#if DEBUG
+    std::cout << " LCGenericObjectStreamer::storeToDB() : " 
+	      << " nObj : " << nObj
+	      << " isFixedSize: " << isFixedSize
+ 	      << std::endl ; 
+#endif 
+
     // make sure that the transient flag is not set when collections are stored 
     flag.unsetBit( LCCollection::BITTransient ) ;
 
@@ -85,8 +96,9 @@ namespace lccd {
     Xdr::tostream( s , &nObj , 1 ) ;
 
     unsigned nInt(0), nFloat(0), nDouble(0);
-    
+
     for( unsigned i=0 ; i< nObj ; i++ ){
+      
       
       if( ! isFixedSize || ( isFixedSize && (i==0) )   ) { 
 	
@@ -100,6 +112,15 @@ namespace lccd {
 	Xdr::tostream( s , &nDouble , 1 ) ;
       } 
       
+#if DEBUG
+      if( i < 10 ) 
+	std::cout << " LCGenericObjectStreamer::storeToDB() : " 
+		  << "  nInt, nFloat, nDouble : " << nInt << ", " << nFloat << ", " <<  nDouble
+		  << std::endl ; 
+#endif 
+
+
+
       for(unsigned  int j=0 ; j< nInt ; j++){
 	int iv =  objects[i]->getIntVal( j ) ;
 	Xdr::tostream( s , &iv , 1 ) ;
@@ -141,13 +162,14 @@ namespace lccd {
     pos = Xdr::fromstream( s , pos , &nObj , 1 ) ;
     
 
-//     std::cout << " LCGenericObjectStreamer::retrieveFromDB() : " 
-// 	      << this 
-// 	      << " _col : " << _col 
-//       	      << " flag : 0x" << std::hex << flagWord << std::dec 
-// 	      << " nObj : " << nObj 
-// 	      << std::endl ; 
-    
+#if DEBUG
+    std::cout << " LCGenericObjectStreamer::retrieveFromDB() : " 
+	      << this 
+	      << " _col : " << _col 
+      	      << " flag : 0x" << std::hex << flagWord << std::dec 
+	      << " nObj : " << nObj 
+	      << std::endl ; 
+#endif    
 
     for( unsigned int i=0 ; i< nObj ; i++ ){
       

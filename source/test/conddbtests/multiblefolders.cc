@@ -14,6 +14,8 @@
 #include "lccd/VCollectionStreamer.hh"
 #include "lccd/DBInterface.hh"
 
+#include "folderpath.h"
+
 // -- C++ headers 
 #include <iostream>
 #include <sstream>
@@ -44,11 +46,16 @@ int main(int argc, char** argv ) {
   
   string fileName( argv[1] ) ;
   string colName( argv[2] ) ;
-  string colNameDB( argv[3] ) ;
+  string dummy( argv[3] ) ;
   string sinceStr( argv[4] ) ;
   string tillStr( argv[5] ) ;
   
-  // create a conditions handler
+  string colNameDB ;
+  string folder ; 
+
+  split_folder_col( dummy, folder, colNameDB ) ;
+
+ // create a conditions handler
   // NB: the rest of the code uses the abstract interface !
  
   lccd::IConditionsHandler* conData = new lccd::SimpleFileHandler( fileName, colNameDB, colName ) ;
@@ -74,9 +81,10 @@ int main(int argc, char** argv ) {
 
     stringstream str ;
     
-    str << "/lccd/" <<  colNameDB << "_" << i ;
+    //    str << "/lccd/" <<  colNameDB << "_" << i ;
+    str << "_" << i ;
 
-    string folder = str.str() ;
+    folder += str.str() ;
  
     db[i] = new lccd::DBInterface( folder , true ) ;
     

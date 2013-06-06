@@ -14,6 +14,8 @@
 #include "lccd/VCollectionStreamer.hh"
 #include "lccd/DBInterface.hh"
 
+#include "folderpath.h"
+
 // -- C++ headers 
 #include <iostream>
 #include <cstdlib>
@@ -34,17 +36,31 @@ int main(int argc, char** argv ) {
   
   // read file name and collection name from command line 
   if( argc < 6) {
-    cout << " usage: calfiletodb <input-file> <input collection name> <db collection name> <since> <till>" << endl ;
+    cout << " usage: calfiletodb <input-file> <input collection name> </folder/db collection name> <since> <till>" << endl ;
     exit(1) ;
   }
   
   string fileName( argv[1] ) ;
   string colName( argv[2] ) ;
-  string colNameDB( argv[3] ) ;
+
+
+  string dummy( argv[3] ) ;
+
+  string colNameDB ;
+  string folder ; 
+
+  split_folder_col( dummy, folder, colNameDB ) ;
+
+  //  string colNameDB( argv[3] ) ;
+
+
   string sinceStr( argv[4] ) ;
   string tillStr( argv[5] ) ;
   
-  string folder( "/lccd/" + colNameDB ) ;
+
+  
+
+  //  string folder( "/lccd/" + colNameDB ) ;
 
 
   // create a conditions handler
@@ -67,6 +83,7 @@ int main(int argc, char** argv ) {
   
   
   LCTOOLS::printLCGenericObjects( col ) ;
+
   //   // or use the class CalibrationConstant to print, i.e. access the data
   //   for(int i=0 ; i< col->getNumberOfElements() ; i++) {
   //     CalibrationConstant cc( col->getElementAt(i) ) ;
