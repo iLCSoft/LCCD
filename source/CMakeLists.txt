@@ -23,7 +23,7 @@ SET( LCCD_DB_INIT "${LCCD_DB_INIT}" CACHE STRING "DB initialization" FORCE )
 
 #----- need long long for int64 for now ------
 #FIXME: should establish wether we are on a 32bit or 64 bit machine ....
-ADD_DEFINITIONS( "-Wno-long-long" )
+#ADD_DEFINITIONS( "-Wno-long-long" )
 ADD_DEFINITIONS( "-DLCCD_DB_INIT_DEFAULT=\\\"${LCCD_DB_INIT}\\\"" )
 
 
@@ -66,9 +66,9 @@ INSTALL( FILES ${lccd_headers} DESTINATION include/lccd )
 INSTALL( FILES ./include/lccd.h ./include/lccd_exceptions.h DESTINATION include )
 
 
-SET_SOURCE_FILES_PROPERTIES( ${library_sources}
-    PROPERTIES COMPILE_FLAGS "-Wall -ansi -pedantic"
-)
+#SET_SOURCE_FILES_PROPERTIES( ${library_sources}
+#    PROPERTIES COMPILE_FLAGS "-Wall -ansi -pedantic"
+#)
 ADD_SHARED_LIBRARY( ${libname} ${library_sources} )
 INSTALL_SHARED_LIBRARY( ${libname} DESTINATION lib )
 TARGET_LINK_LIBRARIES( ${libname} ${LCIO_LIBRARIES} )
