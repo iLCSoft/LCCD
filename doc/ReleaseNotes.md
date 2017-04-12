@@ -1,9 +1,26 @@
-====================
- LCCD release notes
-====================
- --------
-| v01-03 |
- --------
+# v01-04
+
+Marko Petric 2017-04-08
+  - Coverity integration
+
+Marko Petric 2017-03-23
+  - Add install statement to CI
+  - Add CONTRIBUTING.md and PULL_REQUEST_TEMPLATE and fix test script
+
+Frank Gaede 2017-03-21
+  - add AUTHORS file
+
+Marko Petric 2017-03-20
+  - Fix typo LCDD -> LCCD
+  - Enable CI and add LICENCE
+
+# v01-03-01
+
+Frank Gaede 2016-03-07
+  -  - made compatible with c++11     - removed -ansi -pedantic -Wno-long-long
+
+
+# v01-03
      - updated all database test binaries 
          source/test/conddbtests/multiblefolders.cc
          source/test/conddbtests/calfiletodb.cc
@@ -16,15 +33,11 @@
      - bug fix: wrong declaration logic (made obvious by coverity bugfix):
        move declaration and initialization outside loop in LCGenericObjectStreamer
        
- -----------
-| v01-02-01 |
- -----------
+# v01-02-01
 			- Ch. Rosemann: coverity bugfixes
 
 
- -----------
-| v01-02    |
- -----------
+# v01-02   
 
         - added configuration header file LCCDConfig.h
             #defines or #undefines LCCD_CONDDBMYSQL (based on how LCCD was built)
@@ -59,9 +72,7 @@
         - fixed forward declarations from CondDBMySQL
 
 
- -----------
-| v01-01    |
- -----------
+# v01-01   
 
         Improvements from R. Diener. Needs update of CondDBMySQL.
         - DBInterface::tagFolder now handles folders previously tagged of whose subfolders are tagged with the tag supplied to tagFolder. 
@@ -70,9 +81,7 @@
         - Added DBSINCE, DBTILL and DBQUERYTIME for default collections
       -  Note: due to changes in DBCondHandler, v01-01 is only compatible with CondDBMySQL version CondDBMySQL_ILC-0-9-1
 
- -----------
-| v01-00    |
- -----------
+# v01-00   
 
       -  Changes to the API 
       -  IConditionsChangeListener is no longer a pure abstract base class and now contains the two additional call back methods:	
@@ -117,17 +126,13 @@
 
       -  Note: due to changes in DBCondHandler, v01-00 is only compatible with CondDBMySQL version CondDBMySQL_ILC-0-8
 
- -----------
-| v00-06-01 |
- -----------
+# v00-06-01
 
       -  corrected the version number in CMakeLists.txt, as it had not been incremented from v00-05 for v00-06
 
 
 
- --------
-| v00-06 |
- --------
+# v00-06
       -  added collection name to collection parameter "CollectionName" in 
          IConditionsChangeListener::conditionsChanged(lcio::LCCollection* col)
          so that implementors can acces it, via:
@@ -148,9 +153,7 @@
       	 
       -  this version is only compatible with ConDBMySQL version CondDBMySQL_ILC-0-7-3 and later
 
- --------
-| v00-05 |
- --------
+# v00-05
       DBinterface extended:  B.Lutz DESY
        - added functions: 
 	 void findCollections(ColVec &colVec, LCCDTimeStamp since, LCCDTimeStamp till, 
@@ -158,25 +161,19 @@
          void dump2File( ) ;
          void findAllCollections( ColVec& colVec ) ;
 
- ----------
-| v00-04   |
- ----------
+# v00-04  
     - made gcc4.3 compliant
     - made cmake 2.6 compliant
     - added LCCD_LIBRARY_DIRS
     - added 32 bit compatibility build option
     - added CMakeLists.txt for calomap example
  
- ----------
-| v00-03-06 |
- ----------
+# v00-03-06
     - cmake now default build tool - see README for details
     - bug fix:
 	  CondDBMySQL is now optional but not required for building LCCD
 
- ----------
-| v00-03-05 |
- ----------
+# v00-03-05
 
  bug fix release
   - removed ';'s at end of namespace for gcc 3.4 and higher
