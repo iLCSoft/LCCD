@@ -68,7 +68,7 @@ namespace lccd{
    */
   void ensure_LCCDTimeStamp_is_64bit(){ 
     std::bitset<64> a(0xcafebabedeadbeafLL)  ; 
-    std::bitset< 8*sizeof(LCCDTimeStamp)  > b = a ;
+    std::bitset< 8*sizeof(LCCDTimeStamp)  > b = a ; b[0]=0 ;
   } 
 
 }

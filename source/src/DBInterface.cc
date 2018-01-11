@@ -146,8 +146,7 @@ namespace lccd {
       throw lccd::LCCDException( " DBInterface::storeCollection: no streamer found for collection of type " 
 			     + col->getTypeName() ) ;
     
-    // create auto pointer to prevent memory leaks if exceptions are thrown
-    std::auto_ptr<lccd::VCollectionStreamer> colStreamer( colStr ) ;
+    std::unique_ptr<lccd::VCollectionStreamer> colStreamer( colStr ) ;
     
     colStreamer->setCollection( col ) ;
     
@@ -463,8 +462,7 @@ namespace lccd {
  			     + colType ) ;
     }
     
-    // create auto pointer to prevent memory leaks if exceptions are thrown
-    std::auto_ptr<lccd::VCollectionStreamer> colStreamer( colStr ) ;
+    std::unique_ptr<lccd::VCollectionStreamer> colStreamer( colStr ) ;
     
     condObject->data( *colStreamer ) ;
     

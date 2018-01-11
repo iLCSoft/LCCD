@@ -34,7 +34,7 @@ namespace lccd {
     delete _col ;
   }
   
- void SimpleFileHandler::registerDefaultCollection( lcio::LCCollection* col){
+ void SimpleFileHandler::registerDefaultCollection( lcio::LCCollection*){
 
     std::stringstream mess ;
     mess << "SimpleFileHandler::registerDefaultCollection is not implemented for SimpleFileCondHandler. Name of handler: "  << this->name() << std::ends ;
@@ -61,9 +61,8 @@ namespace lccd {
   }
 
   
-  void SimpleFileHandler::update( LCCDTimeStamp timestamp ) {
+  void SimpleFileHandler::update( LCCDTimeStamp ) {
     
-//     if( timestamp >= _validTill ) { // true for first call only ! 
     if( _firstCall ) {
 
       _firstCall = false ;
