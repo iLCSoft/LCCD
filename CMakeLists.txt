@@ -78,5 +78,5 @@ MESSAGE( STATUS "LCCD_DB_INIT = ${LCCD_DB_INIT}" )
 MESSAGE( STATUS )
 
 # generate and install following configuration files
-GENERATE_PACKAGE_CONFIGURATION_FILES( LCCDConfig.cmake LCCDConfigVersion.cmake LCCDLibDeps.cmake )
+GENERATE_PACKAGE_CONFIGURATION_FILES( LCCDConfig.cmake LCCDConfigVersion.cmake)
 
