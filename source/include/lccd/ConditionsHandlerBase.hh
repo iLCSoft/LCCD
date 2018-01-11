@@ -28,6 +28,9 @@ namespace lccd {
     
   public:
     
+    ConditionsHandlerBase(const ConditionsHandlerBase&) = delete ;
+    ConditionsHandlerBase& operator=(const ConditionsHandlerBase&) = delete ;
+
     /** Default c'tor - need a name for the conditions data set.
      */
     ConditionsHandlerBase(const std::string& name) : 
@@ -116,19 +119,19 @@ namespace lccd {
     // ----  data members ------
 
     /** The current collection of conditions data.*/
-    lcio::LCCollection* _col ;
+    lcio::LCCollection* _col = nullptr ;
 
     /** Name assigned with conditions data*/
-    std::string _name ;
+    std::string _name{} ;
 
     /** First timestamp for which the current data is valid.*/
-    LCCDTimeStamp _validSince  ;
+    LCCDTimeStamp _validSince{}  ;
 
     /** Last timestamp for which the current data is valid.*/
-    LCCDTimeStamp _validTill ;
+    LCCDTimeStamp _validTill{} ;
 
     /** The registered change listeners */
-    std::vector< IConditionsChangeListener* > _changeListeners ;
+    std::vector< IConditionsChangeListener* > _changeListeners{} ;
 
      
  

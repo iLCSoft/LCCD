@@ -92,7 +92,7 @@ namespace lccd {
     /** Specialization for strings - count is ignored and taken to be 1.
      */
 //     template<>
-    static void tostream( std::string& s , std::string* strVal, unsigned count ) {
+    static void tostream( std::string& s , std::string* strVal, unsigned /*count*/ ) {
       
       int  strSize = (int) strVal->size() ;
       

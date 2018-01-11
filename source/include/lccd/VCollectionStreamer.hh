@@ -25,7 +25,9 @@ namespace lccd {
     
   public:
     
-    VCollectionStreamer() : _col(0) {} 
+    VCollectionStreamer() = default ;
+    VCollectionStreamer(const VCollectionStreamer&) = delete;
+    VCollectionStreamer& operator=(const VCollectionStreamer&) = delete ;
 
     virtual ~VCollectionStreamer() {} ;
 
@@ -35,7 +37,7 @@ namespace lccd {
     virtual void setCollection( lcio::LCCollection* col) { _col = col ; } ;
 
     /** Get the collection retrieved from the database.
-     *  It is the callers responsibility to delete the collection. FIXME: is this reasonable ?
+     *  It is the callers responsibility to delete the collection.
      */
     virtual lcio::LCCollection* getCollection() { return _col ; }
 
@@ -55,7 +57,7 @@ namespace lccd {
      */
     virtual unsigned readParameters( const std::string& s , unsigned index ) ; 
 
-    lcio::LCCollection*  _col ;
+    lcio::LCCollection*  _col = nullptr ;
   };
 
 } //end namespace

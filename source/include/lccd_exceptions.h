@@ -19,7 +19,7 @@ namespace lccd{
   class LCCDException : public std::exception{
 
   protected:
-    std::string message ;
+    std::string message{} ;
     
     LCCDException(){  /*no_op*/ ; } 
       

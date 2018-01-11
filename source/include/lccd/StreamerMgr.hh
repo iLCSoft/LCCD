@@ -56,7 +56,7 @@ namespace lccd {
 
 
   private:
-    StreamerMap _map ;
+    StreamerMap _map{};
 
     static StreamerMgr* _me ;
 

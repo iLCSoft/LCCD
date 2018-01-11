@@ -112,22 +112,22 @@ namespace lccd {
     // ----  data members ------
 
     /** Name of LCIO input file with conditions data */
-    std::string _fileName ;
+    std::string _fileName{} ;
 
     /** Name of LCCollection in first event */
-    std::string _inputCollection ;
+    std::string _inputCollection{} ;
 
     /** Vector that holds the validity time intervalls for all events */
-    ValidityVector _valVec ;
+    ValidityVector _valVec{} ;
 
     /** The LCIO input file reader */
-    LCReader* _lcReader ;
+    LCReader* _lcReader = nullptr ;
 
     /** The registered default collection */
-    lcio::LCCollection* _defaultCollection ;
+    lcio::LCCollection* _defaultCollection = nullptr ;
     
     /** The last valid collection of conditions data.*/
-    lcio::LCCollection* _lastValidCollection ;
+    lcio::LCCollection* _lastValidCollection = nullptr ;
 
   };
 }  //end namespace

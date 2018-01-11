@@ -57,7 +57,7 @@ private:
   /** list of handlers with which the listener is currently registered 
    */
   
-  std::list<IConditionsHandler*> _handlerList;
+  std::list<IConditionsHandler*> _handlerList{};
   
 };
 

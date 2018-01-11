@@ -53,6 +53,10 @@ namespace lccd {
   class DBInterface {
     
   public:
+
+    DBInterface( const DBInterface& )  = delete ;
+    DBInterface& operator=( const DBInterface& )  = delete ;
+
     
     /** Default c'tor, uses lccd::getDBInitString() to determine the db initialization, i.e. 
      *  as defined by the environment variable $LCCD_DB_INIT.
@@ -292,18 +296,18 @@ namespace lccd {
     
 
     // data members
-    ICondDBMgr* _condDBmgr ;
-    ICondDBDataAccess* _condDataAccess ;
-    ICondDBFolderMgr* _condFolderMgr ;
-    ICondDBTagMgr * _condTagMgr ; 
+    ICondDBMgr* _condDBmgr = nullptr ;
+    ICondDBDataAccess* _condDataAccess = nullptr ;
+    ICondDBFolderMgr* _condFolderMgr = nullptr ;
+    ICondDBTagMgr * _condTagMgr = nullptr ; 
 
 
   private:
 
-    std::string _dbInit ;
-    std::string _folder ;
-    bool _update ;
-    std::string _dbName ;
+    std::string _dbInit{} ;
+    std::string _folder{} ;
+    bool _update{} ;
+    std::string _dbName{} ;
   };
 
 }  //end namespace

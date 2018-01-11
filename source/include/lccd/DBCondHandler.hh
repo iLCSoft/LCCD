@@ -43,6 +43,9 @@ namespace lccd {
     
   public:
     
+    DBCondHandler(const DBCondHandler&) = delete ;
+    DBCondHandler& operator=(const DBCondHandler&) = delete ;
+
     /** Default constructor. You have to specify the following parameters:
      * 
      * @param dbInit: initialization string for the database, e.g. "localhost:lccd_test:calvin:hobbes" 
@@ -89,18 +92,18 @@ namespace lccd {
     
     DBCondHandler() {} 
     
-    lccd::DBInterface* _db ;
+    lccd::DBInterface* _db = nullptr ;
 
     // ----  data members ------
-    std::string _dbInit ;
-    std::string _folder ;
-    std::string _tag ;
+    std::string _dbInit{} ;
+    std::string _folder{} ;
+    std::string _tag{} ;
     
     /** The registered default collection */
-    lcio::LCCollection* _defaultCollection ;
+    lcio::LCCollection* _defaultCollection = nullptr ;
     
     /** The last valid collection of conditions data.*/
-    lcio::LCCollection* _lastValidCollection ;
+    lcio::LCCollection* _lastValidCollection = nullptr ;
 
 
   };

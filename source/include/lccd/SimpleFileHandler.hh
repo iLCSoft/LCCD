@@ -78,13 +78,13 @@ namespace lccd {
     // ----  data members ------
 
     /** Name of LCIO input file with conditions data */
-    std::string _fileName ;
+    std::string _fileName{} ;
 
     /** Name of LCCollection in first event */
-    std::string _inputCollection ;
+    std::string _inputCollection{} ;
 
 
-    bool  _firstCall ;
+    bool  _firstCall{} ;
 
   };
 }  //end namespace

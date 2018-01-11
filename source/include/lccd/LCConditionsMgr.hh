@@ -78,7 +78,7 @@ namespace lccd {
 
 
   private:
-    HandlerMap _map ;
+    HandlerMap _map{} ;
 
     static LCConditionsMgr* _me ;
 

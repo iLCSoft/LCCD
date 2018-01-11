@@ -29,9 +29,8 @@ namespace lccd {
     typedef std::set< DBInterface* > DBSet ;
     
     struct DBRefs{
-      DBRefs() : Mgr(0) {} 
-      ICondDBMgr* Mgr ;
-      DBSet Set ; 
+      ICondDBMgr* Mgr = nullptr ;
+      DBSet Set{} ; 
     } ;
     
 //     typedef std::map< std::string , std::pair< DBSet,ICondDBMgr*> > DBMap ;
@@ -54,7 +53,7 @@ namespace lccd {
     ~DBConnectionMgr() ;
     
   private:
-    DBMap _map ;
+    DBMap _map{} ;
 
   };
 
