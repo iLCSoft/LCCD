@@ -21,7 +21,7 @@
 #include <sstream>
 #include <cstdlib>
 
-int NFolders = 10 ;
+const int NFolders = 10 ;
 
 using namespace std ;
 using namespace lcio;

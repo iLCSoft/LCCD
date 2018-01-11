@@ -26,6 +26,10 @@ using namespace lcio;
 class TestListener : public lccd::IConditionsChangeListener {
   
 public:
+
+  TestListener( const TestListener& ) = delete ;
+  TestListener& operator=( const TestListener& ) = delete ;
+
   TestListener( LCEventImpl** evt ) : _evt( evt ) {} 
   
   void conditionsChanged( LCCollection* col ) {
@@ -41,7 +45,7 @@ public:
   }
 
   // need pointer to pointer to retireve current time stamp
-  LCEventImpl** _evt ;
+  LCEventImpl** _evt = nullptr ;
 } ;
 
 

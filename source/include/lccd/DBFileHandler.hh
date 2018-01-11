@@ -52,7 +52,10 @@ namespace lccd {
   class DBFileHandler : public ConditionsHandlerBase {
     
   public:
-    
+
+    DBFileHandler( const DBFileHandler& ) = delete ;
+    DBFileHandler& operator=( const DBFileHandler& ) = delete ;
+
     /** Default constructor. You have to specify the following parameters:
      * 
      * @param fileName: the LCIO file that holds the conditions data.
