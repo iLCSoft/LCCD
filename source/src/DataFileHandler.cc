@@ -23,7 +23,7 @@ namespace lccd {
     delete _col ;
   }
   
-  void DataFileHandler::registerDefaultCollection( lcio::LCCollection* col){
+  void DataFileHandler::registerDefaultCollection( lcio::LCCollection* ){
     
     std::stringstream mess ;
     mess << "DataFileHandler::registerDefaultCollection is not implemented for DataFileCondHandler. Name of handler: "  << this->name() << std::ends ;

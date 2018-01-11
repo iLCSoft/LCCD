@@ -129,11 +129,11 @@ namespace lccd {
     /** No default c'tor */
     ConditionsMap() { }
 
-    std::map< KEY, LCCONDOBJECT > _map ;
-    PMF _pmf ;
-    PMFC _pmfc ;
+    std::map< KEY, LCCONDOBJECT > _map{} ;
+    PMF _pmf{} ;
+    PMFC _pmfc{} ;
 
-    bool _isPMFconst;
+    bool _isPMFconst{} ;
 };
 
 }  //end namespace

@@ -41,9 +41,6 @@ namespace lccd {
     virtual LCGenericObjectStreamer* create()  ;
 
 
-  protected:
-
-
   };
 
 } //end namespace

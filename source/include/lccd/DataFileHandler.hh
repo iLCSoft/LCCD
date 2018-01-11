@@ -30,6 +30,10 @@ namespace lccd {
     
   public:
     
+    DataFileHandler( const DataFileHandler& ) = delete ;
+    DataFileHandler& operator=( const DataFileHandler& ) = delete ;
+
+
     /** Default constructor. 
      *  @param name:  of this conditions data set - used as collection name 
      */
@@ -48,7 +52,7 @@ namespace lccd {
 
     /* The timestamp is ignored, use update(LCEvent *evt) instead. 
      */
-    virtual void update( LCCDTimeStamp timestamp ) {} 
+    virtual void update( LCCDTimeStamp /*timestamp*/ ) {} 
     
 
     /** Register a pointer to a default collection which will be passed to the
