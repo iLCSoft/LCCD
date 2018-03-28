@@ -1,3 +1,10 @@
+# v01-05
+
+* 2018-01-12 Frank Gaede ([PR#1](https://github.com/iLCSoft/lccd/pull/1))
+  - fix all compiler warnings (gcc5.4)
+      - uninitialized, copy/assignment w/ ptr members, unused, ...
+      - dont create LCCDLibDeps.cmake ( CMP0033 )
+
 # v01-04
 
 # v01-04
