@@ -56,9 +56,9 @@ namespace lccd {
 
     std::for_each( _changeListeners.begin() , 
 		   _changeListeners.end() , 
-		   std::bind2nd( std::mem_fun
-                      ( &IConditionsChangeListener::conditionsChanged  ) , _col ) 
-		   ) ;
+		   std::bind( std::mem_fn
+			      ( &IConditionsChangeListener::conditionsChanged  ) , std::placeholders::_1, _col )
+      ) ;
 
     // or in old fashioned way - simply loop ....      
     //     typedef std::vector<IConditionsChangeListener*>::iterator IT ;
