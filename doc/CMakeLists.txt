@@ -18,6 +18,10 @@ IF( LCCD_CONDDBMYSQL )
     SET( DOX_PREDEFINED "LCCD_CONDDBMYSQL" ) # TODO test !!
 ENDIF()
 
+FILE(GLOB LCCD_DOXYGEN_SOURCES ../source/include/lccd/*
+                               ../source/include/*
+                               ../source/*)
+
 # custom command to build documentation
 ADD_CUSTOM_COMMAND(
     OUTPUT  "${DOC_BIN_DIR}/html/index.html"
@@ -29,10 +33,7 @@ ADD_CUSTOM_COMMAND(
             "${DOXYGEN_EXECUTABLE}"
     WORKING_DIRECTORY "${DOC_SRC_DIR}"
     COMMENT "Building API Documentation..."
-    DEPENDS Doxyfile CMakeLists.txt
-        ../source/include/lccd/*
-        ../source/include/*
-        ../source/src/*
+    DEPENDS Doxyfile CMakeLists.txt ${LCCD_DOXYGEN_SOURCES}
 )
 
 ADD_CUSTOM_TARGET( doc DEPENDS "${DOC_BIN_DIR}/html/index.html" )
