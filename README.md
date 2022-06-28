@@ -1,5 +1,5 @@
 # LCCD
-[![Build Status](https://travis-ci.org/iLCSoft/LCCD.svg?branch=master)](https://travis-ci.org/iLCSoft/LCCD)
+[![linux](https://github.com/iLCSoft/LCCD/actions/workflows/linux.yml/badge.svg)](https://github.com/iLCSoft/LCCD/actions/workflows/linux.yml)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/12357/badge.svg)](https://scan.coverity.com/projects/ilcsoft-lccd)
 
 Linear Collider Conditions Data framework
