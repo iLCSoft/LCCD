@@ -7,7 +7,7 @@ on:
 jobs:
   run-coverity:
     runs-on: ubuntu-latest
-    if: github.repository == 'iLCSoft/DDKalTest'
+    if: github.repository == 'iLCSoft/LCCD'
     steps:
     - uses: actions/checkout@v2
     - uses: cvmfs-contrib/github-action-cvmfs@v2
