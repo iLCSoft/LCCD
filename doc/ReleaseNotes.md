@@ -1,3 +1,18 @@
+# v01-05-01
+
+* 2022-06-28 Thomas Madlener ([PR#5](https://github.com/iLCSoft/LCCD/pull/5))
+  - Fix bug in coverity config to point to the right repo
+
+* 2022-06-28 Thomas Madlener ([PR#4](https://github.com/iLCSoft/LCCD/pull/4))
+  - Migrate CI to github actions and remove travis CI configuration
+
+* 2022-06-28 Thomas Madlener ([PR#3](https://github.com/iLCSoft/LCCD/pull/3))
+  - Replace the implicit globbing for the doxygen target with an explicit cmake glob expression in order for working documentation generation with cmake >= 3.17
+
+* 2020-04-10 Frank Gaede ([PR#2](https://github.com/iLCSoft/LCCD/pull/2))
+  - make compatible w/ c++17 for macos/clang
+        - patch provided by K.Fujii
+
 # v01-05
 
 * 2018-01-12 Frank Gaede ([PR#1](https://github.com/iLCSoft/lccd/pull/1))
