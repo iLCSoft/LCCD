@@ -6,7 +6,6 @@
 INCLUDE_DIRECTORIES( . )
 
 # helper macro for adding tests
-ADD_CUSTOM_TARGET( tests )
 MACRO( ADD_LCCD_TEST _testname )
 
         IF( BUILD_TESTING )
@@ -16,8 +15,6 @@ MACRO( ADD_LCCD_TEST _testname )
         ENDIF()
 
         TARGET_LINK_LIBRARIES( ${_testname} lccd )
-
-        ADD_DEPENDENCIES( tests ${_testname} )
 
         #INSTALL( TARGETS ${_testname} DESTINATION bin/lccd_tests )
 
