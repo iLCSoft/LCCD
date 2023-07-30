@@ -49,6 +49,8 @@ namespace lccd{
 
 
   LCCDTimeStamp fromSimpleTime( const SimpleTime& st ) {
+    // silence possible warning about unused parameter
+    (void)st;
 
 #ifdef LCCD_CONDDBMYSQL
     // subtract the ns from 1.1.1900 to 1.1.1970 
