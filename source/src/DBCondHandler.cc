@@ -173,16 +173,16 @@ namespace lccd {
 
 #else // not linked with CondDBMysql ========================================================================
 
-  DBCondHandler::DBCondHandler(const std::string& dbInit,  const std::string& folder,
-			       const std::string& name,  const std::string& tag  ) {
+  DBCondHandler::DBCondHandler(const std::string& ,  const std::string& ,
+			       const std::string& ,  const std::string& ) {
 
     throw lccd::DatabaseException("DBCondHandler: cannot instantiate - not linked with CondDBMysql ...." ) ; 
   }
 
   DBCondHandler::~DBCondHandler() {}
-  void DBCondHandler::registerDefaultCollection( lcio::LCCollection* col){}
+  void DBCondHandler::registerDefaultCollection( lcio::LCCollection* ){}
 
-  void DBCondHandler::update( LCCDTimeStamp timeStamp )  {}
+  void DBCondHandler::update( LCCDTimeStamp )  {}
 
 
 #endif // LCCD_CONDDBMYSQL
