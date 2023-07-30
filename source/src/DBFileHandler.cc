@@ -17,18 +17,6 @@ using namespace lcio ;
 namespace lccd {
 
 
-  /** Helper predicate to find validity ranges */
-  class contains_timestamp {
-  public:
-    contains_timestamp(LCCDTimeStamp  t) : _t( t) {}  
-    bool operator()(const ValidityInterval& v) {
-      return ( v.first <= _t && v.second > _t  ) ; 
-    }
-  protected:
-    LCCDTimeStamp  _t ;
-  };
-  
-
   DBFileHandler::DBFileHandler(const std::string& fileName, 
 				       const std::string& name,
 				       const std::string& inputCollection ) : 
@@ -198,15 +186,13 @@ namespace lccd {
   int DBFileHandler::findEventNumber( LCCDTimeStamp timestamp ) {
 
 
-    contains_timestamp contains( timestamp ) ;
-
     int evtNum = -1 ;
 
     // This could probably be made more efficient - good for now ...
     int nVal = _valVec.size() ;
     for( int i=0 ; i< nVal ; i++ ){
 
-      if ( contains( _valVec[i] ) ){
+      if (  _valVec[i].first <= timestamp && timestamp < _valVec[i].second ){
 	evtNum = i ;
 	break ;
       }  
