@@ -24,13 +24,13 @@ namespace lccd{
     LCCDException(){  /*no_op*/ ; } 
       
   public: 
-    virtual ~LCCDException() throw() { /*no_op*/; } 
+    virtual ~LCCDException() noexcept { /*no_op*/; }
 
     LCCDException( const std::string& text ) {
       message = "lccd::Exception: " + text ;
     }
     
-    virtual const char* what() const  throw() { return  message.c_str() ; }
+    virtual const char* what() const noexcept { return  message.c_str() ; }
   }; 
       
   /**DatabaseException used for errors accessing the database data.
@@ -42,7 +42,7 @@ namespace lccd{
   protected:
     DatabaseException() {  /*no_op*/ ; } 
   public: 
-    virtual ~DatabaseException() throw() { /*no_op*/; } 
+    virtual ~DatabaseException() noexcept { /*no_op*/; }
 
     DatabaseException( std::string text ){
       message = "lccd::DatabaseException: " + text ;
@@ -56,7 +56,7 @@ namespace lccd{
   class DataNotAvailableException : public LCCDException{
 
   public: 
-    virtual ~DataNotAvailableException() throw() { /*no_op*/; } 
+    virtual ~DataNotAvailableException() noexcept { /*no_op*/; }
 
     DataNotAvailableException( std::string text ) {
       message = "lccd::DataNotAvailableException: " + text ;
@@ -70,7 +70,7 @@ namespace lccd{
   class ReadOnlyException : public LCCDException{
 
   public: 
-    virtual ~ReadOnlyException() throw() { /*no_op*/; } 
+    virtual ~ReadOnlyException() noexcept { /*no_op*/; }
 
     ReadOnlyException( std::string text ){
       message = "lccd::ReadOnlyException: " + text ;
@@ -84,7 +84,7 @@ namespace lccd{
   class InconsistencyException : public LCCDException{
 
   public: 
-    virtual ~InconsistencyException() throw() { /*no_op*/; } 
+    virtual ~InconsistencyException() noexcept { /*no_op*/; }
 
     InconsistencyException( std::string text ) {
       message = "lccd::InconsistencyException: " + text ;
@@ -98,7 +98,7 @@ namespace lccd{
   class MemberNotImplementedException : public LCCDException{
 
   public: 
-    virtual ~MemberNotImplementedException() throw() { /*no_op*/; } 
+    virtual ~MemberNotImplementedException() noexcept { /*no_op*/; }
 
     MemberNotImplementedException( std::string text ) {
       message = "lccd::MemberNotImplementedException: " + text ;

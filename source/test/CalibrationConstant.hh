@@ -12,8 +12,6 @@
 #define OFFSET_INDEX 0
 #define GAIN_INDEX 1
 
-using namespace lcio ;
-
 class CalibrationConstant ;
 
 /** Example for a simple calibration class based on the LCFixedObject template.
@@ -23,7 +21,7 @@ class CalibrationConstant ;
  *  for copying it  to some local structure (Decorator pattern).<br>
  *  
  */
-class CalibrationConstant : public LCFixedObject<NINT,NFLOAT,NDOUBLE> {
+class CalibrationConstant : public lcio::LCFixedObject<NINT,NFLOAT,NDOUBLE> {
   
 public: 
   
