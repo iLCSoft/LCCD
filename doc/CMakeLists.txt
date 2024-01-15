@@ -59,7 +59,7 @@ ELSE()
     # --- out-of-source installations ---
     SET( DOC_INSTALL_PREFIX doc/lccd )
 
-    INSTALL( FILES release.notes  DESTINATION ${DOC_INSTALL_PREFIX} )
+    INSTALL( FILES ReleaseNotes.md  DESTINATION ${DOC_INSTALL_PREFIX} )
 
 ENDIF( CMAKE_INSTALL_PREFIX STREQUAL "${PROJECT_SOURCE_DIR}" )
 
