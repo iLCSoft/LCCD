@@ -24,7 +24,7 @@ namespace lccd{
     LCCDException(){  /*no_op*/ ; } 
       
   public: 
-    virtual ~LCCDException() noexcept { /*no_op*/; }
+    virtual ~LCCDException() noexcept = default;
 
     LCCDException( const std::string& text ) {
       message = "lccd::Exception: " + text ;
@@ -42,7 +42,7 @@ namespace lccd{
   protected:
     DatabaseException() {  /*no_op*/ ; } 
   public: 
-    virtual ~DatabaseException() noexcept { /*no_op*/; }
+    virtual ~DatabaseException() noexcept = default;
 
     DatabaseException( std::string text ){
       message = "lccd::DatabaseException: " + text ;
@@ -56,7 +56,7 @@ namespace lccd{
   class DataNotAvailableException : public LCCDException{
 
   public: 
-    virtual ~DataNotAvailableException() noexcept { /*no_op*/; }
+    virtual ~DataNotAvailableException() noexcept = default;
 
     DataNotAvailableException( std::string text ) {
       message = "lccd::DataNotAvailableException: " + text ;
@@ -70,7 +70,7 @@ namespace lccd{
   class ReadOnlyException : public LCCDException{
 
   public: 
-    virtual ~ReadOnlyException() noexcept { /*no_op*/; }
+    virtual ~ReadOnlyException() noexcept = default;
 
     ReadOnlyException( std::string text ){
       message = "lccd::ReadOnlyException: " + text ;
@@ -84,7 +84,7 @@ namespace lccd{
   class InconsistencyException : public LCCDException{
 
   public: 
-    virtual ~InconsistencyException() noexcept { /*no_op*/; }
+    virtual ~InconsistencyException() noexcept = default;
 
     InconsistencyException( std::string text ) {
       message = "lccd::InconsistencyException: " + text ;
@@ -98,7 +98,7 @@ namespace lccd{
   class MemberNotImplementedException : public LCCDException{
 
   public: 
-    virtual ~MemberNotImplementedException() noexcept { /*no_op*/; }
+    virtual ~MemberNotImplementedException() noexcept = default;
 
     MemberNotImplementedException( std::string text ) {
       message = "lccd::MemberNotImplementedException: " + text ;
