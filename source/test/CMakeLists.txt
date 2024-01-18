@@ -24,9 +24,9 @@ ENDMACRO( ADD_LCCD_TEST )
 # ---------------------------------------------------------------
 
 ADD_LCCD_TEST( createcalfile ./createcalfile.cc )
-ADD_LCCD_TEST( readcalfile ./readcalfile ./CalibrationConstant.cc )
-ADD_LCCD_TEST( readdatafile ./readdatafile )
-ADD_LCCD_TEST( testdbfile ./testdbfile )
+ADD_LCCD_TEST( readcalfile ./readcalfile.cc ./CalibrationConstant.cc )
+ADD_LCCD_TEST( readdatafile ./readdatafile.cc )
+ADD_LCCD_TEST( testdbfile ./testdbfile.cc )
 
 IF( LCCD_CONDDBMYSQL )
 

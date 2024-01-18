@@ -71,7 +71,7 @@ INSTALL( FILES ./include/lccd.h ./include/lccd_exceptions.h DESTINATION include 
 #)
 ADD_SHARED_LIBRARY( ${libname} ${library_sources} )
 INSTALL_SHARED_LIBRARY( ${libname} DESTINATION lib )
-TARGET_LINK_LIBRARIES( ${libname} ${LCIO_LIBRARIES} )
+TARGET_LINK_LIBRARIES( ${libname} LCIO::lcio )
 
 
 # add tests

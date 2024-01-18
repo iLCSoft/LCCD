@@ -49,7 +49,6 @@ int main(int argc, char** argv ) {
   lcReader->open( fileName ) ;
 
   LCEvent* evt ;
-  int nEvents = 0 ;
 
   //----------- the event loop -----------
   while( (evt = lcReader->readNextEvent()) != 0 ) {
@@ -58,7 +57,6 @@ int main(int argc, char** argv ) {
     
     LCTOOLS::dumpEvent( evt ) ;
 
-    nEvents ++ ;
   }
   // -------- end of event loop -----------
 

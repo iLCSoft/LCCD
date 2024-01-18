@@ -4,8 +4,6 @@
 //#include "lccd.h"
 #include "ConditionsHandlerBase.hh"
 
-using namespace lcio ;
-
 namespace lccd {
   
   /** Implementation of ConditionsHandlerBase that reads the conditions data 

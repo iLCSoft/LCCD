@@ -4,8 +4,6 @@
 //#include "lccd.h"
 #include "ConditionsHandlerBase.hh"
 
-using namespace lcio ;
-
 namespace lccd {
   
 
@@ -124,7 +122,7 @@ namespace lccd {
     ValidityVector _valVec{} ;
 
     /** The LCIO input file reader */
-    LCReader* _lcReader = nullptr ;
+    lcio::LCReader* _lcReader = nullptr ;
 
     /** The registered default collection */
     lcio::LCCollection* _defaultCollection = nullptr ;
