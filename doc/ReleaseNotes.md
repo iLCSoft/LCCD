@@ -1,3 +1,24 @@
+# v01-05-02
+
+* 2024-01-18 jmcarcell ([PR#10](https://github.com/iLCSoft/LCCD/pull/10))
+  - Fix compiler warnings with clang about `using namespace` in headers and `throw()` being deprecated
+  - Change to using `LCIO::lcio` instead of `${LCIO_LIBRARIES}`
+  - Fix a couple of CMake warnings due to incomplete file names
+
+* 2024-01-15 tmadlener ([PR#11](https://github.com/iLCSoft/LCCD/pull/11))
+  - Switch clicdp nightlies workflow to existing release
+  - Add key4hep based CI workflows
+
+* 2023-08-16 tmadlener ([PR#9](https://github.com/iLCSoft/LCCD/pull/9))
+  - Remove the no longer working gcc8 based workflow
+  - Bump action versions
+
+* 2023-08-16 jmcarcell ([PR#8](https://github.com/iLCSoft/LCCD/pull/8))
+  - Fix compilation warnings
+
+* 2023-08-15 jmcarcell ([PR#6](https://github.com/iLCSoft/LCCD/pull/6))
+  - Remove the unneeded tests custom target
+
 # v01-05-01
 
 * 2022-06-28 Thomas Madlener ([PR#5](https://github.com/iLCSoft/LCCD/pull/5))
