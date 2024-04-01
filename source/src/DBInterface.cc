@@ -29,7 +29,6 @@
 
 #include <memory>
 #include <algorithm>
-#include <functional>
 #include <stdlib.h>
 #include <iomanip>
 
@@ -39,7 +38,7 @@
 namespace lccd {
   
   /** Helper class to sort collections of conditions data w.r.t. to their validity time intervall */
-  struct less_wrt_validity : public binary_function<lcio::LCCollection*,lcio::LCCollection*,bool>{
+  struct less_wrt_validity {
     bool operator() (lcio::LCCollection*  c0, lcio::LCCollection* c1) const {
       return ( std::atoll( c0->parameters().getStringVal(lccd::DBSINCE).c_str() ) <
 	       std::atoll( c1->parameters().getStringVal(lccd::DBSINCE).c_str() ) ) ;
