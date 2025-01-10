@@ -831,7 +831,7 @@ namespace lccd {
       {
 	condTagMgr()->createCondDBTag( tag, description ) ;
       }
-    catch ( CondDBException condbexc )
+    catch ( CondDBException& condbexc )
       {
 	//	std::cout << " WARNING: DBInterface::tagFolder: "<<condbexc.getMessage() << std::endl;
       }
