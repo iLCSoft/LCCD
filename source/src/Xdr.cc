@@ -2,15 +2,13 @@
 
 #include"lccd/Xdr.hh"
 
-#include <iostream>
-
 namespace lccd{
 
   //------------------------------------------
   // Code copied from SIO_functions.
   //------------------------------------------
 
-#if defined(__alpha__) ||   defined(__i386__)  ||   defined(_M_ALPHA)  ||   defined(_M_IX86) || defined(__x86_64__)
+#if defined(__alpha__) ||   defined(__i386__)  ||   defined(_M_ALPHA)  ||   defined(_M_IX86) || defined(__x86_64__) || defined(__aarch64__)
 #define XDR_LITTLE_ENDIAN
 #endif
   
