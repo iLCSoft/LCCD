@@ -1,5 +1,5 @@
 # LCCD
-[![linux](https://github.com/iLCSoft/LCCD/actions/workflows/linux.yml/badge.svg)](https://github.com/iLCSoft/LCCD/actions/workflows/linux.yml)
+[![Key4hep build](https://github.com/iLCSoft/LCCD/actions/workflows/key4hep.yml/badge.svg)](https://github.com/iLCSoft/LCCD/actions/workflows/key4hep.yml)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/12357/badge.svg)](https://scan.coverity.com/projects/ilcsoft-lccd)
 
 Linear Collider Conditions Data framework
