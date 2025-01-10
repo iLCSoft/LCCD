@@ -1,3 +1,12 @@
+# v01-05-03
+
+* 2025-01-10 Thomas Madlener ([PR#13](https://github.com/iLCSoft/LCCD/pull/13))
+  - Remove the clicdp nightlies based CI workflows
+  - Switch to the central `key4hep-build` action to build on top of Key4hep releases and nightlies in CI.
+
+* 2025-01-10 jmcarcell ([PR#12](https://github.com/iLCSoft/LCCD/pull/12))
+  - Compile on MacOS by adding ARM64 to Xdr.cc and removing binary_function (removed in C++17)
+
 # v01-05-02
 
 * 2024-01-18 jmcarcell ([PR#10](https://github.com/iLCSoft/LCCD/pull/10))
