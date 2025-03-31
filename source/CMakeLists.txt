@@ -8,11 +8,6 @@ INCLUDE_DIRECTORIES( BEFORE "${PROJECT_SOURCE_DIR}/source/include" )
 INCLUDE_DIRECTORIES( ${PROJECT_BINARY_DIR} )
 
 
-# omit warning about preprocessor definitions being escaped
-IF(COMMAND CMAKE_POLICY)
-    CMAKE_POLICY(SET CMP0005 OLD)
-ENDIF()
-
 # specific LCCD variable
 IF( NOT LCCD_DB_INIT )
     SET( LCCD_DB_INIT "localhost:lccd_test:calvin:hobbes" )
@@ -24,7 +19,7 @@ SET( LCCD_DB_INIT "${LCCD_DB_INIT}" CACHE STRING "DB initialization" FORCE )
 #----- need long long for int64 for now ------
 #FIXME: should establish wether we are on a 32bit or 64 bit machine ....
 #ADD_DEFINITIONS( "-Wno-long-long" )
-ADD_DEFINITIONS( "-DLCCD_DB_INIT_DEFAULT=\\\"${LCCD_DB_INIT}\\\"" )
+ADD_DEFINITIONS( "-DLCCD_DB_INIT_DEFAULT=\"${LCCD_DB_INIT}\"" )
 
 
 FILE( GLOB lccd_headers RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "./include/lccd/*.h?" )
