@@ -1,3 +1,16 @@
+# v01-06
+
+* 2026-09-10 Thomas Madlener ([PR#16](https://github.com/iLCSoft/LCCD/pull/16))
+  - Switch to the latest version of the key4hep-build workflow
+
+* 2026-05-19 jmcarcell ([PR#14](https://github.com/iLCSoft/LCCD/pull/14))
+  - Bump the minimum version of CMake to 3.10, to be able to compile with CMake 4.0
+  - Don't set CMP0005 to OLD since it has to be set to NEW with CMake 4.0 and onwards. Escape 
+  the `DLCCD_DB_INIT_DEFAULT` definition accordingly
+
+* 2026-03-19 jmcarcell ([PR#15](https://github.com/iLCSoft/LCCD/pull/15))
+  - Add LANGUAGES CXX to the top level CMakeLists.txt to disable checks for a C compiler
+
 # v01-05-03
 
 * 2025-01-10 Thomas Madlener ([PR#13](https://github.com/iLCSoft/LCCD/pull/13))
